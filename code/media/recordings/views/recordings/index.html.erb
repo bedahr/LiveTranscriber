@@ -20,9 +20,11 @@
     <tr class="searchable">
       <td><%= recording.user.try(:name) %></td>
       <td><%= recording.name %></td>
-      <td><%= link_to "Edit", edit_recording_path(recording), :class => 'btn btn-small' %></td>
+      <td>
+        <%= link_to "Open", recording, :class => 'btn btn-small btn-primary' %>
+        <%= link_to "Edit", edit_recording_path(recording), :class => 'btn btn-small' %>
+      </td>
     </tr>
   <% end %>
   </tbody>
 </table>
-<%= paginate @recordings %>

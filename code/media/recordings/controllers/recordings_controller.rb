@@ -2,11 +2,11 @@ class RecordingsController < ApplicationController
   before_action :set_recording, only: [:show, :edit, :update, :destroy]
 
   def index
-    @recordings = Recording.paginate :page => params[:page]
+    @recordings = Recording.all
   end
 
   def my
-    @recordings = @current_user.recordings.paginate :page => params[:page]
+    @recordings = @current_user.recordings.all
     render :index
   end
 
