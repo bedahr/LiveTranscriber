@@ -51,7 +51,7 @@
  *   - Uses audio library; can be replaced with an equivalent custom library.
  */
 
-/* fatpocketsphinx_continous
+/* fatpocketsphinx_continuous
  *
  * Slightly adopted version of the original code
  *

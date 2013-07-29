@@ -113,7 +113,7 @@ module SpeechRecognizer
     end
 
     def binary_path
-      File.join(ROOT_PATH, "tools/fatpocketsphinx_continuous")
+      File.join(ROOT_PATH, "tools/fatpocketsphinx/fatpocketsphinx_continuous")
     end
 
     def command
