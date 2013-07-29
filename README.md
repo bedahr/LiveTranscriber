@@ -11,6 +11,7 @@ The reviewed and corrected transcript is then used to improve the acoustic and l
 Feel free to watch the [YouTube Video](http://www.youtube.com/watch?v=EA9yWoyhHvM) for a short demo.
 
 You should also watch the video that layed the groundwork for this project:
+
 Peter Grasch's [Simon Dictation Prototype Video](http://www.youtube.com/watch?v=uItCqkpMU_k)
 
 ## Installation
@@ -34,7 +35,6 @@ Peter Grasch's [Simon Dictation Prototype Video](http://www.youtube.com/watch?v=
      	 TODO: Add Instructions
 
 5. Download the language and acoustic model. Thanks to Peter Grasch for providing these:
-
     * [Language Model Download](http://files.kde.org/accessibility/Simon/lm/)
     * [Acoustic Model Download](http://files.kde.org/accessibility/Simon/am/)
 
