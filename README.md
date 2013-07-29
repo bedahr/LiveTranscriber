@@ -44,7 +44,11 @@ Peter Grasch's [Simon Dictation Prototype Video](http://www.youtube.com/watch?v=
         speech_recognition/models/dict/essential-sane-65k.fullCased
         speech_recognition/models/lm/ensemble_wiki_ng_se_so_subs_enron_congress_65k_pruned_huge_sorted_cased.lm.DMP
 
-7. Run it
+7. Setup the database by running:
+
+        rake db:migrate
+
+8. Run the project
 
      	 rails server
 
