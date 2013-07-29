@@ -4,7 +4,12 @@ LiveTranscriber is an open-source, semi-automated transcription platform combini
 
 The reviewed and corrected transcript is then used to improve the acoustic and language models.
 
-* TODO: Add Screenshot
+## Screenshots
+
+![Transcribe without Typing](http://skpvox.github.io/LiveTranscriber/screenshots/transcribe_without_typing.png)
+
+![Transcriber Screenshot](http://skpvox.github.io/LiveTranscriber/screenshots/screenshot_microsoft.png)
+
 
 ## Video Demonstration
 
@@ -13,6 +18,19 @@ Feel free to watch the [YouTube Video](http://www.youtube.com/watch?v=EA9yWoyhHv
 You should also watch the video that layed the groundwork for this project:
 
 Peter Grasch's [Simon Dictation Prototype Video](http://www.youtube.com/watch?v=uItCqkpMU_k)
+
+## About
+
+Transcribing is a tedious and work-intensive task. Most people hate to do it.
+
+Computers don't mind doing it, but they make mistakes.
+
+We want to make it more fun, by letting the computer do the heavy-lifting while you just correct the mistakes.
+
+This way you train the computer to recognize words better.
+
+Our goal is to improve open-source speech recognition. If you use this application you must give every transcription that you make with it back to the community.
+
 
 ## Installation
 
@@ -62,4 +80,4 @@ Please take a look at our "Issues" page on GitHub.
 
 This project is licensed under the GNU Affaro GPL.
 
-Any transcriptions made with this software must be shared with the community.
+Any transcriptions made with this application must be shared with the community.
