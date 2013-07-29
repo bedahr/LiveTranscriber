@@ -33,7 +33,18 @@ Peter Grasch's [Simon Dictation Prototype Video](http://www.youtube.com/watch?v=
 
      	 TODO: Add Instructions
 
-5. Run it
+5. Download the language and acoustic model. Thanks to Peter Grasch for providing these:
+
+    * [Language Model Download](http://files.kde.org/accessibility/Simon/lm/)
+    * [Acoustic Model Download](http://files.kde.org/accessibility/Simon/am/)
+
+6. Extract the speech models and copy them like this:
+
+        speech_recognition/models/hmm/voxforge_en_sphinx.cd_cont_5000/
+        speech_recognition/models/dict/essential-sane-65k.fullCased
+        speech_recognition/models/lm/ensemble_wiki_ng_se_so_subs_enron_congress_65k_pruned_huge_sorted_cased.lm.DMP
+
+7. Run it
 
      	 rails server
 
