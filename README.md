@@ -38,7 +38,7 @@ Peter Grasch's [Simon Dictation Prototype Video](http://www.youtube.com/watch?v=
     * [Language Model Download](http://files.kde.org/accessibility/Simon/lm/)
     * [Acoustic Model Download](http://files.kde.org/accessibility/Simon/am/)
 
-6. Extract the speech models and copy them like this:
+6. Extract the speech models and save them like this:
 
         speech_recognition/models/hmm/voxforge_en_sphinx.cd_cont_5000/
         speech_recognition/models/dict/essential-sane-65k.fullCased
