@@ -8,7 +8,7 @@ The reviewed and corrected transcript is then used to improve the acoustic and l
 
 ![Transcribe without Typing](http://skpvox.github.io/LiveTranscriber/screenshots/transcribe_without_typing.png)
 
-![Transcriber Screenshot](http://skpvox.github.io/LiveTranscriber/screenshots/screenshot_microsoft.png)
+![Transcriber Screenshot](http://skpvox.github.io/LiveTranscriber/screenshots/transcriber.png)
 
 
 ## Video Demonstration
