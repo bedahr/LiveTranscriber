@@ -48,9 +48,7 @@ Our goal is to improve open-source speech recognition. If you use this applicati
 
 	      bundle install
 
-4. Compile `fatpocketsphinx`
-
-     	 TODO: Add Instructions
+4. Compile `fatpocketsphinx_continous`. See INSTALL file under speech_recognition/tools/fatpocketsphinx
 
 5. Download the language and acoustic model. Thanks to Peter Grasch for providing these:
     * [Language Model Download](http://files.kde.org/accessibility/Simon/lm/)

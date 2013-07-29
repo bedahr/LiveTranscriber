@@ -25,7 +25,7 @@ pickle-email-*.html/.bundle
 /speech_recognition/models/hmm/*
 /speech_recognition/models/dict/*
 /speech_recognition/models/lm/*
-/speech_recognition/tools/*
+/speech_recognition/tools/fatpocketsphinx/fatpocketsphinx_continuous
 
 *.DS_Store
 *.rbc

@@ -1,0 +1,8 @@
+1. Download the latest pocketsphinx version (minimum 0.8)
+
+2. Replace the original `src/programs/continous.c` with the modified version `speech_recognition/fatpocketsphinx/modified_continous.c`
+
+3. Compile it and copy the `continous` binary to `speech_recognition/fatpocketsphinx/fatpocketsphinx_continous` (or create a symlink)
+
+
+# TODO: Make this a lot easier ...
