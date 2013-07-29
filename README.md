@@ -64,9 +64,13 @@ Our goal is to improve open-source speech recognition. If you use this applicati
 
         rake db:migrate
 
-8. Run the project
+8. Run Redis
 
-     	 rails server
+        redis-server
+
+9. Run the project
+
+        rails server
 
 ## Contributions
 
