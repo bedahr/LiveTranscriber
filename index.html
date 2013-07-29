@@ -94,10 +94,12 @@
 </code></pre>
 </li>
 <li>
-<p>Compile <code>fatpocketsphinx</code></p>
+<p>Compile <code>fatpocketsphinx_continuous</code>.</p>
 
-<pre><code> TODO: Add Instructions
-</code></pre>
+<ul>
+<li>See <code>INSTALL</code> file under <code>speech_recognition/tools/fatpocketsphinx</code>
+</li>
+</ul>
 </li>
 <li>
 <p>Download the language and acoustic model. Thanks to Peter Grasch for providing these:</p>
@@ -122,9 +124,15 @@ speech_recognition/models/lm/ensemble_wiki_ng_se_so_subs_enron_congress_65k_prun
 </code></pre>
 </li>
 <li>
+<p>Run Redis</p>
+
+<pre><code>redis-server
+</code></pre>
+</li>
+<li>
 <p>Run the project</p>
 
-<pre><code> rails server
+<pre><code>rails server
 </code></pre>
 </li>
 </ol><h2>
