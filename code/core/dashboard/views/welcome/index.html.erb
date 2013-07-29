@@ -1,0 +1,73 @@
+<div class="hero-unit">
+  <h1>Transcribe without typing.</h1>
+
+  <p>Let the computer transcribe the text and you just correct the mistakes.</p>
+
+  <p class="actions">
+    <a class="btn btn-primary btn-large fileinput-button">
+      <%= icon('upload-alt') %> &nbsp;
+      Upload a File
+
+      <input id="fileupload" type="file" name="recording[original_audio_file]"
+             data-url="<%= url_for(@recording) %>">
+    </a>
+
+    <small id="url_toggle">or <%= link_to "Enter URL", '#' %></small>
+
+    <%= form_for(@recording, :html => { :class => 'url_upload hide form-horizontal' }) do |f| %>
+      <%= f.text_field :url, :placeholder => 'http://', :class => 'url' %>
+      <%= f.submit 'Go', :class => 'btn' %>
+    <% end %>
+
+    <div id="progress" class="progress progress-success progress-striped hide">
+        <div class="bar"></div>
+    </div>
+
+  </p>
+</div>
+
+<div class="row-fluid features">
+  <div class="span1">&nbsp;</div>
+
+  <div class="span5">
+    <h3> <%= icon('desktop') %> &nbsp; Computers + Humans = Win!</h3>
+
+    <p>
+      Transcribing is a tedious and work-intensive task.<br />
+      Most people hate to do it.
+    </p>
+
+    <p>Computers don't mind doing it, but they make mistakes.</p>
+
+    <p>
+      We want to make it more fun, by letting the computer do the heavy&#8209;lifting
+      while you just correct the mistakes.<br />
+    </p>
+
+    <p>This way you train the computer to recognize words better.<br />
+      <%= link_to "Learn more",  { :action => :about } %>
+    </p>
+  </div>
+
+  <div class="span5">
+    <h3> <%= icon('code-fork') %> &nbsp; It's Open-Source and Shared</h3>
+
+    <p>
+      Our project is free and open-source.
+    </p>
+
+    <p>We aim to improve open and free speech recognition.</p>
+
+    <p>Every transcription you make is shared with the community.<br />
+      <%= link_to "Learn more",  { :action => :about } %>
+    </p>
+
+    <p>
+      If you're interested in contributing, checkout our <br />
+      <%= link_to "GitHub repository", "http://www.github.com/skpvox/live_transcriber" %>
+    </p>
+
+  </div>
+
+  <div class="span1">&nbsp;</div>
+</div>

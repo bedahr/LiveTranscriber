@@ -1,0 +1,12 @@
+/*
+ *= require_self
+ *= require_tree .
+ *= require 'bootstrap'
+ *= require 'font-awesome'
+ *= require 'default'
+ *= require 'global'
+ *= require 'jquery_fileupload'
+
+ += require 'live_transcriber'
+ += require 'dashboard'
+ */

@@ -1,0 +1,22 @@
+<div class="page-header">
+  <div class="btn-group pull-right">
+    <%= button_to("Overview", recordings_path, :icon => :list) %>
+    <%= button_to("Edit", edit_recording_path(@recording), :icon => :edit) %>
+	</div>
+
+  <h1><%= @recording.name %></h1>
+</div>
+
+<%= box("Trancriber") do %>
+  <%= button_to "Launch Live Transcriber",
+       { :controller => :live_transcriber, :id => @recording }, :class => 'btn-primary' %>
+<% end %>
+
+
+<%= box("Audio File") do %>
+  <% if @recording.original_audio_file.file? %>
+    <%= audio_tag @recording.original_audio_file, :controls => true, :preload => :none %>
+  <% else %>
+    <%= alert("No audio file", :warning) %>
+  <% end %>
+<% end %>

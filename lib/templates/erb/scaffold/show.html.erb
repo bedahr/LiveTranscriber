@@ -1,0 +1,10 @@
+<div class="page-header">
+  <div class="btn-group pull-right">
+    <%%= button_to("Overview", <%= index_helper %>_path, :icon => :list) %>
+    <%%= button_to("Edit", edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), :icon => :edit) %>
+	</div>
+
+  <h1>Showing <%= singular_table_name.titlecase %></h1>
+</div>
+
+<%%= render 'form' %>

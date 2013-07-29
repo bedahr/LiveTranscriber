@@ -1,0 +1,29 @@
+#live_transcriber .workarea { padding-bottom: 120px; }
+
+#live_transcriber .console { border-top: 1px dotted darkgray; padding-top: 5px; margin-top: 15px; background-color: white; }
+
+#live_transcriber .transcript {
+  padding: 15px;
+  margin-top: 0px;
+  margin-bottom: 0.5em;
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
+  font-size: 16pt;
+  line-height: 21pt;
+}
+
+#live_transcriber .partial_hypothese {
+  color: darkgray;
+}
+
+#live_transcriber #status { min-width: 10px; display: inline-block; }
+#live_transcriber audio   { margin-top: 5px; }
+
+#live_transcriber a#event_source { display: none; }
+
+#live_transcriber .logbox { min-height: 100px; max-height: 100px; overflow-y: scroll; }
+
+#live_transcriber [contenteditable="true"].inEditMode {
+  outline-style: dotted;
+  outline-width: 1px;
+  outline-color: #111111;
+}

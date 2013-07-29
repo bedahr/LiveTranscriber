@@ -1,0 +1,31 @@
+<%= form_for(@user, :html => { :class => 'form-horizontal' }) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation" class="round">
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.control_group(:name) do %>
+    <%= f.text_field :name %>
+  <% end %>
+
+  <%= f.control_group(:email) do %>
+    <%= f.text_field :email %>
+  <% end %>
+
+  <%= f.control_group(:password) do %>
+    <%= f.password_field :password %>
+  <% end %>
+
+  <%= f.control_group(:password_confirmation) do %>
+    <%= f.password_field :password_confirmation %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+  </div>
+<% end %>

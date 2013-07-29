@@ -1,0 +1,21 @@
+<%%= form_for(@<%= singular_table_name %>, :html => { :class => 'form-horizontal' }) do |f| %>
+  <%% if @<%= singular_table_name %>.errors.any? %>
+    <div id="error_explanation" class="round">
+      <ul>
+      <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
+        <li><%%= msg %></li>
+      <%% end %>
+      </ul>
+    </div>
+  <%% end %>
+
+<% for attribute in attributes -%>
+  <%%= f.control_group(:<%= attribute.name %>) do %>
+    <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
+  <%% end %>
+
+<% end -%>
+  <div class="form-actions">
+    <%%= f.submit nil, :class => 'btn btn-primary' %>
+  </div>
+<%% end %>

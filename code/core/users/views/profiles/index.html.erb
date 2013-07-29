@@ -1,0 +1,28 @@
+<div class="page-header">
+  <div class="btn-group pull-right">
+    <%= button_to("Add new User", new_user_path, :class => 'btn-primary', :icon => [ :white, :plus ] ) %>
+	</div>
+
+  <h1>Users</h1>
+</div>
+
+<table id="users" class="table hover nowrap zebra">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="edit">&nbsp;</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @users.each do |user| %>
+    <tr class="searchable">
+      <td><%= user.name %></td>
+      <td>
+        <%= link_to "Profile", user, :class => 'btn btn-small' %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= paginate @users %>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Live Transcriber - <%= ( params[:controller] || 'Dashboard' ).titlecase %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body id="<%= params[:controller].to_s.underscore %>">
+
+<!-- Navigation -->
+<div id="top_navigation" class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a id="home_link" class="brand" href="/"><%= icon('comments-alt') %> Live Transcriber</a>
+
+      <div class="btn-group pull-right">
+        <%= dropdown_button(@current_user.name.to_s.titlecase, :icon => :user) do %>
+          <%= dropdown_link_to("My Recordings",  my_recordings_path) %>
+          <%= dropdown_link_to("All Recordings", recordings_path) %>
+        <% end %>
+    	</div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Content Area -->
+<div class="container-fluid">
+  <div class="row-fluid">
+
+	  <div class="span12" id="content">
+	    <%= alert(flash.notice, :success) if flash.notice %>
+	    <%= alert(flash.alert,  :error)   if flash.alert %>
+
+      <%= yield %>
+    </div><!--/span-->
+  </div><!--/row-->
+
+  <footer>
+    <p>&nbsp;</p>
+  </footer>
+
+</div><!--/.fluid-container-->
+</body>
+</html>

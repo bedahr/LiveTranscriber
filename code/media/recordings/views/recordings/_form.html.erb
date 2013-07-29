@@ -1,0 +1,19 @@
+<%= form_for(@recording, :html => { :class => 'form-horizontal' }) do |f| %>
+  <% if @recording.errors.any? %>
+    <div id="error_explanation" class="round">
+      <ul>
+      <% @recording.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.control_group(:original_audio_file) do %>
+    <%= f.file_field :original_audio_file %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+  </div>
+<% end %>

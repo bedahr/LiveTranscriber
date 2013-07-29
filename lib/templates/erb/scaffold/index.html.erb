@@ -1,0 +1,29 @@
+<div class="page-header">
+  <div class="btn-group pull-right">
+    <%%= button_to("Add new <%= human_name %>", new_<%= singular_table_name %>_path, :class => 'btn-primary', :icon => [ :white, :plus ] ) %>
+	</div>
+
+  <h1><%= plural_table_name.titlecase %></h1>
+</div>
+
+<table id="<%= plural_table_name %>" class="table hover nowrap zebra">
+  <thead>
+    <tr>
+<% for attribute in attributes -%>
+      <th><%= attribute.human_name.titlecase %></th>
+<% end -%>
+      <th class="edit">&nbsp;</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+    <tr class="searchable">
+<% for attribute in attributes -%>
+      <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+<% end -%>
+      <td><%%= link_to "Edit", edit_<%= singular_table_name %>_path(<%= singular_table_name %>), :class => 'btn btn-small' %></td>
+    </tr>
+  <%% end %>
+  </tbody>
+</table>

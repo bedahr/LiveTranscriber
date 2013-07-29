@@ -1,0 +1,14 @@
+#welcome .hero-unit h1 { font-size: 45px; margin-bottom: 15px; }
+#welcome .hero-unit .actions { margin-top: 25px; }
+#welcome .features h3 { margin-bottom: 10px; }
+
+#welcome h2 { color: #555; margin-bottom: 5px; }
+
+#welcome input.url {
+  border-color: #ddd;
+  background: #fcfcfc;
+  box-shadow: 1px 1px 0 #fff;
+  font-size: 18px;
+  height: 20px;
+  padding-top: 5px;
+}
