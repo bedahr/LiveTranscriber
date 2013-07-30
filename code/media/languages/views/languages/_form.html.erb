@@ -1,0 +1,27 @@
+<%= form_for(@language, :html => { :class => 'form-horizontal' }) do |f| %>
+  <% if @language.errors.any? %>
+    <div id="error_explanation" class="round">
+      <ul>
+      <% @language.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.control_group(:name) do %>
+    <%= f.text_field :name, :title => "English" %>
+  <% end %>
+
+  <%= f.control_group(:short_code) do %>
+    <%= f.text_field :short_code, :title => "en (ISO 639-1)" %>
+  <% end %>
+
+  <%= f.control_group(:long_code) do %>
+    <%= f.text_field :long_code, :title => "eng (ISO 639-3)" %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+  </div>
+<% end %>

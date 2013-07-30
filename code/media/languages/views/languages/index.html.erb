@@ -1,0 +1,31 @@
+<div class="page-header">
+  <div class="btn-group pull-right">
+    <%= button_to("Add new Language", new_language_path, :class => 'btn-primary', :icon => [ :white, :plus ] ) %>
+	</div>
+
+  <h1>Languages</h1>
+</div>
+
+<table id="languages" class="table hover nowrap">
+  <thead>
+    <tr>
+      <th class="icon">&nbsp;</th>
+      <th>Name</th>
+      <th>Short Code</th>
+      <th>Long Code</th>
+      <th class="edit">&nbsp;</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @languages.each do |language| %>
+    <tr>
+      <td><%= flag(language) %></td>
+      <td><%= language.name %></td>
+      <td><%= language.short_code %></td>
+      <td><%= language.long_code %></td>
+      <td><%= link_to "Edit", edit_language_path(language), :class => 'btn btn-small' %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

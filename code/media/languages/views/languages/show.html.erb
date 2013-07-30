@@ -1,0 +1,10 @@
+<div class="page-header">
+  <div class="btn-group pull-right">
+    <%= button_to("Overview", languages_path, :icon => :list) %>
+    <%= button_to("Edit", edit_language_path(@language), :icon => :edit) %>
+	</div>
+
+  <h1>Showing Language</h1>
+</div>
+
+<%= render 'form' %>

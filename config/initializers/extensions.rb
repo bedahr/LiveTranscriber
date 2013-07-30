@@ -3,6 +3,7 @@
   extensions << 'core/users'
 
   extensions << 'media/recordings'
+  extensions << 'media/languages'
 
   extensions << 'workflow/live_transcriber'
 
