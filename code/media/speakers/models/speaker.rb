@@ -36,9 +36,9 @@ private
     return unless parent
     return if base_model_name.blank?
 
-    self.hidden_markov_model = base_model_name
-    self.dictionary          = "#{base_model_name}.dict"
-    self.language_model      = "#{base_model_name}.lm.DMP"
+    self.hidden_markov_model ||= base_model_name
+    self.dictionary          ||= "#{base_model_name}.dict"
+    self.language_model      ||= "#{base_model_name}.lm.DMP"
   end
 
   def base_model_name
