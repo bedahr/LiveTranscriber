@@ -23,7 +23,7 @@
 
       this.event_source.addEventListener('terminated', function(e) {
         self._log(e.data);
-        self._log("LiveTranscriber terminated :(");
+        self._log("LiveTranscriber terminated.");
         $("#status").removeClass('label-success').addClass('label-important');
 
         self.event_source.close();

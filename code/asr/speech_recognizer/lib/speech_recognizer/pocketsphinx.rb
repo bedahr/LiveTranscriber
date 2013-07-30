@@ -98,6 +98,7 @@ module SpeechRecognizer
     end
 
     def kill!
+      debug "Killing process: #{pid}"
       Process.kill("KILL", pid)
     end
 
