@@ -63,7 +63,7 @@ Our goal is to improve open-source speech recognition. If you use this applicati
 
 7. Setup the database by running:
 
-        rake db:migrate
+        rake db:setup
 
 8. Run Redis
 
