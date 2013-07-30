@@ -11,6 +11,8 @@
 
   <%= f.control_group(:language_id) do %>
     <%= f.choser :language_id, Language.all %>
+
+    <%= button_to "Manage Languages", languages_path, :icon => :list %>
   <% end %>
 
   <% if @speaker.parent %>
