@@ -69,9 +69,9 @@ Our goal is to improve open-source speech recognition. If you use this applicati
 
         redis-server
 
-9. Run the project
+9. Run the `puma` server to start the application
 
-        rails server
+        puma
 
 ## Contributions
 

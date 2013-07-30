@@ -19,6 +19,8 @@ gem 'acts_as_list'
 gem 'paperclip'
 gem 'redis'
 
+gem 'puma'
+
 group :doc do
   gem 'sdoc', require: false
 end
