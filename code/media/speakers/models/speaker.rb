@@ -18,20 +18,21 @@ private
 
   def initialize_models
     return unless parent
-    return if self.name.blank?
+    return if base_model_name.blank?
 
-    model_keys.each do |key|
-      self.send("#{key}=", self.name.to_s.downcase.gsub(/\W/, '_') ) if self.send(key).blank?
-    end
+    self.hidden_markov_model = base_model_name
+    self.dictionary          = "#{base_model_name}.dict"
+    self.language_model      = "#{base_model_name}.lm.DMP"
+  end
+
+  def base_model_name
+    self.name.to_s.downcase.gsub(/\W/, '_')
   end
 
   def normalize_model_names
-    model_keys.each do |key|
+    [ :hidden_markov_model, :language_model, :dictionary ].each do |key|
       self.send(key).gsub!(/[^\w\.]/, '_') if self.send(key)
     end
   end
 
-  def model_keys
-    [ :hidden_markov_model, :language_model, :dictionary ]
-  end
 end

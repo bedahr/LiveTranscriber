@@ -29,8 +29,8 @@ english_language = Language.find_by_long_code('eng')
 base_speaker_attrs = {
   :name                => "Peter Grasch",
   :hidden_markov_model => "voxforge_en_sphinx.cd_cont_5000",
-  :language_model      => "essential_sane_65k.fullCased",
-  :dictionary          => "ensemble_wiki_ng_se_so_subs_enron_congress_65k_pruned_huge_sorted_cased.lm.DMP"
+  :language_model      => "ensemble_wiki_ng_se_so_subs_enron_congress_65k_pruned_huge_sorted_cased.lm.DMP",
+  :dictionary          => "essential_sane_65k.fullCased"
 }
 
 base_speaker   = english_language.speakers.find_by_name(base_speaker_attrs[:name])
