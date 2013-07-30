@@ -14,6 +14,13 @@ module ApplicationHelper
     content_tag(:i, '', options)
   end
 
+  def flag(object)
+    return unless object
+
+    filename = object.is_a?(Language) ? object.short_code : object
+    content_tag(:span, image_tag("flags/#{filename}.png"), :class => 'flag')
+  end
+
   def box(title, &block)
     content_tag(:div, content_tag(:h4, title, :class => 'box-header round-top') + content_tag(:div, content_tag(:div, nil, { :class => 'box-content' }, true, &block), :class => 'box-container-toggle'), :class => 'box')
   end
@@ -59,7 +66,7 @@ module ApplicationHelper
       end
     end
 
-    array.any? ? content_tag(:table, rows.join.html_safe, :class => 'table hover zebra') : ''
+    array.any? ? content_tag(:table, rows.join.html_safe, :class => 'table hover') : ''
   end
 
   def alert(msg, klass, options={})
