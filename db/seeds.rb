@@ -21,3 +21,17 @@ end
 
 # Fixing Greek Name
 Language.find_by_long_code('ell').update_attribute(:name, "Greek")
+
+# Adding Peter Grasch base 'Speaker'
+
+english_language = Language.find_by_long_code('eng')
+
+base_speaker_attrs = {
+  :name                => "Peter Grasch",
+  :hidden_markov_model => "voxforge_en_sphinx.cd_cont_5000",
+  :language_model      => "essential_sane_65k.fullCased",
+  :dictionary          => "ensemble_wiki_ng_se_so_subs_enron_congress_65k_pruned_huge_sorted_cased.lm.DMP"
+}
+
+base_speaker   = english_language.speakers.find_by_name(base_speaker_attrs[:name])
+base_speaker ||= english_language.speakers.create!(base_speaker_attrs)

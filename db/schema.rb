@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130730054730) do
+ActiveRecord::Schema.define(version: 20130730063542) do
 
   create_table "languages", force: true do |t|
     t.string   "name"
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 20130730054730) do
     t.string   "downsampled_wav_file_content_type"
     t.integer  "downsampled_wav_file_file_size"
     t.datetime "downsampled_wav_file_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "speakers", force: true do |t|
+    t.integer  "parent_id"
+    t.integer  "language_id"
+    t.string   "name"
+    t.string   "hidden_markov_model"
+    t.string   "language_model"
+    t.string   "dictionary"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

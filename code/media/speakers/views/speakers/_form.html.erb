@@ -1,0 +1,37 @@
+<%= form_for(@speaker, :html => { :class => 'form-horizontal' }) do |f| %>
+  <% if @speaker.errors.any? %>
+    <div id="error_explanation" class="round">
+      <ul>
+      <% @speaker.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.control_group(:language_id) do %>
+    <%= f.choser :language_id, Language.all %>
+  <% end %>
+
+  <% if @speaker.parent %>
+    <%= f.control_group(:based_on) do %>
+      <%= f.choser :parent_id, [ @speaker.parent ] %>
+    <% end %>
+  <% end %>
+
+  <%= f.control_group(:name) do %>
+    <%= f.text_field :name %>
+  <% end %>
+
+  <div class="advanced">
+    <% [ :hidden_markov_model, :language_model, :dictionary ].each do |key| %>
+      <%= f.control_group(key) do %>
+        <%= f.text_field key, :placeholder => @speaker.parent ? "(will be automatically set)" : nil %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+  </div>
+<% end %>

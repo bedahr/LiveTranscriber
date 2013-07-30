@@ -1,0 +1,10 @@
+<div class="page-header">
+  <div class="btn-group pull-right">
+    <%= button_to("Overview", speakers_path, :icon => :list) %>
+    <%= button_to("Edit", edit_speaker_path(@speaker), :icon => :edit) %>
+	</div>
+
+  <h1>Showing Speaker</h1>
+</div>
+
+<%= render 'form' %>

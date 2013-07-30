@@ -19,4 +19,8 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.acronym 'HTTP'
   inflect.acronym 'YouTube'
   inflect.acronym 'SRT'
+
+  inflect.acronym 'HMM'
+  inflect.acronym 'LM'
+  inflect.acronym 'AM'
 end
