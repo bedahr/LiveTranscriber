@@ -57,9 +57,9 @@ Our goal is to improve open-source speech recognition. If you use this applicati
 
 6. Extract the speech models and save them like this:
 
-        speech_recognition/models/hmm/voxforge_en_sphinx.cd_cont_5000/
-        speech_recognition/models/dict/essential_sane_65k.fullCased
-        speech_recognition/models/lm/ensemble_wiki_ng_se_so_subs_enron_congress_65k_pruned_huge_sorted_cased.lm.DMP
+        speech_recognition/models/hidden_markov_model/voxforge_en_sphinx.cd_cont_5000/
+        speech_recognition/models/dictionary/essential_sane_65k.fullCased
+        speech_recognition/models/language_model/ensemble_wiki_ng_se_so_subs_enron_congress_65k_pruned_huge_sorted_cased.lm.DMP
 
 7. Setup the database by running:
 

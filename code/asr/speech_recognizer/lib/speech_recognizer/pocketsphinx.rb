@@ -11,20 +11,12 @@ module SpeechRecognizer
       end
     end
 
-    # DEFAULT_OPTIONS = {
-    #   :hmm  => 'voxforge_en_sphinx.cd_cont_5000',
-    #   :dict => 'essential-sane-65k.fullCased',
-    #   :lm   => 'ensemble_wiki_ng_se_so_subs_enron_congress_65k_pruned_huge_sorted_cased.lm.DMP'
-    # }
-
-    ROOT_PATH = File.join(Rails.root, "speech_recognition")
-
     attr_accessor :file, :pid
     attr_accessor :options
 
     def initialize(file, options={})
       @file    = file
-      @options = options
+      @options = options.symbolize_keys
     end
 
     def run!(&block)
@@ -107,21 +99,21 @@ module SpeechRecognizer
     def check!
       raise "Could not find #{binary_path}. Did you compile it?" unless File.exists?(binary_path)
 
-      [ :hmm, :dict, :lm ].each do |key|
+      SpeechRecognizer.model_keys.each do |key|
         raise "Speech model not completly defined. Missing key: #{key}" unless options[key]
-        raise "Could not find '#{key}' speech model: #{options[key]}" unless File.exists?( File.join(ROOT_PATH, "models", key.to_s, options[key]) )
+        raise "Could not find '#{key}' speech model: #{options[key]}" unless File.exists?( File.join(SpeechRecognizer.models_path, key.to_s, options[key]) )
       end
     end
 
     def binary_path
-      File.join(ROOT_PATH, "tools/fatpocketsphinx/fatpocketsphinx_continuous")
+      File.join(SpeechRecognizer.tools_path, "fatpocketsphinx/fatpocketsphinx_continuous")
     end
 
     def command
       @command ||= [ binary_path,
-                     "-hmm  #{File.join(ROOT_PATH, 'models/hmm',  options[:hmm])}",
-                     "-dict #{File.join(ROOT_PATH, 'models/dict', options[:dict])}",
-                     "-lm   #{File.join(ROOT_PATH, 'models/lm',   options[:lm])}",
+                     "-hmm  #{File.join(SpeechRecognizer.models_path, 'hidden_markov_model', options[:hidden_markov_model])}",
+                     "-dict #{File.join(SpeechRecognizer.models_path, 'dictionary',          options[:dictionary])}",
+                     "-lm   #{File.join(SpeechRecognizer.models_path, 'language_model',      options[:language_model])}",
                      "-infile #{file.path.shell_safe}",
                      "-time yes"
                     ].join(' ')

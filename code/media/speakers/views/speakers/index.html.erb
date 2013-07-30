@@ -24,7 +24,13 @@
       <td><%= flag(speaker.language) %></td>
       <td><%= speaker.language.try(:name) %></td>
       <td><%= speaker.name %></td>
-      <td><%= speaker.parent.try(:name) || "(Root Model)" %></td>
+      <td>
+        <% if speaker.base_model? %>
+          <strong><%= icon(:inbox) %> Base Model</strong>
+        <% else %>
+          <%= icon('code-fork')%> <%= speaker.parent.try(:name) || "N/A" %>
+        <% end %>
+      </td>
       <td>
         <% if speaker == @current_speaker %>
           <%= button_to "Active", '#', :class => 'btn-success btn-small' %>
@@ -34,7 +40,7 @@
       </td>
       <td>
         <%= link_to "Clone", new_speaker_path(:speaker => { :parent_id => speaker.id, :language_id => speaker.language_id }), :class => 'btn btn-small' %>
-        <%= link_to "Edit",  edit_speaker_path(speaker), :class => 'btn btn-small' %>
+        <%= link_to "Show",  speaker, :class => 'btn btn-small' %>
       </td>
     </tr>
   <% end %>

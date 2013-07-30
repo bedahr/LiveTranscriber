@@ -1,8 +1,8 @@
 class SpeakersController < ApplicationController
-  before_action :set_speaker, only: [:show, :edit, :update, :destroy, :activate]
+  before_action :set_speaker, only: [:show, :edit, :update, :destroy, :activate, :initialize_speech_model]
 
   def index
-    @speakers = Speaker.all
+    @speakers = Speaker.ordered.all
   end
 
   def show
@@ -17,7 +17,12 @@ class SpeakersController < ApplicationController
 
   def activate
     session[:current_speaker_id] = @speaker
-    redirect_to speakers_path
+    redirect_to @speaker
+  end
+
+  def initialize_speech_model
+    @speaker.initialize_speech_model!(:force => params[:force])
+    redirect_to @speaker
   end
 
   def create

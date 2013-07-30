@@ -27,13 +27,7 @@ class LiveTranscriberController < ApplicationController
 
    raise "No current_speaker defined" unless @current_speaker
 
-   options = {
-     :hmm  => @current_speaker.hidden_markov_model,
-     :dict => @current_speaker.dictionary,
-     :lm   => @current_speaker.language_model
-   }
-
-   speech_recognizer = SpeechRecognizer::PocketSphinx.new(@recording.downsampled_wav_file, options)
+   speech_recognizer = SpeechRecognizer::PocketSphinx.new(@recording.downsampled_wav_file, @current_speaker.attributes)
 
    speech_recognizer.run! do |on|
 

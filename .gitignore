@@ -22,9 +22,9 @@ pickle-email-*.html/.bundle
 /tmp
 
 /public/system
-/speech_recognition/models/hmm/*
-/speech_recognition/models/dict/*
-/speech_recognition/models/lm/*
+/speech_recognition/models/hidden_markov_model/*
+/speech_recognition/models/dictionary/*
+/speech_recognition/models/language_model/*
 /speech_recognition/tools/fatpocketsphinx/fatpocketsphinx_continuous
 
 *.DS_Store

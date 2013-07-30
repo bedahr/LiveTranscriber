@@ -9,6 +9,14 @@ module ApplicationHelper
     content_tag(:a, body, html_options.merge({ :href => href, :class => "btn #{html_options[:class]}"}))
   end
 
+  def check_or_unchecked(value, title='')
+    if value
+      content_tag(:span, icon(:check),     :class => 'btn btn-success')
+    else
+      content_tag(:span, icon(:unchecked), :class => 'btn btn-danger')
+    end
+  end
+
   def icon(icons, options={})
     options[:class] = [ icons, options[:class] ].flatten.compact.collect { |k| "icon-#{k}" }.join(' ')
     content_tag(:i, '', options)

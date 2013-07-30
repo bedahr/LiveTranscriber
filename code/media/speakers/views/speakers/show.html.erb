@@ -4,7 +4,50 @@
     <%= button_to("Edit", edit_speaker_path(@speaker), :icon => :edit) %>
 	</div>
 
-  <h1>Showing Speaker</h1>
+  <h1><%= @speaker.name %></h1>
 </div>
 
-<%= render 'form' %>
+<%= box("Active Speaker") do %>
+
+  <div class="btn-group">
+    <% if @speaker == @current_speaker %>
+      <%= check_or_unchecked(true) %>
+      <%= button_to "Activated", '#' %>
+    <% else %>
+      <%= check_or_unchecked(false) %>
+      <%= button_to "Activate", activate_speaker_path(@speaker), data: { method: :post } %>
+    <% end %>
+  </div>
+
+<% end %>
+
+<%= box("Speech Model") do %>
+  <div class="btn-toolbar">
+
+    <div class="btn-group">
+      <% if @speaker.speech_model_initialized? %>
+        <%= check_or_unchecked(true) %>
+        <%= button_to "Initialized", '#' %>
+      <% else %>
+        <%= check_or_unchecked(false) %>
+        <%= button_to "Not Initialized", '#' %>
+      <% end %>
+    </div>
+
+    <div class="btn-group">
+      <% if @speaker.base_model? %>
+        <%= check_or_unchecked(true) %>
+        <%= button_to "Base Model", '#' %>
+      <% elsif @speaker.speech_model_initialized? %>
+        <%= button_to "Re-Initialize", initialize_speech_model_speaker_path(@speaker, :force => true), icon: 'gears', data: { method: :post, confirm: "Are you sure? Any adaptions will be lost!" }, class: 'btn-primary' %>
+      <% else %>
+        <%= button_to "Initialize Speech Model", initialize_speech_model_speaker_path(@speaker),  icon: 'gears', class: 'btn-primary', data: { method: :post } %>
+      <% end %>
+    </div>
+
+  </div>
+<% end %>
+
+<%= box("Training") do %>
+  <!-- TODO: Implement Adoption -->
+<% end %>

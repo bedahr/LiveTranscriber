@@ -11,12 +11,28 @@ class Speaker < ActiveRecord::Base
 
   acts_as_tree
 
-  before_validation :initialize_models
+  before_validation :initialize_model_settings
   before_validation :normalize_model_names
+
+  scope :ordered, -> { order(:parent_id) }
+
+  def base_model?
+    parent_id.nil?
+  end
+
+  def speech_model_initialized?
+    base_model? || File.directory?( File.join(SpeechRecognizer.models_path, "hidden_markov_model/", hidden_markov_model ))
+  end
+
+  def initialize_speech_model!(options={})
+    raise "Can not initialize a base model" if base_model?
+
+    SpeechTraining::ModelCloner.new(self.parent.attributes, self.attributes, options).clone!
+  end
 
 private
 
-  def initialize_models
+  def initialize_model_settings
     return unless parent
     return if base_model_name.blank?
 
@@ -30,7 +46,7 @@ private
   end
 
   def normalize_model_names
-    [ :hidden_markov_model, :language_model, :dictionary ].each do |key|
+    SpeechRecognizer.model_keys.each do |key|
       self.send(key).gsub!(/[^\w\.]/, '_') if self.send(key)
     end
   end
