@@ -39,6 +39,7 @@ Our goal is to improve open-source speech recognition. If you use this applicati
     * [RubyGems](http://rubygems.org/)
     * [Bundler](http://bundler.io/)
     * [SoX](http://sox.sourceforge.net/)
+    * [Redis](http://redis.io/)
 
 2. Fetch the git repository
 
