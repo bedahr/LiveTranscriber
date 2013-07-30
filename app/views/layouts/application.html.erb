@@ -19,7 +19,14 @@
       <a id="home_link" class="brand" href="/"><%= icon('comments-alt') %> Live Transcriber</a>
 
       <div class="btn-group pull-right">
-        <%= dropdown_button(@current_user.name.to_s.titlecase, :icon => :user) do %>
+
+        <% if @current_speaker %>
+          <%= button_to @current_speaker.name, '#', :icon => 'volume-up', 'data-toggle' => 'dropdown' %>
+        <% end %>
+
+        <%= dropdown_button("", :icon => :reorder, :caret => false) do %>
+          <%= dropdown_link_to("Change Speaker", speakers_path) %>
+          <%= divider %>
           <%= dropdown_link_to("My Recordings",  my_recordings_path) %>
           <%= dropdown_link_to("All Recordings", recordings_path) %>
         <% end %>

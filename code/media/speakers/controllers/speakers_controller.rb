@@ -1,5 +1,5 @@
 class SpeakersController < ApplicationController
-  before_action :set_speaker, only: [:show, :edit, :update, :destroy]
+  before_action :set_speaker, only: [:show, :edit, :update, :destroy, :activate]
 
   def index
     @speakers = Speaker.all
@@ -13,6 +13,11 @@ class SpeakersController < ApplicationController
   end
 
   def edit
+  end
+
+  def activate
+    session[:current_speaker_id] = @speaker
+    redirect_to speakers_path
   end
 
   def create

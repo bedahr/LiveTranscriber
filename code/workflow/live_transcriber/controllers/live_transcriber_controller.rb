@@ -23,8 +23,17 @@ class LiveTranscriberController < ApplicationController
   def events
    response.headers['Content-Type'] = 'text/event-stream'
 
-   sse               = SSE.new(response.stream)
-   speech_recognizer = SpeechRecognizer::PocketSphinx.new(@recording.downsampled_wav_file)
+   sse = SSE.new(response.stream)
+
+   raise "No current_speaker defined" unless @current_speaker
+
+   options = {
+     :hmm  => @current_speaker.hidden_markov_model,
+     :dict => @current_speaker.dictionary,
+     :lm   => @current_speaker.language_model
+   }
+
+   speech_recognizer = SpeechRecognizer::PocketSphinx.new(@recording.downsampled_wav_file, options)
 
    speech_recognizer.run! do |on|
 

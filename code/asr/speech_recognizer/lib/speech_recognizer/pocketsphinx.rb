@@ -11,11 +11,11 @@ module SpeechRecognizer
       end
     end
 
-    DEFAULT_OPTIONS = {
-      :hmm  => 'voxforge_en_sphinx.cd_cont_5000',
-      :dict => 'essential-sane-65k.fullCased',
-      :lm   => 'ensemble_wiki_ng_se_so_subs_enron_congress_65k_pruned_huge_sorted_cased.lm.DMP'
-    }
+    # DEFAULT_OPTIONS = {
+    #   :hmm  => 'voxforge_en_sphinx.cd_cont_5000',
+    #   :dict => 'essential-sane-65k.fullCased',
+    #   :lm   => 'ensemble_wiki_ng_se_so_subs_enron_congress_65k_pruned_huge_sorted_cased.lm.DMP'
+    # }
 
     ROOT_PATH = File.join(Rails.root, "speech_recognition")
 
@@ -24,7 +24,7 @@ module SpeechRecognizer
 
     def initialize(file, options={})
       @file    = file
-      @options = DEFAULT_OPTIONS.merge(options)
+      @options = options
     end
 
     def run!(&block)
@@ -109,7 +109,7 @@ module SpeechRecognizer
 
       [ :hmm, :dict, :lm ].each do |key|
         raise "Speech model not completly defined. Missing key: #{key}" unless options[key]
-        raise "Could not find: #{options[key]}" unless File.exists?( File.join(ROOT_PATH, "models", key.to_s, options[key]) )
+        raise "Could not find '#{key}' speech model: #{options[key]}" unless File.exists?( File.join(ROOT_PATH, "models", key.to_s, options[key]) )
       end
     end
 

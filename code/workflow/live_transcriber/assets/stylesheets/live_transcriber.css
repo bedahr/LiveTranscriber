@@ -16,7 +16,7 @@
 }
 
 #live_transcriber #status { min-width: 10px; display: inline-block; }
-#live_transcriber audio   { position: fixed; width: 200px; top: 5px; z-index: 10000!important; right: 150px; }
+/*#live_transcriber audio   { position: fixed; width: 200px; top: 5px; z-index: 10000!important; right: 150px; }*/
 
 #live_transcriber a#event_source { display: none; }
 

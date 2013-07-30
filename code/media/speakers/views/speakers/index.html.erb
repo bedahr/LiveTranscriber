@@ -14,6 +14,7 @@
       <th>Name</th>
       <th>Based On</th>
       <th class="edit">&nbsp;</th>
+      <th class="edit">&nbsp;</th>
     </tr>
   </thead>
 
@@ -25,7 +26,14 @@
       <td><%= speaker.name %></td>
       <td><%= speaker.parent.try(:name) || "(Root Model)" %></td>
       <td>
-        <%= link_to "Clone", new_speaker_path(:speaker => { :parent_id => speaker.id, :language_id => speaker.language_id }), :class => 'btn btn-small btn-primary' %>
+        <% if speaker == @current_speaker %>
+          <%= button_to "Active", '#', :class => 'btn-success btn-small' %>
+        <% else %>
+          <%= button_to "Activate", activate_speaker_path(speaker), :data => { :method => :post }, :class => 'btn-primary btn-small' %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to "Clone", new_speaker_path(:speaker => { :parent_id => speaker.id, :language_id => speaker.language_id }), :class => 'btn btn-small' %>
         <%= link_to "Edit",  edit_speaker_path(speaker), :class => 'btn btn-small' %>
       </td>
     </tr>
