@@ -8,5 +8,6 @@
 //= require bootstrap
 //= require hallo
 //
+//= require global
 //= require live_transcriber
 //= require dashboard
