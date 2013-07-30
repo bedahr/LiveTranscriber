@@ -6,7 +6,7 @@
   <h1>Users</h1>
 </div>
 
-<table id="users" class="table hover nowrap zebra">
+<table id="users" class="table hover nowrap">
   <thead>
     <tr>
       <th>Name</th>
@@ -16,7 +16,7 @@
 
   <tbody>
   <% @users.each do |user| %>
-    <tr class="searchable">
+    <tr>
       <td><%= user.name %></td>
       <td>
         <%= link_to "Profile", user, :class => 'btn btn-small' %>

@@ -6,7 +6,7 @@
   <h1>Recordings</h1>
 </div>
 
-<table id="recordings" class="table hover nowrap zebra">
+<table id="recordings" class="table hover nowrap">
   <thead>
     <tr>
       <th>User</th>
@@ -17,7 +17,7 @@
 
   <tbody>
   <% @recordings.each do |recording| %>
-    <tr class="searchable">
+    <tr>
       <td><%= recording.user.try(:name) %></td>
       <td><%= recording.name %></td>
       <td>
