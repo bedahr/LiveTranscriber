@@ -14,8 +14,11 @@ gem 'colored'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
+gem 'chosen-rails'
 
 gem 'acts_as_list'
+gem 'acts_as_tree'
+
 gem 'paperclip'
 gem 'redis'
 gem 'language_list'
