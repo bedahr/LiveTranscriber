@@ -9,6 +9,10 @@ module SpeechRecognizer
       def tag?
         !! word.to_s.match(/</)
       end
+
+      def to_s
+        word.to_s.gsub(/\(\d+\)$/, '')
+      end
     end
 
     attr_accessor :file, :pid
@@ -59,13 +63,13 @@ module SpeechRecognizer
           elsif line.match(/^\= final_hypothese \| /)
             callbacks.invoke(:final_hypothese, $~)
 
-          elsif line.match(/^\= timed_word \| (?<word>.*?) \| (?<start_timecode>[\d\.]+) (?<end_timecode>[\d\.]+) (?<duration>[\d\.]+)/)
+          elsif line.match(/^\= timed_word \| (?<word>.*?) \| (?<start_timecode>[\d\.]+) (?<end_timecode>[\d\.]+) (?<confidence>[\d\.]+)/)
             @word_buffer << Word.new($~.to_hash)
 
             callbacks.invoke(:timed_word, $~)
 
           elsif line.match(/^\= continue/)
-            data = { :text       => @word_buffer.reject(&:tag?).collect(&:word).join(' '),
+            data = { :text       => @word_buffer.reject(&:tag?).collect(&:to_s).join(' '),
                      :start_time => @word_buffer.collect(&:start_timecode).collect(&:to_f).min,
                      :end_time   => @word_buffer.collect(&:end_timecode).collect(&:to_f).max,
                      :words      => @word_buffer.collect(&:all_attributes) }
