@@ -18,11 +18,19 @@ gem 'font-awesome-rails'
 gem 'acts_as_list'
 gem 'paperclip'
 gem 'redis'
+gem 'language_list'
 
 gem 'puma'
 
 group :doc do
   gem 'sdoc', require: false
+end
+
+group :development, :test do
+  gem 'minitest'
+  gem 'minitest-rails'
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
 end
 
 gem 'bcrypt-ruby', '~> 3.0.0'
