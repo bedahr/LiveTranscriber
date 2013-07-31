@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(:name => "Simon", :password => "livetranscriber", :email => "simon@livetranscriber.org")
+User.create(:name => "Simon", :password => "livetranscriber", :password_confirmation => "livetranscriber", :email => "simon@livetranscriber.org")
 
 # Selecting languages with flags
 common_languages = LanguageList::COMMON_LANGUAGES.select do |language|
