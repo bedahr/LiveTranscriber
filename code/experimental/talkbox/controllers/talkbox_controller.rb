@@ -6,6 +6,7 @@ class TalkboxController < ApplicationController
   before_filter :set_userhash
 
   def index
+    @language = params[:language] || 'en'
   end
 
   def say

@@ -9,6 +9,7 @@
   <h1>Talk Box</h1>
 </div>
 
+<%= hidden_field_tag 'language', @language %>
 <%= hidden_field_tag 'userhash', @userhash %>
 
 <div id="messages">
@@ -35,6 +36,7 @@
 <script>
   var lastResult = 0;
   var recognition = new webkitSpeechRecognition();
+  recognition.lang = $("#language").val();
   recognition.continuous = true;
   recognition.interim = true;
   recognition.maxAlternatives = 5;
@@ -67,6 +69,14 @@
       $("#final_result").html("Start talking now ...");
     };
 
+    recognition.onspeechstart = function(event) {
+      $("#new_message").addClass('btn-success');
+    };
+
+    recognition.onspeechend = function(event) {
+      $("#new_message").removeClass('btn-success');
+    };
+
     recognition.onresult = function (event) {
       $("#final_result").html("");
       $("#new_message").show();
@@ -79,7 +89,7 @@
 
           $("<span>").text(transcript).appendTo("#final_result");
 
-          data = { userhash:$("#userhash").val(), message:transcript };
+          data = { userhash:$("#userhash").val(), message:transcript, language:$("#language").val() };
 
           $.post("/talkbox/say", data, function(data) {
             console.log("message submitted");
