@@ -8,6 +8,7 @@ class LiveTranscriberController < ApplicationController
 
   def index
     @recording.create_downsampled_wav_file! unless @recording.downsampled_wav_file.file?
+    @recording.create_optimized_audio_file! unless @recording.optimized_audio_file.file?
   end
 
   # TODO: Implement saving of transcription
