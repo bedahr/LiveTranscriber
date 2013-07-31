@@ -36,6 +36,8 @@ private
     return unless parent
     return if base_model_name.blank?
 
+    SpeechRecognizer.model_keys.each { |k| self.send("#{k}=", nil) if self.send(k).blank? }
+
     self.hidden_markov_model ||= base_model_name
     self.dictionary          ||= "#{base_model_name}.dict"
     self.language_model      ||= "#{base_model_name}.lm.DMP"
