@@ -27,7 +27,7 @@ Language.find_by_long_code('ell').update_attribute(:name, "Greek")
 english_language = Language.find_by_long_code('eng')
 
 base_speaker_attrs = {
-  :name                => "Peter Grasch",
+  :name                => "Ensemble",
   :hidden_markov_model => "voxforge_en_sphinx.cd_cont_5000",
   :language_model      => "ensemble_wiki_ng_se_so_subs_enron_congress_65k_pruned_huge_sorted_cased.lm.DMP",
   :dictionary          => "essential_sane_65k.fullCased"
