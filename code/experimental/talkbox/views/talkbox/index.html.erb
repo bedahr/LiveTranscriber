@@ -1,0 +1,110 @@
+<div class="page-header">
+  <div class="btn-group pull-right">
+    <a class="btn toggle_recognition" href="#" icon="microphone"><i class="icon-microphone"></i>
+      <span class="start">Start Chatting</span>
+      <span class="stop hide">Stop Chatting</span>
+    </a>
+	</div>
+
+  <h1>Talk Box</h1>
+</div>
+
+<%= hidden_field_tag 'userhash', @userhash %>
+
+<div id="messages">
+  <%= render 'message', userhash:'other', message:"Hello." %>
+</div>
+
+<span id="new_message" class="toggle_recognition">
+  <span id="final_result">Click <strong>Start Chatting</strong> ...</span>
+</span>
+
+<style>
+  #new_message {
+    border-radius: 5px;
+    background-color: lightgray;
+    padding: 8px;
+    font-size: 16px;
+    display: inline-block;
+  }
+
+  .message { margin-bottom: 8px; }
+  .message img { width: 15px; height: 15px; }
+</style>
+
+<script>
+  var lastResult = 0;
+  var recognition = new webkitSpeechRecognition();
+  recognition.continuous = true;
+  recognition.interim = true;
+  recognition.maxAlternatives = 5;
+
+  $(".toggle_recognition").click( function() {
+
+    $("#new_message").removeClass('toggle_recognition');
+    var btn = $(".toggle_recognition");
+
+    if ( btn.hasClass('btn-danger') ) {
+      // Stop recognition
+      btn.removeClass('btn-danger');
+      btn.find(".start").show();
+      btn.find(".stop").hide();
+
+      recognition.stop();
+
+    } else {
+      // Start recognition
+      btn.addClass('btn-danger');
+      btn.find(".start").hide();
+      btn.find(".stop").show();
+
+      recognition.start();
+
+      $("#final_result").html("Waiting for microphone access ...");
+    }
+
+    recognition.onaudiostart = function (event) {
+      $("#final_result").html("Start talking now ...");
+    };
+
+    recognition.onresult = function (event) {
+      $("#final_result").html("");
+      $("#new_message").show();
+
+      for (var i = lastResult; i < event.results.length; ++i) {
+        console.log(event.results[i]);
+
+        if (event.results[i].isFinal) {
+          transcript = event.results[i][0].transcript;
+
+          $("<span>").text(transcript).appendTo("#final_result");
+
+          data = { userhash:$("#userhash").val(), message:transcript };
+
+          $.post("/talkbox/say", data, function(data) {
+            console.log("message submitted");
+            console.log(data);
+          })
+
+          lastResult = i + 1;
+        }
+      }
+    };
+
+  });
+</script>
+
+<script>
+
+  $(document).ready(function() {
+
+    var event_source = new EventSource("/talkbox/events");
+
+    event_source.addEventListener('message', function(e) {
+      data = $.parseJSON(e.data);
+
+      $("#messages").append(data.html);
+    });
+  });
+
+</script>

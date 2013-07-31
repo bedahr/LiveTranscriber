@@ -8,5 +8,7 @@
 
   extensions << 'workflow/live_transcriber'
 
+  extensions << 'experimental/talkbox'
+
   extensions << 'asr/speech_recognizer'
 end
