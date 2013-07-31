@@ -77,6 +77,11 @@
       $("#new_message").removeClass('btn-success');
     };
 
+    recognition.onnomatch = function(event) {
+      $("#new_message").removeClass('btn-success');
+      $("#final_result").html("[not recognized]");
+    };
+
     recognition.onresult = function (event) {
       $("#final_result").html("");
       $("#new_message").show();
