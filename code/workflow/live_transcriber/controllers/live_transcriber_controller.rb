@@ -84,7 +84,7 @@ private
 
   def notify_speech_recognizer
     debug "Redis: Sending 'continue' notification"
-    Redis.new.tap { |k| k.publish(redis_channel, "continue") }.quit
+    $redis.publish(redis_channel, "continue")
 
     render :text => "OK"
   end

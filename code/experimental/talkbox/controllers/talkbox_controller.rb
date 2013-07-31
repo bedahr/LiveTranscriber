@@ -10,14 +10,7 @@ class TalkboxController < ApplicationController
   end
 
   def say
-    @message  = params[:message]
-    @userhash = params[:userhash]
-    @html     = render_to_string :partial => 'message', :locals => { message:@message, userhash:@userhash }
-    @data     = { message:@message, userhash:@userhash, html:@html, time:Time.now }
-
-    puts "posting message: #{@data}"
-
-    Redis.new.tap { |k| k.publish "talkbox", @data.to_json }.quit
+    publish_message(params[:message], params[:userhash])
 
     render nothing: true
   end
@@ -32,22 +25,33 @@ class TalkboxController < ApplicationController
 
       on.subscribe do |channel, subscriptions|
         puts "subscribed to: #{channel}"
+        publish_message("Entered the chatroom ...", @userhash)
       end
 
       on.message do |event, data|
         puts "got message: #{data}";
-
         sse.write(JSON.parse(data), event: 'message')
       end
     end
 
   rescue IOError
+
   ensure
+    puts "closing ..."
+
     redis.quit if redis
     sse.close
   end
 
 private
+
+  def publish_message(message, userhash)
+    data = { message:message, userhash:userhash, avatar:"http://www.gravatar.com/avatar/#{userhash}?s=15&d=monsterid", time:Time.now }
+
+    puts "publishing message: #{data}"
+
+    $redis.tap { |k| k.publish "talkbox", data.to_json }.quit
+  end
 
   def set_userhash
     @userhash = Digest::MD5.hexdigest( request.remote_ip ).to_s

@@ -12,8 +12,19 @@
 <%= hidden_field_tag 'language', @language %>
 <%= hidden_field_tag 'userhash', @userhash %>
 
+<div class="template hide">
+  <div class="message">
+    <div class="btn-group">
+      <span class="btn">
+        <img class="avatar" />
+      </span>
+
+      <span class="btn text"></span>
+    </div>
+  </div>
+</div>
+
 <div id="messages">
-  <%= render 'message', userhash:'other', message:"Hello." %>
 </div>
 
 <span id="new_message" class="toggle_recognition">
@@ -116,9 +127,16 @@
     var event_source = new EventSource("/talkbox/events");
 
     event_source.addEventListener('message', function(e) {
+      console.log("received message");
       data = $.parseJSON(e.data);
 
-      $("#messages").append(data.html);
+      console.log(data);
+
+      new_message = $(".template .message").clone();
+      new_message.find('.text').text(data.message);
+      new_message.find('.avatar').attr('src', data.avatar);
+
+      new_message.appendTo('#messages');
     });
   });
 

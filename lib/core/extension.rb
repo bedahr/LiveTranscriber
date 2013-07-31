@@ -35,7 +35,7 @@ module Core
     end
 
     def dirs
-      %w(models lib concerns controllers daemons vendor).
+      %w(models helpers lib concerns controllers daemons vendor).
         collect { |dir| File.join(Rails.root, path, dir) }.
         select  { |dir| File.directory?(dir)     }
     end
