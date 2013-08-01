@@ -11,6 +11,10 @@ class LiveTranscriberController < ApplicationController
     @recording.create_optimized_audio_file! unless @recording.optimized_audio_file.file?
   end
 
+  def realtime
+    index
+  end
+
   # TODO: Implement saving of transcription
   def submit
     notify_speech_recognizer

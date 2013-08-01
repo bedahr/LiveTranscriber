@@ -1,0 +1,10 @@
+<div class="page-header">
+  <div class="btn-group pull-right">
+    <%= button_to("Overview", words_path, :icon => :list) %>
+    <%= button_to("Edit", edit_word_path(@word), :icon => :edit) %>
+	</div>
+
+  <h1>Showing Word</h1>
+</div>
+
+<%= render 'form' %>

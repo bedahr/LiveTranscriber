@@ -1,7 +1,7 @@
 require 'tempfile'
 
 class Recording
-  class AudioProcessor
+  class AbstractProcessor
 
     attr_accessor :recording, :options
 

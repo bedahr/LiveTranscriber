@@ -88,6 +88,6 @@ $(document).ready(function() {
   $("#live_transcriber div.editor").hallo();
 
   // LiveTranscriber
-  $("#live_transcriber").liveTranscriber();
+  // $("#live_transcriber").liveTranscriber();
 
 });

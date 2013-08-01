@@ -1,0 +1,5 @@
+<%= render 'audio_player' %>
+<%= render 'workarea' %>
+<%= render 'console' %>
+
+<%= link_to "", { :action => :events, :format => :sse, :id => @recording }, :id => 'event_source' %>

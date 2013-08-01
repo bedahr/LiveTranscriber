@@ -1,7 +1,5 @@
-require 'tempfile'
-
 class Recording
-  class Optimizer < Recording::AudioProcessor
+  class Optimizer < Recording::AbstractProcessor
 
     def process!
       check_recording!

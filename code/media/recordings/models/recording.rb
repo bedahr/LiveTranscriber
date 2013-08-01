@@ -3,6 +3,8 @@ class Recording < ActiveRecord::Base
 
   belongs_to :user
 
+  has_many :words
+
   has_attached_file :original_audio_file
   has_attached_file :optimized_audio_file
   has_attached_file :downsampled_wav_file
@@ -19,6 +21,10 @@ class Recording < ActiveRecord::Base
 
   def create_optimized_audio_file!
     Recording::Optimizer.new(self).process!
+  end
+
+  def import_label_file!(filename)
+    Recording::LabelImporter.new(self).import!(filename)
   end
 
 private

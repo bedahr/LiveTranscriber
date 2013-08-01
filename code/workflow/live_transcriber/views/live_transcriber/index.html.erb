@@ -1,5 +1,43 @@
-<%= render 'audio_player' %>
-<%= render 'workarea' %>
-<%= render 'console' %>
+<%#= render 'audio_player' %>
+<%#= render 'workarea' %>
+<%#= render 'console' %>
 
-<%= link_to "", { :action => :events, :format => :sse, :id => @recording }, :id => 'event_source' %>
+<div id="audio_player">
+  <audio controls="controls" preload="auto">
+    <source src="<%= @recording.downsampled_wav_file %>" />
+    <track kind="subtitles"
+           src="<%= url_for(action: :words, id: @recording, format: 'vtt') %>" default></track>
+  </audio>
+</div>
+
+<% @recording.words.each do |word| %>
+  <%= content_tag(:span, word, id: dom_id(word), class: 'word', data: { confidence: word.confidence, start_time: word.start_time, end_time: word.end_time }) %>
+  <%= tag(:br) if word.tag? %>
+<% end %>
+
+<style>
+  .word { font-size: 18px; cursor: pointer; }
+  .word.active { background-color: lightyellow; }
+</style>
+
+<script>
+$(document).ready(function() {
+
+  $(".word").click( function() {
+    var audio = $("audio")[0];
+    audio.currentTime = $(this).data('start-time');
+    audio.play();
+  });
+
+  $("#audio_player audio track").on('cuechange', function() {
+    $( this.track.activeCues ).each( function(i, cue) {
+      console.log("cue: " + cue.id);
+      $("#" + cue.id).addClass('active');
+    });
+  });
+
+});
+
+</script>
+
+<%#= link_to "", { :action => :events, :format => :sse, :id => @recording }, :id => 'event_source' %>

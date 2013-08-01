@@ -1,5 +1,5 @@
 class Recording
-  class Downsampler < Recording::AudioProcessor
+  class Downsampler < Recording::AbstractProcessor
 
     def initialize(*args)
       super

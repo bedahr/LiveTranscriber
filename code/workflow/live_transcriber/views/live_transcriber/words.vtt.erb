@@ -1,0 +1,8 @@
+WEBVTT
+
+<%- @recording.words.each do |word| %>
+<%= dom_id(word) %>
+<%= word.start_timecode %> --> <%= word.end_timecode %>
+<%= word.body %>
+
+<%- end %>

@@ -5,6 +5,7 @@
   extensions << 'media/recordings'
   extensions << 'media/languages'
   extensions << 'media/speakers'
+  extensions << 'media/words'
 
   extensions << 'workflow/live_transcriber'
 
