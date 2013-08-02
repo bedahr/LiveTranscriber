@@ -111,6 +111,9 @@ $(document).ready(function() {
 
   $("#transcriber audio").on('canplay', function() {
     console.log("meta data loaded. showing first segment ...");
+    $(".streaming").hide();
+    $(".next_segment").show();
+    $(".replay").show();
     $(".next_segment").trigger('click');
   });
 

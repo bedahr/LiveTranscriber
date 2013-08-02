@@ -7,6 +7,10 @@
   </audio>
 </div>
 
+<div class="streaming">
+  <i class="icon-spinner icon-spin icon-large"></i> Streaming Audio ...
+</div>
+
 <div class="editor">
   <% @segments.each do |segment| %>
     <%= content_tag(:div, id: dom_id(segment), class: 'segment hide', data: { start_time: segment.start_time, end_time: segment.end_time, next_segment_preview: segment.next_segment_preview  }) do %>
@@ -27,7 +31,9 @@
 </div>
 
 <div class="actions">
-  <%= button_to "Next", '#', :class => 'next_segment btn-primary', :icon => "collapse", :title => '[ENTER]' %>
+  <%= button_to "Next", '#', :class => 'next_segment btn-primary hide', :icon => "collapse", :title => '[ENTER]' %>
+
+  <!-- TODO: Add check if last page ...   -->
   <%= button_to "Continue ...", { :page => @segments.current_page + 1 }, :class => 'continue hide btn-primary', :icon => "chevron-sign-right" %>
-  <%= button_to "Replay", '#', :class => 'replay', :icon => :play, :title => '[TAB]' %>
+  <%= button_to "Replay", '#', :class => 'replay', :icon => :play, :title => '[TAB]', :class => 'hide' %>
 </div>
