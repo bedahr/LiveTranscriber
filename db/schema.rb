@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130802133959) do
+ActiveRecord::Schema.define(version: 20130802140624) do
 
   create_table "languages", force: true do |t|
     t.string   "name"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20130802133959) do
     t.datetime "optimized_audio_file_updated_at"
   end
 
+  add_index "recordings", ["user_id"], name: "index_recordings_on_user_id"
+
   create_table "segments", force: true do |t|
     t.integer  "recording_id"
     t.float    "start_time"
@@ -48,6 +50,8 @@ ActiveRecord::Schema.define(version: 20130802133959) do
     t.datetime "updated_at"
     t.integer  "position"
   end
+
+  add_index "segments", ["recording_id"], name: "index_segments_on_recording_id"
 
   create_table "speakers", force: true do |t|
     t.integer  "parent_id"
@@ -59,6 +63,8 @@ ActiveRecord::Schema.define(version: 20130802133959) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "speakers", ["language_id"], name: "index_speakers_on_language_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -79,5 +85,8 @@ ActiveRecord::Schema.define(version: 20130802133959) do
     t.integer  "segment_id"
     t.text     "alternatives"
   end
+
+  add_index "words", ["recording_id"], name: "index_words_on_recording_id"
+  add_index "words", ["segment_id"], name: "index_words_on_segment_id"
 
 end

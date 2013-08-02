@@ -16,6 +16,10 @@ class Recording < ActiveRecord::Base
 
   alias_attribute :name, :original_audio_file_file_name
 
+  def processed?
+    downsampled_wav_file.file? && optimized_audio_file.file?
+  end
+
   def create_downsampled_wav_file!
     Recording::Downsampler.new(self).process!
   end

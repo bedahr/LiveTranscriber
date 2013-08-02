@@ -1,5 +1,5 @@
 class RecordingsController < ApplicationController
-  before_action :set_recording, only: [:show, :edit, :update, :destroy]
+  before_action :set_recording, only: [:show, :edit, :update, :destroy, :import_labels]
 
   def index
     @recordings = Recording.all
@@ -12,6 +12,14 @@ class RecordingsController < ApplicationController
 
   def new
     @recording = Recording.new(params[:recording] && recording_params)
+  end
+
+  def import_labels
+    Recording::SegmentImporter.new(@recording).import_lines!( params[:lines].to_s.split(/\n/) )
+
+    @recording.segments.each(&:create_words!)
+
+    redirect_to @recording
   end
 
   def show

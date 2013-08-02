@@ -11,13 +11,22 @@
   <%= button_to "Launch Transcriber",
        { :controller => :live_transcriber, :id => @recording }, :class => 'btn-primary' %>
 
+  <%= button_to "Add Labels", '#', :class => 'add_labels', :caret => true %>
+
    <%#= button_to "Realtime Transcriber (experimental)",
         { :controller => :live_transcriber, :action => :realtime, :id => @recording } %>
 
+   <div class="label_importer hide">
+     <%= form_tag( import_labels_recording_path(@recording) ) do %>
+       <%= text_area_tag :lines, '', :class => '', :placeholder => "3.23\t5.6\tAdd tab-separated labels here .." %>
+       <%= submit_tag "Import Labels", :class => 'btn' %>
+      <% end %>
+   </div>
 <% end %>
 
+<%= box("Information") do %>
+  <%= dump_table processed: @recording.processed?, segments: @recording.segments.count, words: @recording.words.count %>
 
-<%= box("Audio File") do %>
   <% if @recording.original_audio_file.file? %>
     <%= audio_tag @recording.original_audio_file, :controls => true, :preload => :none %>
   <% else %>

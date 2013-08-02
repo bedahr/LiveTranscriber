@@ -67,6 +67,8 @@ module ApplicationHelper
 
       value = yield(value) if block_given?
 
+      value = number_with_delimiter(value) if value.is_a?(Integer)
+
       if title
         rows << content_tag(:tr, content_tag(:td, title, :class => 'title top') + content_tag(:td, value))
       else

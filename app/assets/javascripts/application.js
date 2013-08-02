@@ -12,3 +12,4 @@
 //= require global
 //= require live_transcriber
 //= require dashboard
+//= require recordings
