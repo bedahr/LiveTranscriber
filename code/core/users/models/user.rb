@@ -12,4 +12,5 @@ class User < ActiveRecord::Base
   include Extendable
 
   has_many :recordings
+  has_many :transcriptions
 end

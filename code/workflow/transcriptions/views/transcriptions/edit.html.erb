@@ -1,0 +1,13 @@
+<div class="page-header">
+  <div class="btn-group pull-right">
+    <%= button_to("Overview", transcriptions_path, :icon => :list) %>
+
+    <%= dropdown_button("Actions") do %>
+      <%= dropdown_link_to("Delete", @transcription, data: { confirm: 'Are you sure?', method: :delete }, :icon => 'trash') %>
+    <% end %>
+	</div>
+
+  <h1>Edit Transcription</h1>
+</div>
+
+<%= render 'form' %>

@@ -5,6 +5,8 @@ $(document).ready(function() {
   $("#transcriber .next_segment").click( function(e) {
     console.log("next ..");
 
+    $(".segment:visible:last").trigger('save');
+
     var next_segment = $(".segment:hidden:first");
 
     if (next_segment.length == 0) {
@@ -47,32 +49,24 @@ $(document).ready(function() {
     audio.play();
   } );
 
-  $('#transcriber .editor').bind('halloselected', function(event, data) {
-      console.log("halloselected");
+  $("#transcriber .segment").on('save', function() {
+    var segment = $(this);
 
-      console.log( $(".hallotoolbar:visible") );
+    console.log("Saving transcription: " + segment.attr('id') );
 
-      sel = window.getSelection();
-      range = sel.getRangeAt(0);
+    if (segment.hasClass('saved')) {
+      console.log("already saved");
+      return(false);
+    }
 
-      $(".alternatives").html("");
+    $.post( segment.attr('action'),
+            { transcription: { segment_id: segment.data('id'), html_body: segment.html() } },
+            function(data) {
+              console.log("transcription saved");
+              segment.addClass('saved');
+            } )
 
-      var selectedNode = $(range.startContainer.parentNode);
-
-      $.each( selectedNode.data('alternatives'), function(i, alternative) {
-        var btn = $("<span>").addClass('btn').text(alternative);
-
-        btn.click( function() {
-          console.log( $(this).text() );
-          selectedNode.text( $(this).text() );
-
-          $(this).closest('.hallotoolbar').hide();
-        });
-
-        $(".alternatives").append(btn);
-      });
-
-      // TODO: Implement support for multi word spanning ranges
+    .fail(function() { alert("Segment could not be saved!"); }) ;
   });
 
   $("#transcriber audio track").on('cuechange', function() {
@@ -111,6 +105,12 @@ $(document).ready(function() {
 
   $("#transcriber audio").on('canplay', function() {
     console.log("meta data loaded. showing first segment ...");
+
+    $('#transcriber .existing_transcriptions').find('li').each( function(i, element) {
+      console.log( element );
+      $( $(element).data('target') ).remove();
+    });
+
     $(".streaming").hide();
     $(".next_segment").show();
     $(".replay").show();
@@ -118,11 +118,46 @@ $(document).ready(function() {
   });
 
   // Transcriber
-  $('#transcriber .editor').hallo({
+  $('#transcriber .segment').hallo({
     plugins: {
       'hallotranscriber': {}
     }
   });
 
+  // On selected
+  $('#transcriber .editor').bind('halloselected', function(event, data) {
+    console.log("halloselected");
+
+    sel = window.getSelection();
+    range = sel.getRangeAt(0);
+
+    $(".alternatives").html("");
+
+    // TODO: Implement support for multi word spanning ranges
+    var selectedNode = $(range.startContainer.parentNode);
+
+    $.each( selectedNode.data('alternatives'), function(i, alternative) {
+      var btn = $("<span>").addClass('btn').text(alternative);
+
+      btn.click( function() {
+        console.log( $(this).text() );
+        selectedNode.text( $(this).text() );
+
+        $(this).closest('.hallotoolbar').hide();
+      });
+
+      $(".alternatives").append(btn);
+    });
+
+    $(event.target).removeClass('saved');
+  });
+
+  $('#transcriber .editor').bind('halloactivated', function(event, data) {
+    $(event.target).removeClass('saved');
+  });
+
+  $('#transcriber .editor').bind('hallodeactivated', function(event, data) {
+    $(event.target).trigger('save');
+  });
 
 });

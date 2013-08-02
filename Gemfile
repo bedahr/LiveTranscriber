@@ -27,6 +27,8 @@ gem 'paperclip'
 gem 'redis'
 gem 'language_list'
 
+gem 'nokogiri'
+
 gem 'puma'
 
 group :doc do

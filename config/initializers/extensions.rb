@@ -10,6 +10,7 @@
 
   extensions << 'workflow/transcriber'
   extensions << 'workflow/live_transcriber'
+  extensions << 'workflow/transcriptions'
 
   extensions << 'asr/speech_recognizer'
 end

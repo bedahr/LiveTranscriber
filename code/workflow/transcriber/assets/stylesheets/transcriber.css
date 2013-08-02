@@ -16,7 +16,9 @@
 #transcriber .line   { line-height: 30px!important; font-size: 35px; padding: 10px; }
 
 #transcriber .segment .info { border-top: 2px dotted lightgray; margin-top: 20px; color: lightgray; }
+
 #transcriber .segment.active { background-color: lightyellow; }
+#transcriber .segment.saved  { background-color: lightblue!important; }
 
 #transcriber [contenteditable="true"].inEditMode {
   outline-style: dotted;

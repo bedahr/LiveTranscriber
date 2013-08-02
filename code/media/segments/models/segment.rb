@@ -4,6 +4,7 @@ class Segment < ActiveRecord::Base
   belongs_to :recording
 
   has_many :words
+  has_many :transcriptions
 
   include Timecodes
 

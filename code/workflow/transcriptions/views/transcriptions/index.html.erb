@@ -1,0 +1,31 @@
+<div class="page-header">
+  <div class="btn-group pull-right">
+    <%= button_to("Add new Transcription", new_transcription_path, :class => 'btn-primary', :icon => [ :white, :plus ] ) %>
+	</div>
+
+  <h1>Transcriptions</h1>
+</div>
+
+<table id="transcriptions" class="table hover nowrap">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Segment</th>
+      <th>HTML Body</th>
+      <th>Text Body</th>
+      <th class="edit">&nbsp;</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @transcriptions.each do |transcription| %>
+    <tr>
+      <td><%= transcription.user_id %></td>
+      <td><%= transcription.segment_id %></td>
+      <td><%= transcription.html_body %></td>
+      <td><%= transcription.text_body %></td>
+      <td><%= link_to "Edit", edit_transcription_path(transcription), :class => 'btn btn-small' %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

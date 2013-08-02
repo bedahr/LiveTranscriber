@@ -1,0 +1,27 @@
+<%= form_for(@transcription, :html => { :class => 'form-horizontal' }) do |f| %>
+  <% if @transcription.errors.any? %>
+    <div id="error_explanation" class="round">
+      <ul>
+      <% @transcription.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.control_group(:segment_id) do %>
+    <%= f.number_field :segment_id %>
+  <% end %>
+
+  <%= f.control_group(:html_body) do %>
+    <%= f.text_area :html_body %>
+  <% end %>
+
+  <%= f.control_group(:text_body) do %>
+    <%= f.text_area :text_body %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+  </div>
+<% end %>

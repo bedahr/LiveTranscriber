@@ -11,9 +11,17 @@
   <i class="icon-spinner icon-spin icon-large"></i> Streaming Audio ...
 </div>
 
+<ul class="existing_transcriptions">
+  <% @transcriptions.each do |transcription| %>
+    <%= content_tag(:li, transcription.text_body, data: { target: '#' + dom_id(transcription.segment) }) %>
+  <% end %>
+</ul>
+
 <div class="editor">
   <% @segments.each do |segment| %>
-    <%= content_tag(:div, id: dom_id(segment), class: 'segment hide', data: { start_time: segment.start_time, end_time: segment.end_time, next_segment_preview: segment.next_segment_preview  }) do %>
+    <%= content_tag(:div, id: dom_id(segment), class: 'segment hide',
+                    action: transcriptions_path(format: :json),
+                    data: { id: segment.id, start_time: segment.start_time, end_time: segment.end_time, next_segment_preview: segment.next_segment_preview  }) do %>
       <div class="info">
         <%#= segment.body %>
       </div>

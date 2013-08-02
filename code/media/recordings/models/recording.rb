@@ -6,6 +6,8 @@ class Recording < ActiveRecord::Base
   has_many :words
   has_many :segments, -> { order(:position) }
 
+  has_many :transcriptions, :through => :segments
+
   has_attached_file :original_audio_file
   has_attached_file :optimized_audio_file
   has_attached_file :downsampled_wav_file
