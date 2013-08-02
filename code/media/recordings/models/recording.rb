@@ -4,6 +4,7 @@ class Recording < ActiveRecord::Base
   belongs_to :user
 
   has_many :words
+  has_many :segments
 
   has_attached_file :original_audio_file
   has_attached_file :optimized_audio_file
@@ -23,8 +24,12 @@ class Recording < ActiveRecord::Base
     Recording::Optimizer.new(self).process!
   end
 
-  def import_label_file!(filename)
-    Recording::LabelImporter.new(self).import!(filename)
+  def import_words!(filename)
+    Recording::WordImporter.new(self).import!(filename)
+  end
+
+  def import_segments!(filename)
+    Recording::SegmentImporter.new(self).import!(filename)
   end
 
 private
