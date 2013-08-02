@@ -1,5 +1,5 @@
 class RecordingsController < ApplicationController
-  before_action :set_recording, only: [:show, :edit, :update, :destroy, :import_labels]
+  before_action :set_recording, except: [ :index, :my, :new, :create ]
 
   def index
     @recordings = Recording.all
@@ -16,9 +16,13 @@ class RecordingsController < ApplicationController
 
   def import_labels
     Recording::SegmentImporter.new(@recording).import_lines!( params[:lines].to_s.split(/\n/) )
-
     @recording.segments.each(&:create_words!)
+    redirect_to @recording
+  end
 
+  def import_words
+    Recording::WordImporter.new(@recording).import_lines!( params[:lines].to_s.split(/\n/) )
+    @recording.segments.each(&:assign_words!)
     redirect_to @recording
   end
 

@@ -3,6 +3,6 @@ WEBVTT
 <%- @recording.segments.each do |segment| %>
 <%= dom_id(segment) %>
 <%= segment.start_timecode %> --> <%= segment.end_timecode %>
-<%= segment.body %>
+<%= segment.body.blank? ? "undefined" : segment.body %>
 
 <%- end %>

@@ -7,6 +7,8 @@ class Word < ActiveRecord::Base
 
   serialize :alternatives
 
+  scope :unassigned, -> { where(:segment_id => nil) }
+
   include Timecodes
 
   # TODO: Temporary method as sphinx seems to always suggest 2 words as alternative

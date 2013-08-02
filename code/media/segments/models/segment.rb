@@ -28,7 +28,7 @@ class Segment < ActiveRecord::Base
   end
 
   def raw_words
-    body.to_s.split(/ /)
+    body.to_s.split(/ /).reject(&:blank?)
   end
 
 end

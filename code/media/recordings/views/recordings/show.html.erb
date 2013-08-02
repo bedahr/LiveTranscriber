@@ -12,8 +12,8 @@
   <div class="btn-toolbar">
 
     <div class="btn-group">
-      <%= check_or_unchecked(true) %>
-      <%= button_to @recording.processed? ? "Audio prepared" : "Prepare Recording", prepare_recording_path(@recording), method: :post %>
+      <%= check_or_unchecked(@recording.processed?) %>
+      <%= button_to @recording.processed? ? "Audio prepared" : "Prepare Recording", prepare_recording_path(@recording), data: { method: :post } %>
     </div>
 
     <div class="btn-group">
@@ -24,6 +24,7 @@
 
     <div class="btn-group">
       <%= button_to "Add Labels", '#', :class => 'add_labels', :caret => true %>
+      <%= button_to "Add Words",  '#', :class => 'add_words', :caret => true %>
     </div>
 
   </div>
@@ -36,10 +37,21 @@
        <%= submit_tag "Import Labels", :class => 'btn' %>
       <% end %>
    </div>
+
+   <div class="word_importer hide">
+     <%= form_tag( import_words_recording_path(@recording) ) do %>
+       <%= text_area_tag :lines, '', :class => '', :placeholder => "3.23\t5.6\tword\t0.98\t0.7 alternative\t0.6 other_alternative" %>
+       <%= submit_tag "Import Words", :class => 'btn' %>
+      <% end %>
+   </div>
 <% end %>
 
 <%= box("Information") do %>
-  <%= dump_table processed: @recording.processed?, segments: @recording.segments.count, words: @recording.words.count %>
+  <%= dump_table( {
+        processed: @recording.processed?,
+        segments: @recording.segments.count,
+        words: @recording.words.count,
+        unassigned_words: @recording.words.unassigned.count }) %>
 
   <% if @recording.original_audio_file.file? %>
     <%= audio_tag @recording.original_audio_file, :controls => true, :preload => :none %>

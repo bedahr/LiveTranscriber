@@ -4,13 +4,13 @@ class Recording
   class WordImporter < Recording::AbstractProcessor
 
     def import!(filename)
+      import_lines!( File.readlines(filename).collect(&:rstrip) )
+    end
+
+    def import_lines!(lines)
       raise "recording already has words" if recording.words.exists?
 
-      File.readlines(filename).collect(&:rstrip).each do |line|
-        next unless line.match(/^= timed_word/)
-
-        line.gsub!(/^= timed_word \| /, "")
-
+      lines.each do |line|
         tabs = line.split(/\t/)
 
         start_time, end_time, body, confidence = tabs.shift(4)
