@@ -8,6 +8,7 @@
   extensions << 'media/words'
   extensions << 'media/segments'
 
+  extensions << 'workflow/transcriber'
   extensions << 'workflow/live_transcriber'
 
   extensions << 'asr/speech_recognizer'

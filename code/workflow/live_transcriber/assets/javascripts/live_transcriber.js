@@ -85,9 +85,9 @@ $(document).ready(function() {
   $("#live_transcriber .buttons a").click( function() { $(".buttons").css('visibility', 'hidden') });
 
   // HTML5 editor
-  // $("#live_transcriber div.editor").hallo();
+  $("#live_transcriber div.editor").hallo();
 
   // LiveTranscriber
-  // $("#live_transcriber").liveTranscriber();
+  $("#live_transcriber").liveTranscriber();
 
 });

@@ -1,0 +1,33 @@
+<%= paginate @segments %>
+
+<div id="audio_player">
+  <audio controls="controls" preload="auto">
+    <source src="<%= @recording.downsampled_wav_file %>" />
+    <track kind="subtitles" src="<%= url_for(action: :segments, id: @recording, format: 'vtt') %>" default></track>
+  </audio>
+</div>
+
+<div class="editor">
+  <% @segments.each do |segment| %>
+    <%= content_tag(:div, id: dom_id(segment), class: 'segment hide', data: { start_time: segment.start_time, end_time: segment.end_time, next_segment_preview: segment.next_segment_preview  }) do %>
+      <div class="info">
+        <%#= segment.body %>
+      </div>
+
+      <div class="line">
+        <% segment.words.reject(&:tag?).each do |word| %><%= content_tag(:span, word, id: dom_id(word), class: 'word', data: { alternatives: word.suggestions.to_json, confidence: word.confidence, start_time: word.start_time, end_time: word.end_time }) %> <% end %>
+      </div>
+    <% end %>
+
+  <% end %>
+</div>
+
+<div class="preview">
+  &nbsp;
+</div>
+
+<div class="actions">
+  <%= button_to "Next", '#', :class => 'next_segment btn-primary', :icon => "collapse", :title => '[ENTER]' %>
+  <%= button_to "Continue ...", { :page => @segments.current_page + 1 }, :class => 'continue hide btn-primary', :icon => "chevron-sign-right" %>
+  <%= button_to "Replay", '#', :class => 'replay', :icon => :play, :title => '[TAB]' %>
+</div>

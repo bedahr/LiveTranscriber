@@ -8,13 +8,27 @@
 </div>
 
 <%= box("Trancriber") do %>
-  <%= button_to "Launch Transcriber",
-       { :controller => :live_transcriber, :id => @recording }, :class => 'btn-primary' %>
 
-  <%= button_to "Add Labels", '#', :class => 'add_labels', :caret => true %>
+  <div class="btn-toolbar">
 
-   <%#= button_to "Realtime Transcriber (experimental)",
-        { :controller => :live_transcriber, :action => :realtime, :id => @recording } %>
+    <div class="btn-group">
+      <%= check_or_unchecked(true) %>
+      <%= button_to @recording.processed? ? "Audio prepared" : "Prepare Recording", prepare_recording_path(@recording), method: :post %>
+    </div>
+
+    <div class="btn-group">
+      <%= check_or_unchecked(false) %>
+      <%= button_to "Transcriber",
+         { :controller => :transcriber, :id => @recording }, :class => 'btn-pxrimary' %>
+    </div>
+
+    <div class="btn-group">
+      <%= button_to "Add Labels", '#', :class => 'add_labels', :caret => true %>
+    </div>
+
+  </div>
+   <%#= button_to "Live Transcriber (experimental)",
+        { :controller => :live_transcriber, :id => @recording } %>
 
    <div class="label_importer hide">
      <%= form_tag( import_labels_recording_path(@recording) ) do %>
