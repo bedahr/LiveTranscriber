@@ -82,4 +82,31 @@ module ApplicationHelper
     content_tag(:div, msg, :class => "alert alert-#{klass}")
   end
 
+  # Paginate helper using will_paginate manual navigation, plus InfinityScroll (Show More), plus Show All, plus page entries info
+  def paginate(collection, options={})
+    pagination   = will_paginate(collection, :container => false, :previous_label => "&laquo; Previous", :next_label => "Next &raquo;")
+    page_entries = content_tag(:li, content_tag(:a, raw(page_entries_info(collection, options)), :href => '#'), :class => 'disabled')
+
+    content_tag(:ul, [ pagination, page_entries ].join.html_safe, :class => 'pagination')
+  end
+
+  # Nicely formatted page_entries_info
+  def page_entries_info(collection, options = {})
+    entry_name = options[:entry_name] || (collection.empty? ? 'entry' : collection.first.class.name.underscore.gsub(/_|\//, ' '))
+
+    if collection.total_pages < 2
+      case collection.size
+      when 0 then "No #{entry_name.titlecase.pluralize} found"
+      when 1 then "<b>1</b> #{entry_name.titlecase}"
+      else        "<b>#{collection.size}</b> #{entry_name.pluralize.titlecase}"
+      end
+    else
+      %{<b>%s&nbsp;-&nbsp;%s</b> of <b>%s</b> #{entry_name.pluralize.titlecase}} % [
+        number_with_delimiter(collection.offset + 1),
+        number_with_delimiter(collection.offset + collection.length),
+        number_with_delimiter(collection.total_entries)
+      ]
+    end
+  end
+
 end
