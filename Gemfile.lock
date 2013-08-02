@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/jetthoughts/yaml_db.git
+  revision: fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba
+  ref: fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba
+  specs:
+    yaml_db (0.2.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -31,7 +38,9 @@ GEM
       activerecord (>= 3.0.0)
     arel (4.0.0)
     atomic (1.1.10)
+    atomic (1.1.10-java)
     bcrypt-ruby (3.0.1)
+    bcrypt-ruby (3.0.1-java)
     bootstrap-will_paginate (0.0.9)
       will_paginate
     builder (3.1.4)
@@ -82,6 +91,7 @@ GEM
       jquery-rails
       railties (>= 3.1.0)
     json (1.8.0)
+    json (1.8.0-java)
     language_list (1.0.0)
     libv8 (3.11.8.17)
     mail (2.5.4)
@@ -97,6 +107,8 @@ GEM
     mysql2 (0.3.11)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    nokogiri (1.6.0-java)
+      mini_portile (~> 0.5.0)
     paperclip (3.5.0)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -104,6 +116,8 @@ GEM
       mime-types
     polyglot (0.3.3)
     puma (2.4.0)
+      rack (>= 1.1, < 2.0)
+    puma (2.4.0-java)
       rack (>= 1.1, < 2.0)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -150,6 +164,8 @@ GEM
     thor (0.18.1)
     thread_safe (0.1.2)
       atomic
+    thread_safe (0.1.2-java)
+      atomic
     tilt (1.4.1)
     treetop (1.4.14)
       polyglot
@@ -193,3 +209,4 @@ DEPENDENCIES
   therubyracer
   uglifier (>= 1.3.0)
   will_paginate
+  yaml_db!

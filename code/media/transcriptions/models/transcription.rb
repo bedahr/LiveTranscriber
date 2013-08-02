@@ -9,6 +9,14 @@ class Transcription < ActiveRecord::Base
 
   before_validation :initialize_text_body
 
+  attr_accessor :text_body_with_mines
+
+  def self.best
+    all.group_by(&:segment).collect do |segment, transcriptions|
+      transcriptions.sort_by(&:created_at).last
+    end
+  end
+
 private
 
   def initialize_text_body

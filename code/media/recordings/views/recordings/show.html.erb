@@ -19,12 +19,18 @@
     <div class="btn-group">
       <%= check_or_unchecked(false) %>
       <%= button_to "Transcriber",
-         { :controller => :transcriber, :id => @recording }, :class => 'btn-pxrimary' %>
+         { controller: :transcriber, id: @recording }, class: 'btn-pxrimary' %>
     </div>
 
     <div class="btn-group">
-      <%= button_to "Add Segments", '#', :class => 'add_segments', :caret => true %>
-      <%= button_to "Add Words",    '#', :class => 'add_words',    :caret => true %>
+      <%= check_or_unchecked(false) %>
+      <%= button_to "Reviewer",
+         { controller: :reviewer, id: @recording }, class: 'btn-pxrimary' %>
+    </div>
+
+    <div class="btn-group">
+      <%= button_to "Add Segments", '#', class: 'add_segments', caret: true %>
+      <%= button_to "Add Words",    '#', class: 'add_words',    caret: true %>
     </div>
 
   </div>

@@ -1,0 +1,17 @@
+#reviewer .transcriptions {
+  font-family:proxima-nova;
+  font-style:normal;
+  font-weight:100;
+  line-height: 50px!important;
+  font-size: 35px;
+}
+
+#reviewer .transcriptions {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+#reviewer .segment.active {
+  background-color: lightyellow;
+}

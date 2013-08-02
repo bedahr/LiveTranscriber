@@ -1,0 +1,21 @@
+<%= paginate @segments %>
+
+<div id="audio_player">
+  <audio controls="controls" preload="auto">
+    <source src="<%= @recording.downsampled_wav_file %>" />
+    <track kind="subtitles" src="<%= segments_recording_path(@recording, format: 'vtt') %>" default></track>
+  </audio>
+</div>
+
+<div class="streaming">
+  <i class="icon-spinner icon-spin icon-large"></i> Streaming Audio ...
+</div>
+
+<div class="transcriptions">
+  <% @transcriptions.each do |transcription| %>
+    <%= content_tag(:span, transcription.text_body_with_mines,
+              id: dom_id(transcription.segment),
+              class: 'segment',
+              data: { start_time: transcription.segment.start_time, end_time: transcription.segment.end_time }) %>
+  <% end %>
+</div>

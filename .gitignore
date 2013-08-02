@@ -15,6 +15,7 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html/.bundle
 
+/db/data.yml
 /db/*.sqlite3
 /db/*.sqlite3-journal
 

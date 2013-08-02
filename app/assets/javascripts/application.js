@@ -12,9 +12,9 @@
 //= require global
 //
 //= require live_transcriber
-//
 //= require hallo_transcriber
 //= require transcriber
+//= require reviewer
 //
 //= require dashboard
 //= require recordings

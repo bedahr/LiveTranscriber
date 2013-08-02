@@ -8,6 +8,9 @@ class Word < ActiveRecord::Base
   serialize :alternatives
 
   scope :unassigned, -> { where(:segment_id => nil) }
+  scope :random,     -> { order("RAND()") }
+
+  before_validation :normalize_body
 
   include Timecodes
 
@@ -22,5 +25,11 @@ class Word < ActiveRecord::Base
 
   def tag?
     !! body.to_s.match(/</)
+  end
+
+private
+
+  def normalize_body
+    self.body = body.strip if body
   end
 end

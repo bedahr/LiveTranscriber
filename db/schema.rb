@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20130802171342) do
     t.datetime "optimized_audio_file_updated_at"
   end
 
-  add_index "recordings", ["user_id"], name: "index_recordings_on_user_id"
+  add_index "recordings", ["user_id"], name: "index_recordings_on_user_id", using: :btree
 
   create_table "segments", force: true do |t|
     t.integer  "recording_id"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20130802171342) do
     t.integer  "position"
   end
 
-  add_index "segments", ["recording_id"], name: "index_segments_on_recording_id"
+  add_index "segments", ["recording_id"], name: "index_segments_on_recording_id", using: :btree
 
   create_table "speakers", force: true do |t|
     t.integer  "parent_id"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20130802171342) do
     t.datetime "updated_at"
   end
 
-  add_index "speakers", ["language_id"], name: "index_speakers_on_language_id"
+  add_index "speakers", ["language_id"], name: "index_speakers_on_language_id", using: :btree
 
   create_table "transcriptions", force: true do |t|
     t.integer  "user_id"
@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(version: 20130802171342) do
     t.datetime "updated_at"
   end
 
-  add_index "transcriptions", ["segment_id"], name: "index_transcriptions_on_segment_id"
-  add_index "transcriptions", ["user_id"], name: "index_transcriptions_on_user_id"
+  add_index "transcriptions", ["segment_id"], name: "index_transcriptions_on_segment_id", using: :btree
+  add_index "transcriptions", ["user_id"], name: "index_transcriptions_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20130802171342) do
     t.text     "alternatives"
   end
 
-  add_index "words", ["recording_id"], name: "index_words_on_recording_id"
-  add_index "words", ["segment_id"], name: "index_words_on_segment_id"
+  add_index "words", ["recording_id"], name: "index_words_on_recording_id", using: :btree
+  add_index "words", ["segment_id"], name: "index_words_on_segment_id", using: :btree
 
 end
