@@ -6,6 +6,7 @@
 //= require jquery_fileupload
 //
 //= require bootstrap
+//= require rangy
 //= require hallo
 //
 //= require global
