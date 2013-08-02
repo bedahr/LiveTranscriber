@@ -1,0 +1,27 @@
+<%= form_for(@segment, :html => { :class => 'form-horizontal' }) do |f| %>
+  <% if @segment.errors.any? %>
+    <div id="error_explanation" class="round">
+      <ul>
+      <% @segment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.control_group(:recording_id) do %>
+    <%= f.number_field :recording_id %>
+  <% end %>
+
+  <%= f.control_group(:start_time) do %>
+    <%= f.number_field :start_time %>
+  <% end %>
+
+  <%= f.control_group(:end_time) do %>
+    <%= f.number_field :end_time %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+  </div>
+<% end %>

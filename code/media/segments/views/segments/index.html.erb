@@ -1,0 +1,29 @@
+<div class="page-header">
+  <div class="btn-group pull-right">
+    <%= button_to("Add new Segment", new_segment_path, :class => 'btn-primary', :icon => [ :white, :plus ] ) %>
+	</div>
+
+  <h1>Segments</h1>
+</div>
+
+<table id="segments" class="table hover nowrap">
+  <thead>
+    <tr>
+      <th>Recording</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th class="edit">&nbsp;</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @segments.each do |segment| %>
+    <tr>
+      <td><%= segment.recording_id %></td>
+      <td><%= segment.start_time %></td>
+      <td><%= segment.end_time %></td>
+      <td><%= link_to "Edit", edit_segment_path(segment), :class => 'btn btn-small' %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
