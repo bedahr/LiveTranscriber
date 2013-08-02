@@ -4,16 +4,22 @@
   font-style:normal;font-weight:100;
 }
 
-.streaming { margin-top: 20px; font-size: 18px; color: darkgray; }
+#transcriber .streaming { margin-top: 20px; font-size: 18px; color: darkgray; }
 
-.preview { font-family:proxima-nova; font-size: 16px; color: darkgray; padding: 10px; }
+#transcriber .preview { font-family:proxima-nova; font-size: 16px; color: darkgray; padding: 10px; }
 
-.actions { margin-top: 10px; }
+#transcriber .actions { margin-top: 10px; }
 
-.unsure { border-bottom: 2px dotted red; }
+#transcriber .unsure { border-bottom: 2px dotted red; }
 
-.editor { font-family:proxima-nova;font-style:normal;font-weight:100; }
-.line   { line-height: 30px!important; font-size: 35px; padding: 10px; }
+#transcriber .editor { font-family:proxima-nova;font-style:normal;font-weight:100; }
+#transcriber .line   { line-height: 30px!important; font-size: 35px; padding: 10px; }
 
-.segment .info { border-top: 2px dotted lightgray; margin-top: 20px; color: lightgray; }
-.segment.active { background-color: lightyellow; }
+#transcriber .segment .info { border-top: 2px dotted lightgray; margin-top: 20px; color: lightgray; }
+#transcriber .segment.active { background-color: lightyellow; }
+
+#transcriber [contenteditable="true"].inEditMode {
+  outline-style: dotted;
+  outline-width: 1px;
+  outline-color: #111111;
+}
