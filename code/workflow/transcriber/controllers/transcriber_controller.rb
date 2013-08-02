@@ -8,12 +8,6 @@ class TranscriberController < ApplicationController
     @transcriptions = @current_user.transcriptions.includes(:segment).where(:segment_id => @segments.collect(&:id))
   end
 
-  def segments
-  end
-
-  def words
-  end
-
 private
 
   def set_recording

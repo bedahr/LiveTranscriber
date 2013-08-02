@@ -10,6 +10,9 @@ class RecordingsController < ApplicationController
     render :index
   end
 
+  def segments
+  end
+
   def new
     @recording = Recording.new(params[:recording] && recording_params)
   end

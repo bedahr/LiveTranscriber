@@ -7,10 +7,11 @@
   extensions << 'media/speakers'
   extensions << 'media/words'
   extensions << 'media/segments'
+  extensions << 'media/transcriptions'
 
   extensions << 'workflow/transcriber'
   extensions << 'workflow/live_transcriber'
-  extensions << 'workflow/transcriptions'
+  extensions << 'workflow/reviewer'
 
   extensions << 'asr/speech_recognizer'
 end
