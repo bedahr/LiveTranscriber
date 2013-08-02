@@ -93,6 +93,7 @@ GEM
       minitest (~> 4.7)
       rails (>= 3.0)
     multi_json (1.7.7)
+    mysql2 (0.3.11)
     paperclip (3.5.0)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -177,6 +178,7 @@ DEPENDENCIES
   language_list
   minitest
   minitest-rails
+  mysql2
   paperclip
   puma
   rails (= 4.0.0)
