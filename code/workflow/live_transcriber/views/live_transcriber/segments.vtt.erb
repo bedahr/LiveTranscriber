@@ -1,0 +1,8 @@
+WEBVTT
+
+<%- @recording.segments.each do |segment| %>
+<%= dom_id(segment) %>
+<%= segment.start_timecode %> --> <%= segment.end_timecode %>
+<%= segment.body %>
+
+<%- end %>

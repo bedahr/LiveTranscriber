@@ -2,13 +2,18 @@ require 'sse'
 require 'speech_recognizer/pocketsphinx'
 
 class LiveTranscriberController < ApplicationController
-  include ActionController::Live
+  #include ActionController::Live
 
   before_filter :set_recording
 
   def index
     @recording.create_downsampled_wav_file! unless @recording.downsampled_wav_file.file?
     @recording.create_optimized_audio_file! unless @recording.optimized_audio_file.file?
+
+    @segments = @recording.segments.paginate :per_page => ( params[:per_page] || 5 ), :page => params[:page]
+  end
+
+  def segments
   end
 
   def realtime
