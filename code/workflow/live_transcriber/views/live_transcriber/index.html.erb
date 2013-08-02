@@ -27,8 +27,8 @@
 </div>
 
 <div class="actions">
-  <%= button_to "Save", '#', :class => 'next_segment btn-primary', :icon => "collapse", :title => '[ENTER]' %>
-  <%= button_to "Continue", { :page => @segments.current_page + 1 }, :class => 'continue hide btn-primary', :icon => "chevron-sign-right" %>
+  <%= button_to "Next", '#', :class => 'next_segment btn-primary', :icon => "collapse", :title => '[ENTER]' %>
+  <%= button_to "Continue ...", { :page => @segments.current_page + 1 }, :class => 'continue hide btn-primary', :icon => "chevron-sign-right" %>
   <%= button_to "Replay", '#', :class => 'replay', :icon => :play, :title => '[TAB]' %>
 </div>
 
@@ -137,6 +137,7 @@ $(document).ready(function() {
     e.stopPropagation();
   });
 
+  // TODO: Sometimes clips are not played. Find out why ...
   $(".segment").on('play', function() {
     var audio = $("audio")[0];
     var track = audio.textTracks[0];
@@ -148,6 +149,7 @@ $(document).ready(function() {
 
     cue.pauseOnExit   = true;
 
+    audio.pause();
     audio.currentTime = $(this).data('start-time');
     audio.play();
   } );
@@ -184,7 +186,7 @@ $(document).ready(function() {
     // $(".segment.active").removeClass('active');
 
     $( this.track.activeCues ).each( function(i, cue) {
-      console.log("cue: " + cue.id);
+      console.log("cue changed: " + cue.id);
       $("#" + cue.id).addClass('active');
 
       // TODO: Put focus on element
