@@ -16,6 +16,9 @@ gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
 gem 'chosen-rails'
 
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+
 gem 'acts_as_list'
 gem 'acts_as_tree'
 
