@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-  $(".btn.add_labels").click( function() {
-    $(".label_importer").toggle();
+  $(".btn.add_segments").click( function() {
+    $(".segment_importer").toggle();
   })
 
   $(".btn.add_words").click( function() {

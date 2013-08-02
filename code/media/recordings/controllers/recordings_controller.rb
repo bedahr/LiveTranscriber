@@ -14,7 +14,7 @@ class RecordingsController < ApplicationController
     @recording = Recording.new(params[:recording] && recording_params)
   end
 
-  def import_labels
+  def import_segments
     Recording::SegmentImporter.new(@recording).import_lines!( params[:lines].to_s.split(/\n/) )
     @recording.segments.each(&:create_words!)
     redirect_to @recording

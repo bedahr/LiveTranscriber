@@ -23,18 +23,18 @@
     </div>
 
     <div class="btn-group">
-      <%= button_to "Add Labels", '#', :class => 'add_labels', :caret => true %>
-      <%= button_to "Add Words",  '#', :class => 'add_words', :caret => true %>
+      <%= button_to "Add Segments", '#', :class => 'add_segments', :caret => true %>
+      <%= button_to "Add Words",    '#', :class => 'add_words',    :caret => true %>
     </div>
 
   </div>
    <%#= button_to "Live Transcriber (experimental)",
         { :controller => :live_transcriber, :id => @recording } %>
 
-   <div class="label_importer hide">
-     <%= form_tag( import_labels_recording_path(@recording) ) do %>
+   <div class="segment_importer hide">
+     <%= form_tag( import_segments_recording_path(@recording) ) do %>
        <%= text_area_tag :lines, '', :class => '', :placeholder => "3.23\t5.6\tAdd tab-separated labels here .." %>
-       <%= submit_tag "Import Labels", :class => 'btn' %>
+       <%= submit_tag "Import Segments", :class => 'btn' %>
       <% end %>
    </div>
 
