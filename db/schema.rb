@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130801095157) do
+ActiveRecord::Schema.define(version: 20130802100012) do
 
   create_table "languages", force: true do |t|
     t.string   "name"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(version: 20130801095157) do
     t.string   "optimized_audio_file_content_type"
     t.integer  "optimized_audio_file_file_size"
     t.datetime "optimized_audio_file_updated_at"
+  end
+
+  create_table "segments", force: true do |t|
+    t.integer  "recording_id"
+    t.float    "start_time"
+    t.float    "end_time"
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "speakers", force: true do |t|
@@ -66,6 +75,8 @@ ActiveRecord::Schema.define(version: 20130801095157) do
     t.float    "confidence"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "segment_id"
+    t.text     "alternatives"
   end
 
 end
