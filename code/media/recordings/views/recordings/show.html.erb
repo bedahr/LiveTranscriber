@@ -8,8 +8,12 @@
 </div>
 
 <%= box("Trancriber") do %>
-  <%= button_to "Launch Live Transcriber",
+  <%= button_to "Launch Transcriber",
        { :controller => :live_transcriber, :id => @recording }, :class => 'btn-primary' %>
+
+   <%#= button_to "Realtime Transcriber (experimental)",
+        { :controller => :live_transcriber, :action => :realtime, :id => @recording } %>
+
 <% end %>
 
 

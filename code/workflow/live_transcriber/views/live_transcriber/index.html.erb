@@ -9,7 +9,7 @@
 
 <div class="editor">
   <% @segments.each do |segment| %>
-    <%= content_tag(:div, id: dom_id(segment), class: 'segment hide', data: { start_time: segment.start_time, end_time: segment.end_time }) do %>
+    <%= content_tag(:div, id: dom_id(segment), class: 'segment hide', data: { start_time: segment.start_time, end_time: segment.end_time, next_segment_preview: segment.next_segment_preview  }) do %>
       <div class="info">
         <%#= segment.body %>
       </div>
@@ -20,6 +20,10 @@
     <% end %>
 
   <% end %>
+</div>
+
+<div class="preview">
+  &nbsp;
 </div>
 
 <div class="actions">
@@ -37,6 +41,8 @@
 </style>
 
 <style>
+  .preview { font-family:proxima-nova; font-size: 16px; color: darkgray; padding: 10px; }
+
   .actions { margin-top: 10px; }
 
   .unsure { border-bottom: 2px dotted red; }
@@ -111,8 +117,10 @@ $(document).ready(function() {
     if (next_segment.length == 0) {
       $(".continue").show();
       $(".next_segment").hide();
+      $(".preview").text("");
     } else {
       next_segment.show().trigger('play');
+      $(".preview").text( next_segment.data('next-segment-preview') );
     }
 
     e.preventDefault();

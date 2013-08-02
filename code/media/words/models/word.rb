@@ -11,7 +11,7 @@ class Word < ActiveRecord::Base
 
   # TODO: Temporary method as sphinx seems to always suggest 2 words as alternative
   def suggestions
-    alternatives.collect { |k| k[:word].split(/ /).first }.uniq
+    alternatives ? alternatives.collect { |k| k[:word].split(/ /).first }.uniq : []
   end
 
   def to_s
