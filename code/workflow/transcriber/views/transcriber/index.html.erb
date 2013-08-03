@@ -23,7 +23,7 @@
   <% @segments.each do |segment| %>
     <%= content_tag(:div, id: dom_id(segment), class: 'segment hide',
                     action: transcriptions_path(format: :json),
-                    data: { id: segment.id, start_time: segment.start_time, end_time: segment.end_time, next_segment_preview: segment.next_segment_preview  }) do %>
+                    data: { id: segment.id, start_time: segment.start_time, end_time: segment.end_time, next_segment_preview: segment.next_segment.try(:body)  }) do %>
       <div class="info">
         <%#= segment.body %>
       </div>

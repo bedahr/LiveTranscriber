@@ -19,3 +19,12 @@
   outline-width: 1px;
   outline-color: #111111;
 }
+
+#transcriber .existing_transcriptions li {
+  list-style: none;
+  border: 1px solid lightgray;
+  padding: 5px;
+  indent: 0px;
+  margin-bottom: 3px;
+  border-radius: 5px;
+}

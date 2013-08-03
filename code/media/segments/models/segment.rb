@@ -13,9 +13,8 @@ class Segment < ActiveRecord::Base
   scope :transcribed,   -> { includes(:transcriptions).where("transcriptions.id IS NOT NULL") }
   scope :untranscribed, -> { includes(:transcriptions).where("transcriptions.id IS NULL") }
 
-  def next_segment_preview
-    lower_item.words.collect(&:body).join(' ') if lower_item
-  end
+  alias :previous_segment :higher_item
+  alias :next_segment     :lower_item
 
   def assign_words!
     recording.words.where("start_time >= ? AND start_time <= ?", start_time, end_time).each do |word|
