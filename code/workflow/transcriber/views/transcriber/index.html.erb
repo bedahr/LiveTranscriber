@@ -5,15 +5,17 @@
     <source src="<%= @recording.downsampled_wav_file %>" />
     <track kind="subtitles" src="<%= segments_recording_path(@recording, format: 'vtt') %>" default></track>
   </audio>
-</div>
 
-<div class="streaming">
-  <i class="icon-spinner icon-spin icon-large"></i> Streaming Audio ...
+  <span class="streaming">
+    <i class="icon-spinner icon-spin icon-large"></i> Streaming Audio ...
+  </span>
 </div>
 
 <ul class="existing_transcriptions">
   <% @transcriptions.each do |transcription| %>
-    <%= content_tag(:li, transcription.text_body, data: { target: '#' + dom_id(transcription.segment) }) %>
+    <%= content_tag(:li, data: { target: '#' + dom_id(transcription.segment) }) do %>
+      <%= link_to transcription.text_body, edit_transcription_path(transcription), target: '_blank' %>
+    <% end %>
   <% end %>
 </ul>
 

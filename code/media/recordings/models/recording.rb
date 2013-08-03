@@ -22,6 +22,14 @@ class Recording < ActiveRecord::Base
     downsampled_wav_file.file? && optimized_audio_file.file?
   end
 
+  def transcribed?
+    segments.untranscribed.count.zero?
+  end
+
+  def transcribed_percentage
+    @transcribed_percentage ||= segments.transcribed.count / segments.count.to_f
+  end
+
   def create_downsampled_wav_file!
     Recording::Downsampler.new(self).process!
   end

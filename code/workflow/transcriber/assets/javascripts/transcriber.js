@@ -2,10 +2,15 @@ $(document).ready(function() {
 
   // TODO: Indicate whether audio is still playing (useful if there is a silence) ...
 
+  $("#transcriber .continue").click( function() {
+    if ( $(".segment").not('.saved').length > 0 ) {
+      alert("There are unsaved segments");
+      return(false);
+    }
+  })
+
   $("#transcriber .next_segment").click( function(e) {
     console.log("next ..");
-
-    $(".segment:visible:last").trigger('save');
 
     var next_segment = $(".segment:hidden:first");
 
@@ -14,7 +19,7 @@ $(document).ready(function() {
       $(".next_segment").hide();
       $(".preview").text("");
     } else {
-      next_segment.show().trigger('play');
+      next_segment.show().trigger('focus').trigger('play');
       $(".preview").text( next_segment.data('next-segment-preview') );
     }
 
@@ -38,6 +43,7 @@ $(document).ready(function() {
     var track = audio.textTracks[0];
     var cue   = track.cues.getCueById($(this).attr('id'));
 
+    console.log("playing cue");
     console.log(cue);
 
     $.each(track.cues, function(i,e) { e.pauseOnExit = false } );
@@ -54,11 +60,6 @@ $(document).ready(function() {
 
     console.log("Saving transcription: " + segment.attr('id') );
 
-    if (segment.hasClass('saved')) {
-      console.log("already saved");
-      return(false);
-    }
-
     $.post( segment.attr('action'),
             { transcription: { segment_id: segment.data('id'), html_body: segment.html() } },
             function(data) {
@@ -73,7 +74,7 @@ $(document).ready(function() {
     // $(".segment.active").removeClass('active');
 
     $( this.track.activeCues ).each( function(i, cue) {
-      console.log("cue changed: " + cue.id);
+      console.log("cue changed: " + cue.id + " - " + cue.pauseOnExit);
       $("#" + cue.id).addClass('active');
 
       // TODO: Put focus on element

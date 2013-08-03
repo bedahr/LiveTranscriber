@@ -10,6 +10,9 @@ class Segment < ActiveRecord::Base
 
   acts_as_list :scope => :recording
 
+  scope :transcribed,   -> { includes(:transcriptions).where("transcriptions.id IS NOT NULL") }
+  scope :untranscribed, -> { includes(:transcriptions).where("transcriptions.id IS NULL") }
+
   def next_segment_preview
     lower_item.words.collect(&:body).join(' ') if lower_item
   end
