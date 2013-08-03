@@ -3,6 +3,7 @@ class Transcription < ActiveRecord::Base
   validates_presence_of :segment_id
 
   validates_presence_of :html_body
+  validates_presence_of :text_body
 
   belongs_to :user
   belongs_to :segment

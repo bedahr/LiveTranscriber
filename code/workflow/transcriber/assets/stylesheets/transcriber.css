@@ -13,6 +13,9 @@
 
 #transcriber .segment.active { background-color: lightyellow; }
 #transcriber .segment.saved  { background-color: lightblue!important; }
+#transcriber .segment.failed  { background-color: #b94a48!important; }
+
+#transcriber .alert { margin-top: 15px; }
 
 #transcriber [contenteditable="true"].inEditMode {
   outline-style: dotted;
@@ -20,11 +23,6 @@
   outline-color: #111111;
 }
 
-#transcriber .existing_transcriptions li {
-  list-style: none;
-  border: 1px solid lightgray;
-  padding: 5px;
-  indent: 0px;
-  margin-bottom: 3px;
-  border-radius: 5px;
+#transcriber .existing_transcriptions td.actions {
+  width: 10%;
 }

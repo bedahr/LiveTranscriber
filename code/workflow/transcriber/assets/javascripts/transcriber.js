@@ -60,6 +60,9 @@ $(document).ready(function() {
 
     console.log("Saving transcription: " + segment.attr('id') );
 
+    segment.removeClass('failed');
+    $(".alert").hide();
+
     $.post( segment.attr('action'),
             { transcription: { segment_id: segment.data('id'), html_body: segment.html() } },
             function(data) {
@@ -67,7 +70,7 @@ $(document).ready(function() {
               segment.addClass('saved');
             } )
 
-    .fail(function() { alert("Segment could not be saved!"); }) ;
+    .fail(function(data) { segment.addClass("failed"); $(".alert").text(data.responseText).show(); }) ;
   });
 
   $("#transcriber audio track").on('cuechange', function() {
@@ -107,7 +110,7 @@ $(document).ready(function() {
   $("#transcriber audio").on('canplay', function() {
     console.log("meta data loaded. showing first segment ...");
 
-    $('#transcriber .existing_transcriptions').find('li').each( function(i, element) {
+    $('#transcriber .existing_transcriptions').find('tr').each( function(i, element) {
       console.log( element );
       $( $(element).data('target') ).remove();
     });
@@ -119,7 +122,7 @@ $(document).ready(function() {
   });
 
   // Transcriber
-  $('#transcriber .segment').hallo({
+  $('#transcriber .segment .line').hallo({
     plugins: {
       'hallotranscriber': {}
     }

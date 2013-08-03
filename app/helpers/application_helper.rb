@@ -81,7 +81,7 @@ module ApplicationHelper
 
   def alert(msg, klass, options={})
     msg = content_tag(:a, 'x', :href => '#', :class => 'close', 'data-dismiss' => 'alert').html_safe + msg if options[:close]
-    content_tag(:div, msg, :class => "alert alert-#{klass}")
+    content_tag(:div, msg, :class => "alert alert-#{klass} #{options[:class]}")
   end
 
   # Paginate helper using will_paginate manual navigation, plus InfinityScroll (Show More), plus Show All, plus page entries info

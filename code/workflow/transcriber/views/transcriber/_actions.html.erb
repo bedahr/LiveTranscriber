@@ -1,0 +1,9 @@
+<div class="actions">
+  <%= button_to "Next", '#', :class => 'next_segment btn-primary hide', :icon => "collapse", :title => '[ENTER]' %>
+
+  <!-- TODO: Add check if last page ...   -->
+  <%= button_to "Continue ...", { :page => @segments.current_page + 1 }, :class => 'continue hide btn-primary', :icon => "chevron-sign-right" %>
+  <%= button_to "Replay", '#', :class => 'replay hide', :icon => :play, :title => '[TAB]' %>
+</div>
+
+<%= alert("",  :error, class: 'hide') %>

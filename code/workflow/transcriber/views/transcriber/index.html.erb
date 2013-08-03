@@ -1,49 +1,9 @@
 <%= paginate @segments %>
 
-<div id="audio_player">
-  <audio controls="controls" preload="auto">
-    <source src="<%= @recording.downsampled_wav_file %>" />
-    <track kind="subtitles" src="<%= segments_recording_path(@recording, format: 'vtt') %>" default></track>
-  </audio>
+<%= render 'audio_player' %>
 
-  <span class="streaming">
-    <i class="icon-spinner icon-spin icon-large"></i> Streaming Audio ...
-  </span>
-</div>
+<%= render 'existing_transcriptions' %>
 
-<ul class="existing_transcriptions">
-  <% @transcriptions.each do |transcription| %>
-    <%= content_tag(:li, data: { target: '#' + dom_id(transcription.segment) }) do %>
-      <%= link_to transcription.text_body, edit_transcription_path(transcription), target: '_blank' %>
-    <% end %>
-  <% end %>
-</ul>
+<%= render 'editor' %>
 
-<div class="editor">
-  <% @segments.each do |segment| %>
-    <%= content_tag(:div, id: dom_id(segment), class: 'segment hide',
-                    action: transcriptions_path(format: :json),
-                    data: { id: segment.id, start_time: segment.start_time, end_time: segment.end_time, next_segment_preview: segment.next_segment.try(:body)  }) do %>
-      <div class="info">
-        <%#= segment.body %>
-      </div>
-
-      <div class="line">
-        <% segment.words.reject(&:tag?).each do |word| %><%= content_tag(:span, word, id: dom_id(word), class: 'word', data: { alternatives: word.suggestions.to_json, confidence: word.confidence, start_time: word.start_time, end_time: word.end_time }) %> <% end %>
-      </div>
-    <% end %>
-
-  <% end %>
-</div>
-
-<div class="preview">
-  &nbsp;
-</div>
-
-<div class="actions">
-  <%= button_to "Next", '#', :class => 'next_segment btn-primary hide', :icon => "collapse", :title => '[ENTER]' %>
-
-  <!-- TODO: Add check if last page ...   -->
-  <%= button_to "Continue ...", { :page => @segments.current_page + 1 }, :class => 'continue hide btn-primary', :icon => "chevron-sign-right" %>
-  <%= button_to "Replay", '#', :class => 'replay hide', :icon => :play, :title => '[TAB]' %>
-</div>
+<%= render 'actions' %>
