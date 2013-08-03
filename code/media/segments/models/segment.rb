@@ -32,7 +32,7 @@ class Segment < ActiveRecord::Base
   end
 
   def raw_words
-    body.to_s.split(/ /).reject(&:blank?)
+    body.to_s.rstrip.split(/ /).reject(&:blank?)
   end
 
 end

@@ -5,17 +5,37 @@
     <source src="<%= @recording.downsampled_wav_file %>" />
     <track kind="subtitles" src="<%= segments_recording_path(@recording, format: 'vtt') %>" default></track>
   </audio>
+
+  <span class="streaming">
+    <i class="icon-spinner icon-spin icon-large"></i> Streaming Audio ...
+  </span>
+
 </div>
 
-<div class="streaming">
-  <i class="icon-spinner icon-spin icon-large"></i> Streaming Audio ...
-</div>
+<span id="form" action="<%= url_for(action: :save, id: @recording) %>"></span>
 
 <div class="transcriptions">
-  <% @reviewed_transcriptions.each do |reviewed_transcription| %>
-    <%= content_tag(:span, reviewed_transcription.text_body,
-              id: dom_id(reviewed_transcription.segment),
-              class: 'segment',
-              data: { start_time: reviewed_transcription.segment.start_time, end_time: reviewed_transcription.segment.end_time }) %>
-  <% end %>
+  <span class="highlightable">
+    <% @reviewed_transcriptions.each do |reviewed_transcription| %>
+      <%= content_tag(:span, raw(reviewed_transcription.current_body),
+                id: dom_id(reviewed_transcription.segment),
+                class: 'segment',
+                data: { reviewed_transcription_id: reviewed_transcription.id, start_time: reviewed_transcription.segment.start_time, end_time: reviewed_transcription.segment.end_time }) %>
+    <% end %>
+  </span>
+
+  <span class="preview"><%= @reviewed_transcriptions.last.segment.next_segment_preview %></span>
+</div>
+
+<div class="btn-toolbar actions pull-right">
+
+  <div class="btn-group">
+    <%= check_or_unchecked(false, class: 'unreviewed') %>
+    <%= check_or_unchecked(true,  class: 'hide reviewed') %>
+    <%= button_to "Reviewed", '#', class: 'reviewed_button', disabled: true %>
+  </div>
+
+  <div class="btn-group">
+    <%= button_to "Replay", '#', class: 'replay_button', icon: 'play' %>
+  </div>
 </div>

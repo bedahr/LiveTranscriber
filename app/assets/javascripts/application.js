@@ -4,6 +4,7 @@
 //= require jquery_ujs
 //= require jquery_scrollto
 //= require jquery_fileupload
+//= require jquery_texthighlighter
 //
 //= require bootstrap
 //= require rangy

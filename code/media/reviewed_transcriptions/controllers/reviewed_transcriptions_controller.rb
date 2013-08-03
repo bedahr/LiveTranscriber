@@ -2,7 +2,7 @@ class ReviewedTranscriptionsController < ApplicationController
   before_action :set_reviewed_transcription, only: [:show, :edit, :update, :destroy]
 
   def index
-    @reviewed_transcriptions = ReviewedTranscription.all
+    @reviewed_transcriptions = ReviewedTranscription.paginate :page => params[:page], :per_page => 100
   end
 
   def show

@@ -18,10 +18,14 @@ class Transcription < ActiveRecord::Base
     end
   end
 
+  def raw_words
+    text_body.to_s.split(/ /)
+  end
+
 private
 
   def initialize_text_body
-    self.text_body = Nokogiri::HTML(html_body).text.strip
+    self.text_body = Nokogiri::HTML(html_body).text.strip.gsub(" ", " ") # Normalizing nbsp
   end
 
 end

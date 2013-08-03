@@ -11,10 +11,12 @@
     <tr>
       <th>User</th>
       <th>Transcription</th>
+      <th>Status</th>
+      <th>Spotted Mistakes</th>
+      <th>Mines Status</th>
+      <th>Mines Indirectly Spotted</th>
       <th>Text Body</th>
       <th>HTML Answer</th>
-      <th>Spotted Mistakes</th>
-      <th>Has Mines Spotted</th>
       <th class="edit">&nbsp;</th>
     </tr>
   </thead>
@@ -22,14 +24,28 @@
   <tbody>
   <% @reviewed_transcriptions.each do |reviewed_transcription| %>
     <tr>
-      <td><%= reviewed_transcription.user_id %></td>
-      <td><%= reviewed_transcription.transcription_id %></td>
-      <td><%= reviewed_transcription.text_body %></td>
-      <td><%= reviewed_transcription.html_answer %></td>
+      <td><%= reviewed_transcription.user.try(:name) %></td>
+      <td><%= link_to reviewed_transcription.transcription_id, reviewed_transcription.transcription %></td>
+      <td>
+        <% if reviewed_transcription.has_mistakes? %>
+          <%= button_to "", '#', icon: 'warning-sign', class: 'btn-warning', title: 'Mistakes spotted' %>
+        <% elsif reviewed_transcription.accepted? %>
+          <%= button_to "", '#', icon: :check, class: 'btn-success', title: 'Accepted' %>
+        <% elsif reviewed_transcription.rejected? %>
+          <%= button_to "", '#', icon: 'ban-circle', class: 'btn-danger', title: 'Rejected' %>
+        <% else %>
+          <%= button_to "", "#", icon: 'question', title: 'Pending' %>
+        <% end %>
+      </td>
       <td><%= reviewed_transcription.spotted_mistakes %></td>
       <td><%= reviewed_transcription.has_mines_spotted %></td>
+      <td><%= reviewed_transcription.has_mines_indirectly_spotted %></td>
+      <td><%= reviewed_transcription.text_body %></td>
+      <td><%= reviewed_transcription.html_answer %></td>
       <td><%= link_to "Edit", edit_reviewed_transcription_path(reviewed_transcription), :class => 'btn btn-small' %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
+
+<%= paginate @reviewed_transcriptions %>

@@ -15,7 +15,7 @@ module Reviewer
         mine  = available_mines.shift || raise('no more mines left')
         words = reviewed_transcription.transcription.text_body.split(/ /)
 
-        words.insert( rand(words.size), mine.body)
+        words.insert( rand(words.size - 1) + 1, mine.body)
 
         reviewed_transcription.mine_words ||= []
         reviewed_transcription.mine_words << mine.body

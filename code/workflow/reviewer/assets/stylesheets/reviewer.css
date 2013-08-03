@@ -1,3 +1,6 @@
+#reviewer .highlighted {
+}
+
 #reviewer .transcriptions {
   font-family:proxima-nova;
   font-style:normal;
@@ -7,11 +10,19 @@
 }
 
 #reviewer .transcriptions {
-  border: 2px solid black;
+  border: 2px solid lightgray;
   border-radius: 5px;
   padding: 10px;
 }
 
 #reviewer .segment.active {
   background-color: lightyellow;
+}
+
+#reviewer .actions {
+  margin-top: 10px;
+}
+
+#reviewer .preview {
+  font-size: 16px; color: darkgray; }
 }
