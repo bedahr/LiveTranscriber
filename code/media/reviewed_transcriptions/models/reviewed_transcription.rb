@@ -16,6 +16,10 @@ class ReviewedTranscription < ActiveRecord::Base
   scope :accepted, -> { where("has_mines_spotted IS TRUE or has_mines_indirectly_spotted IS TRUE") }
   scope :rejected, -> { where("has_mines_spotted IS FALSE") }
 
+  scope :today, -> { where("DAY(created_at) = DAY(NOW())") }
+
+  after_validation :initialize_duration
+
   after_validation :process_answer
   after_validation :process_mines
 
@@ -44,6 +48,10 @@ class ReviewedTranscription < ActiveRecord::Base
   end
 
 private
+
+  def initialize_duration
+    self.duration = transcription.try(:duration)
+  end
 
   def process_answer
     return unless answered?

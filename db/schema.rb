@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130803092233) do
+ActiveRecord::Schema.define(version: 20130803100223) do
 
   create_table "languages", force: true do |t|
     t.string   "name"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20130803092233) do
     t.datetime "updated_at"
     t.boolean  "has_mines_indirectly_spotted"
     t.boolean  "has_mistakes"
+    t.float    "duration"
   end
 
   add_index "reviewed_transcriptions", ["transcription_id"], name: "index_reviewed_transcriptions_on_transcription_id", using: :btree
@@ -90,6 +91,7 @@ ActiveRecord::Schema.define(version: 20130803092233) do
     t.text     "text_body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "duration"
   end
 
   add_index "transcriptions", ["segment_id"], name: "index_transcriptions_on_segment_id", using: :btree

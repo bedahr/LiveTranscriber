@@ -10,6 +10,9 @@ class Transcription < ActiveRecord::Base
   has_many :reviewed_transcriptions
 
   before_validation :initialize_text_body
+  before_validation :initialize_duration
+
+  scope :today, -> { where("DAY(created_at) = DAY(NOW())") }
 
   # TODO: Implement this with a boolean flag, e.g. #is_best or #is_active
   def self.best
@@ -26,6 +29,10 @@ private
 
   def initialize_text_body
     self.text_body = Nokogiri::HTML(html_body).text.strip.gsub(" ", " ") # Normalizing nbsp
+  end
+
+  def initialize_duration
+    self.duration = segment.end_time - segment.start_time if segment && segment.end_time && segment.start_time
   end
 
 end
