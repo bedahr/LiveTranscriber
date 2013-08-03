@@ -1,0 +1,35 @@
+<div class="page-header">
+  <div class="btn-group pull-right">
+    <%= button_to("Add new Reviewed transcription", new_reviewed_transcription_path, :class => 'btn-primary', :icon => [ :white, :plus ] ) %>
+	</div>
+
+  <h1>Reviewed Transcriptions</h1>
+</div>
+
+<table id="reviewed_transcriptions" class="table hover nowrap">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Transcription</th>
+      <th>Text Body</th>
+      <th>HTML Answer</th>
+      <th>Spotted Mistakes</th>
+      <th>Has Mines Spotted</th>
+      <th class="edit">&nbsp;</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @reviewed_transcriptions.each do |reviewed_transcription| %>
+    <tr>
+      <td><%= reviewed_transcription.user_id %></td>
+      <td><%= reviewed_transcription.transcription_id %></td>
+      <td><%= reviewed_transcription.text_body %></td>
+      <td><%= reviewed_transcription.html_answer %></td>
+      <td><%= reviewed_transcription.spotted_mistakes %></td>
+      <td><%= reviewed_transcription.has_mines_spotted %></td>
+      <td><%= link_to "Edit", edit_reviewed_transcription_path(reviewed_transcription), :class => 'btn btn-small' %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

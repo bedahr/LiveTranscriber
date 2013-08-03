@@ -13,7 +13,7 @@ class ReviewerController < ApplicationController
 
     @mine_words = @recording.words.where("body NOT IN(?)", @segments.collect(&:words).flatten.collect(&:body) ).random.limit(@transcriptions.size)
 
-    Reviewer::Miner.new(@transcriptions).add_mines!(@mine_words, :max => 1)
+    @reviewed_transcriptions = @current_user.reviewed_transcriptions.find_or_create_with_mines!(@transcriptions, @mine_words, :max => 1)
   end
 
 private

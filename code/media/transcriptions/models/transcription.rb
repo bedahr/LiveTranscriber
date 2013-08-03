@@ -7,10 +7,11 @@ class Transcription < ActiveRecord::Base
   belongs_to :user
   belongs_to :segment
 
+  has_many :reviewed_transcriptions
+
   before_validation :initialize_text_body
 
-  attr_accessor :text_body_with_mines
-
+  # TODO: Implement this with a boolean flag, e.g. #is_best or #is_active
   def self.best
     all.group_by(&:segment).collect do |segment, transcriptions|
       transcriptions.sort_by(&:created_at).last

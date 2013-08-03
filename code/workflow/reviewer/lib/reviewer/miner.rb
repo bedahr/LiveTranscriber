@@ -1,26 +1,29 @@
 module Reviewer
   class Miner
 
-    attr_accessor :transcriptions
+    attr_accessor :reviewed_transcriptions
 
-    def initialize(transcriptions)
-      @transcriptions = transcriptions
+    def initialize(reviewed_transcriptions)
+      @reviewed_transcriptions = reviewed_transcriptions
     end
 
     def add_mines!(mine_words, options={})
       available_mines = mine_words.dup
       max             = options[:max] || raise('no max given')
 
-      transcriptions.shuffle.first(max).each do |transcription|
+      reviewed_transcriptions.shuffle.first(max).each do |reviewed_transcription|
         mine  = available_mines.shift || raise('no more mines left')
-        words = transcription.text_body.split(/ /)
+        words = reviewed_transcription.transcription.text_body.split(/ /)
 
         words.insert( rand(words.size), mine.body)
 
-        transcription.text_body_with_mines = words.join(' ')
+        reviewed_transcription.mine_words ||= []
+        reviewed_transcription.mine_words << mine.body
+
+        reviewed_transcription.text_body   = words.join(' ')
       end
 
-      transcriptions.each { |k| k.text_body_with_mines ||= k.text_body }
+      reviewed_transcriptions.each { |k| k.text_body ||= k.transcription.text_body }
     end
 
   end

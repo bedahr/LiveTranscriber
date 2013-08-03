@@ -13,4 +13,5 @@ class User < ActiveRecord::Base
 
   has_many :recordings
   has_many :transcriptions
+  has_many :reviewed_transcriptions
 end

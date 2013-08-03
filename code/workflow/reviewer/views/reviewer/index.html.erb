@@ -12,10 +12,10 @@
 </div>
 
 <div class="transcriptions">
-  <% @transcriptions.each do |transcription| %>
-    <%= content_tag(:span, transcription.text_body_with_mines,
-              id: dom_id(transcription.segment),
+  <% @reviewed_transcriptions.each do |reviewed_transcription| %>
+    <%= content_tag(:span, reviewed_transcription.text_body,
+              id: dom_id(reviewed_transcription.segment),
               class: 'segment',
-              data: { start_time: transcription.segment.start_time, end_time: transcription.segment.end_time }) %>
+              data: { start_time: reviewed_transcription.segment.start_time, end_time: reviewed_transcription.segment.end_time }) %>
   <% end %>
 </div>
