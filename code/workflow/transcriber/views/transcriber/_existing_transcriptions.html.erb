@@ -1,10 +1,10 @@
 <table class="table existing_transcriptions">
   <% @transcriptions.each do |transcription| %>
-    <%= content_tag(:tr, data: { target: '#' + dom_id(transcription.segment) }) do %>
+    <%= content_tag(:tr, data: { target: '#' + dom_id(transcription.segment) }, class: 'transcription') do %>
       <td><%= transcription.text_body %></td>
       <td class="actions">
           <%= button_to "", edit_transcription_path(transcription), target: '_blank', icon: 'edit', class: 'btn-mini' %>
-          <%= button_to "", transcription, data: { remote: true, method: :delete}, icon: 'remove', class: 'btn-mini' %>
+          <%= button_to "", transcription, data: { remote: true, format: :json, method: :delete}, icon: 'remove', class: 'btn-mini remove_transcription' %>
       </td>
     <% end %>
   <% end %>

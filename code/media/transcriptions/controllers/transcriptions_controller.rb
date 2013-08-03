@@ -46,6 +46,7 @@ class TranscriptionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to transcriptions_url }
       format.json { head :no_content }
+      format.js   { head :no_content }
     end
   end
 

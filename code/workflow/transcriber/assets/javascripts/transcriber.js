@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
+  // Continue to next page
   // TODO: Indicate whether audio is still playing (useful if there is a silence) ...
-
   $("#transcriber .continue").click( function() {
     if ( $(".segment").not('.saved').length > 0 ) {
       alert("There are unsaved segments");
@@ -9,6 +9,7 @@ $(document).ready(function() {
     }
   })
 
+  // Next Segment
   $("#transcriber .next_segment").click( function(e) {
     console.log("next ..");
 
@@ -27,14 +28,20 @@ $(document).ready(function() {
     e.stopPropagation();
   });
 
+  // Replay clip
+  // TODO: Implement better selection of what to play, e.g. last selected segment
   $("#transcriber .replay").click( function(e) {
     console.log("replay clip");
 
-    // TODO: Implement better selection of what to play, e.g. last selected segment
     $(".segment:visible:last").trigger('play');
 
     e.preventDefault();
     e.stopPropagation();
+  });
+
+  // Remove Transcription
+  $("#transcriber .remove_transcription").on('ajax:success', function() {
+    $(this).closest('.transcription').hide();
   });
 
   // TODO: Sometimes clips are not played. Find out why ...
@@ -55,6 +62,7 @@ $(document).ready(function() {
     audio.play();
   } );
 
+  // 'save' event for segment
   $("#transcriber .segment").on('save', function() {
     var segment = $(this);
 
@@ -73,17 +81,16 @@ $(document).ready(function() {
     .fail(function(data) { segment.addClass("failed"); $(".alert").text(data.responseText).show(); }) ;
   });
 
+  // Cue Change
+  // TODO: Put focus on element
   $("#transcriber audio track").on('cuechange', function() {
-    // $(".segment.active").removeClass('active');
-
     $( this.track.activeCues ).each( function(i, cue) {
       console.log("cue changed: " + cue.id + " - " + cue.pauseOnExit);
       $("#" + cue.id).addClass('active');
-
-      // TODO: Put focus on element
     });
   });
 
+  // Keycodes
   $('#transcriber').on('keydown', function(e) {
     var code = (e.keyCode ? e.keyCode : e.which);
 
@@ -107,6 +114,7 @@ $(document).ready(function() {
     }
   });
 
+  // Audio has loaded
   $("#transcriber audio").on('canplay', function() {
     console.log("meta data loaded. showing first segment ...");
 
@@ -128,7 +136,8 @@ $(document).ready(function() {
     }
   });
 
-  // On selected
+  // Editor selected
+  // TODO: Implement support for multi word spanning ranges
   $('#transcriber .editor').bind('halloselected', function(event, data) {
     console.log("halloselected");
 
@@ -137,7 +146,6 @@ $(document).ready(function() {
 
     $(".alternatives").html("");
 
-    // TODO: Implement support for multi word spanning ranges
     var selectedNode = $(range.startContainer.parentNode);
 
     $.each( selectedNode.data('alternatives'), function(i, alternative) {
@@ -156,10 +164,12 @@ $(document).ready(function() {
     $(event.target).removeClass('saved');
   });
 
+  // Editor activated
   $('#transcriber .editor').bind('halloactivated', function(event, data) {
     $(event.target).removeClass('saved');
   });
 
+  // Editor deactivated
   $('#transcriber .editor').bind('hallodeactivated', function(event, data) {
     $(event.target).trigger('save');
   });

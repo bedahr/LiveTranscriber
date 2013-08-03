@@ -5,17 +5,13 @@
 //= require jquery_scrollto
 //= require jquery_fileupload
 //= require jquery_texthighlighter
-//
 //= require bootstrap
 //= require rangy
 //= require hallo
-//
 //= require global
-//
 //= require live_transcriber
 //= require hallo_transcriber
 //= require transcriber
 //= require reviewer
-//
 //= require dashboard
 //= require recordings
