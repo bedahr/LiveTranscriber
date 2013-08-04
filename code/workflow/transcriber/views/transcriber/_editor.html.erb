@@ -6,7 +6,7 @@
         <%#= segment.body %>
       </div>
 
-      <div class="line"><% segment.words.reject(&:tag?).each do |word| %><%= content_tag(:span, word, id: dom_id(word), class: 'word', data: { alternatives: word.suggestions.to_json, confidence: word.confidence, start_time: word.start_time, end_time: word.end_time }) %><% end %></div>
+      <div class="line"><% segment.words.reject(&:tag?).each do |word| %><%= content_tag(:span, word, id: dom_id(word), class: 'word', data: { alternatives: word.suggestions.to_json, confidence: word.confidence, start_time: word.start_time, end_time: word.end_time }) %> <% end %></div>
 
     <% end %>
 

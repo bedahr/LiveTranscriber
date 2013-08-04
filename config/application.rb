@@ -47,5 +47,7 @@ module LiveTranscriber
 
     ActiveRecord::Base.send :include, ActiveRecordExtensions
 
+    WillPaginate.per_page = 100
+
   end
 end
