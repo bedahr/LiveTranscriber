@@ -1,1 +1,1 @@
-resources :profiles
+resources :users
