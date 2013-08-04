@@ -13,6 +13,18 @@ class SegmentsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:segments)
   end
 
+  test "should export as txt" do
+    get :export, format: 'txt'
+    assert_response :success
+    assert_not_nil assigns(:segments)
+  end
+
+  test "should export as transcription" do
+    get :export, format: 'transcription'
+    assert_response :success
+    assert_not_nil assigns(:segments)
+  end
+
   test "should get new" do
     get :new
     assert_response :success

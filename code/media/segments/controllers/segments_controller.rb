@@ -9,7 +9,11 @@ class SegmentsController < ApplicationController
 
   def export
     @segments = finder.all
-    render 'index'
+
+    respond_to do |format|
+      format.txt
+      format.transcription
+    end
   end
 
   def show
