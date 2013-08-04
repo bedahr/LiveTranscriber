@@ -55,7 +55,8 @@ $(document).ready(function() {
 
     $.each(track.cues, function(i,e) { e.pauseOnExit = false } );
 
-    cue.pauseOnExit   = true;
+    if (cue)
+      cue.pauseOnExit = true;
 
     audio.pause();
     audio.currentTime = $(this).data('start-time');
