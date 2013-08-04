@@ -81,19 +81,19 @@
   </div>
 
   <div class="row-fluid">
-    <div class="span3">&nbsp;</div>
+    <div class="span2">&nbsp;</div>
 
-    <div class="span3 statistics nowrap">
+    <div class="span4 statistics nowrap">
       <div class="number"><%= icon(:time)%> <%= distance_of_time_in_words( Transcription.today.sum(:duration) ) %></div>
       <div class="desc">Transcribed Today</div>
     </div>
 
-    <div class="span3 statistics nowrap">
+    <div class="span4 statistics nowrap">
       <div class="number"><%= icon(:time)%> <%= distance_of_time_in_words( ReviewedTranscription.today.sum(:duration) ) %></div>
       <div class="desc">Reviewed Today</div>
     </div>
 
-    <div class="span3">&nbsp;</div>
+    <div class="span2">&nbsp;</div>
 
   </div>
 

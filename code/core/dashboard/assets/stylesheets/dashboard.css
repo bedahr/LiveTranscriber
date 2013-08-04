@@ -18,7 +18,7 @@
   font-size: 28px;
   line-height: 41px;
   font-weight: 700;
-  width: 200px;
+  width: 300px;
   float: left;
   padding-right: 10px;
   padding-left: 10px;
@@ -47,9 +47,9 @@
 
   color: #fff;
   float: left;
-  width: 201px;
+  width: 300px;
   padding: 5px;
-  padding-right: 9px;
+  padding-right:10px;
   padding-left: 10px;
 }
 
