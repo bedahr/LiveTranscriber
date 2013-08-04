@@ -19,4 +19,17 @@ FactoryGirl.define do
     body "or(2)"
   end
 
+  factory :a_test_word, class: Word do
+    recording_id 1
+    body "a test"
+    alternatives { [ { word: "attest" }, { word: "affex twins" } ] }
+  end
+
+  factory :no_alternatives_word, class: Word do
+    recording_id 1
+    body "ugamagoma"
+    alternatives nil
+  end
+
+
 end

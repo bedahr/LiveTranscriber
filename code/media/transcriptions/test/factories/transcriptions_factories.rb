@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :transcription do
     user_id 1
     segment_id 1
-    html_body "MyText"
-    text_body "MyText"
+    html_body "<span>hello this is a test</span>"
+    text_body "hello this is a test"
   end
 end

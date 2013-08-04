@@ -58,7 +58,7 @@ class ReviewedTranscriptionsController < ApplicationController
       @reviewed_transcription = ReviewedTranscription.find(params[:id])
     end
 
-    def reviewed_transcription_params
-      params.require(:reviewed_transcription).permit(:html_answer)
-    end
+    # def reviewed_transcription_params
+    #   params.require(:reviewed_transcription).permit(:html_answer)
+    # end
 end
