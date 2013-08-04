@@ -27,6 +27,12 @@ class <%= controller_class_name %>ControllerTest < ActionController::TestCase
     assert_redirected_to <%= singular_table_name %>_path(assigns(:<%= singular_table_name %>))
   end
 
+  test "should fail on bad create" do
+    post :create, <%= "#{singular_table_name}: " %> { foo: 1 }
+    assert_response :success
+    assert_template :new
+  end
+
   test "should show" do
     get :show, <%= key_value :id, "@#{singular_table_name}" %>
     assert_response :success
@@ -40,6 +46,12 @@ class <%= controller_class_name %>ControllerTest < ActionController::TestCase
   test "should update" do
     put :update, <%= key_value :id, "@#{singular_table_name}" %>, <%= "#{singular_table_name}: FactoryGirl.attributes_for(:#{table_name.singularize})" %>
     assert_redirected_to <%= singular_table_name %>_path(assigns(:<%= singular_table_name %>))
+  end
+
+  test "should fail on bad update" do
+    put :update, <%= key_value :id, "@#{singular_table_name}" %>, <%= "#{singular_table_name}: { }
+    assert_response :success
+    assert_template :edit
   end
 
   test "should destroy" do

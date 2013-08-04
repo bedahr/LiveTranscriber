@@ -26,6 +26,12 @@ class WordsControllerTest < ActionController::TestCase
     assert_redirected_to word_path(assigns(:word))
   end
 
+  test "should fail on bad create" do
+    post :create, word: { non_existing: 1 }
+    assert_response :success
+    assert_template :new
+  end
+
   test "should show" do
     get :show, id: @word
     assert_response :success
@@ -39,6 +45,12 @@ class WordsControllerTest < ActionController::TestCase
   test "should update" do
     put :update, id: @word, word: FactoryGirl.attributes_for(:word)
     assert_redirected_to word_path(assigns(:word))
+  end
+
+  test "should fail on bad update" do
+    put :update, id: @word, word: { body: nil }
+    assert_response :success
+    assert_template :edit
   end
 
   test "should destroy" do

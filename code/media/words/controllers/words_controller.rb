@@ -27,7 +27,7 @@ class WordsController < ApplicationController
         format.json { render action: 'show', status: :created, location: @word }
       else
         format.html { render action: 'new' }
-        format.json { render json: @word.errors, status: :unprocessable_entity }
+        #format.json { render json: @word.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -41,6 +41,18 @@ class LanguagesControllerTest < ActionController::TestCase
     assert_redirected_to language_path(assigns(:language))
   end
 
+  test "should fail on bad create" do
+    post :create, language: { non_existing: 1 }
+    assert_response :success
+    assert_template :new
+  end
+
+  test "should fail on bad update" do
+    put :update, id: @language, language: { name: nil }
+    assert_response :success
+    assert_template :edit
+  end
+
   test "should destroy" do
     assert_difference('Language.count', -1) do
       delete :destroy, id: @language

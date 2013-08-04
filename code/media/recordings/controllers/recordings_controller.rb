@@ -80,7 +80,7 @@ private
   end
 
   def recording_params
-    params.require(:recording).permit(:user_id, :url, :original_audio_file)
+    params.require(:recording).permit(:url, :original_audio_file)
   end
 
 end

@@ -41,6 +41,18 @@ class TranscriptionsControllerTest < ActionController::TestCase
     assert_redirected_to transcription_path(assigns(:transcription))
   end
 
+  test "should fail on bad create" do
+    post :create, transcription: { non_existing: 1 }
+    assert_response :success
+    assert_template :new
+  end
+
+  test "should fail on bad update" do
+    put :update, id: @transcription, transcription: { segment_id: nil }
+    assert_response :success
+    assert_template :edit
+  end
+
   test "should destroy" do
     assert_difference('Transcription.count', -1) do
       delete :destroy, id: @transcription
