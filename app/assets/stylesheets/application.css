@@ -6,9 +6,9 @@
  *= require 'global'
  *= require 'jquery_fileupload'
 
- += require 'live_transcriber'
- += require 'transcriber'
- += require reviewer
- += require 'dashboard'
- += require 'recordings'
+ *= require 'live_transcriber'
+ *= require 'transcriber'
+ *= require 'reviewer'
+ *= require 'dashboard'
+ *= require 'recordings'
  */
