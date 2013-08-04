@@ -2,7 +2,10 @@ class ReviewedTranscriptionsController < ApplicationController
   before_action :set_reviewed_transcription, only: [:show, :edit, :update, :destroy]
 
   def index
-    @reviewed_transcriptions = ReviewedTranscription.paginate :page => params[:page], :per_page => 100
+    @chain = ReviewedTranscription.chain
+    @chain.includes(:transcription => :segment).where(segments: { recording_id: params[:recording_id] }) if params[:recording_id]
+
+    @reviewed_transcriptions = @chain.finder.paginate page: params[:page]
   end
 
   def show
@@ -50,6 +53,7 @@ class ReviewedTranscriptionsController < ApplicationController
   end
 
   private
+
     def set_reviewed_transcription
       @reviewed_transcription = ReviewedTranscription.find(params[:id])
     end

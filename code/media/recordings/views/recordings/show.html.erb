@@ -1,7 +1,15 @@
 <div class="page-header">
   <div class="btn-group pull-right">
     <%= button_to("Overview", recordings_path, :icon => :list) %>
-    <%= button_to("Edit", edit_recording_path(@recording), :icon => :edit) %>
+
+    <%= dropdown_button("Actions", icon: :cog) do %>
+      <% %w(segments words transcriptions reviewed_transcriptions).each do |key| %>
+        <%= dropdown_link_to(key.titlecase, send("#{key}_path", recording_id: @recording), icon: :list ) %>
+      <% end %>
+
+      <%= divider %>
+      <%= dropdown_link_to("Edit", edit_recording_path(@recording), :icon => :edit) %>
+    <% end %>
 	</div>
 
   <h1><%= @recording.name %></h1>
@@ -63,6 +71,8 @@
         transcribed: @recording.transcribed?,
         segments: @recording.segments.count,
         words: @recording.words.count,
+        transcriptions: @recording.transcriptions.count,
+        reviewed_transcriptions: @recording.reviewed_transcriptions.count,
         unassigned_words: @recording.words.unassigned.count }) %>
 
   <% if @recording.original_audio_file.file? %>

@@ -13,6 +13,8 @@ class Segment < ActiveRecord::Base
   scope :transcribed,   -> { includes(:transcriptions).where("transcriptions.id IS NOT NULL") }
   scope :untranscribed, -> { includes(:transcriptions).where("transcriptions.id IS NULL") }
 
+  before_validation :normalize_body
+
   alias :previous_segment :higher_item
   alias :next_segment     :lower_item
 
@@ -32,6 +34,12 @@ class Segment < ActiveRecord::Base
 
   def raw_words
     body.to_s.rstrip.split(/ /).reject(&:blank?)
+  end
+
+private
+
+  def normalize_body
+    self.body = body.strip if body
   end
 
 end

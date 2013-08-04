@@ -1,6 +1,11 @@
 <div class="page-header">
   <div class="btn-group pull-right">
-    <%= button_to("Add new Segment", new_segment_path, :class => 'btn-primary', :icon => [ :white, :plus ] ) %>
+    <%= button_to("Add Segment", new_segment_path, icon: :plus ) %>
+
+    <%= dropdown_button("Export", icon: :cog) do %>
+      <%= dropdown_link_to("TXT",           export_segments_path(format: :txt) ) %>
+      <%= dropdown_link_to("Transcription", export_segments_path(format: :transcription) ) %>
+    <% end %>
 	</div>
 
   <h1>Segments</h1>
@@ -12,6 +17,9 @@
       <th>Recording</th>
       <th>Start Time</th>
       <th>End Time</th>
+      <th>Body</th>
+      <th>Words</th>
+      <th>Transcriptions</th>
       <th class="edit">&nbsp;</th>
     </tr>
   </thead>
@@ -19,11 +27,16 @@
   <tbody>
   <% @segments.each do |segment| %>
     <tr>
-      <td><%= segment.recording_id %></td>
+      <td><%= segment.recording.try(:name) %></td>
       <td><%= segment.start_time %></td>
       <td><%= segment.end_time %></td>
+      <td><%= segment.body %></td>
+      <td><%= number_with_delimiter segment.words.count %></td>
+      <td><%= number_with_delimiter segment.transcriptions.count %></td>
       <td><%= link_to "Edit", edit_segment_path(segment), :class => 'btn btn-small' %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
+
+<%= paginate @segments %>

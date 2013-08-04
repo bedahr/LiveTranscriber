@@ -40,9 +40,12 @@ module LiveTranscriber
     end
 
     require 'core/core_ext'
+    require 'core/active_record_extensions'
     require 'core/helpers/form_builder'
 
     config.action_view.default_form_builder = Core::Helpers::FormBuilder
+
+    ActiveRecord::Base.send :include, ActiveRecordExtensions
 
   end
 end

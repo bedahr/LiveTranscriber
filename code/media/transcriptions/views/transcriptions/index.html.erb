@@ -1,6 +1,11 @@
 <div class="page-header">
   <div class="btn-group pull-right">
-    <%= button_to("Add new Transcription", new_transcription_path, :class => 'btn-primary', :icon => [ :white, :plus ] ) %>
+    <%= button_to("Add Transcription", new_transcription_path, icon: :plus ) %>
+
+    <%= dropdown_button("Export", icon: :cog) do %>
+      <%= dropdown_link_to("TXT",           export_transcriptions_path(format: :txt) ) %>
+      <%= dropdown_link_to("Transcription", export_transcriptions_path(format: :transcription) ) %>
+    <% end %>
 	</div>
 
   <h1>Transcriptions</h1>
@@ -11,7 +16,6 @@
     <tr>
       <th>User</th>
       <th>Segment</th>
-      <th>HTML Body</th>
       <th>Text Body</th>
       <th class="edit">&nbsp;</th>
     </tr>
@@ -20,12 +24,14 @@
   <tbody>
   <% @transcriptions.each do |transcription| %>
     <tr>
-      <td><%= transcription.user_id %></td>
-      <td><%= transcription.segment_id %></td>
-      <td><%= transcription.html_body %></td>
+      <td><%= transcription.user.try(:name) %></td>
+      <td><%= transcription.segment.try(:name) || 'N/A' %></td>
       <td><%= transcription.text_body %></td>
       <td><%= link_to "Edit", edit_transcription_path(transcription), :class => 'btn btn-small' %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
+
+<%= paginate @transcriptions %>
+

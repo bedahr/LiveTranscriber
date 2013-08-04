@@ -21,7 +21,7 @@
   <tbody>
   <% @words.each do |word| %>
     <tr>
-      <td><%= word.recording_id %></td>
+      <td><%= word.recording.try(:name) %></td>
       <td><%= word.body %></td>
       <td><%= word.start_time %></td>
       <td><%= word.end_time %></td>
@@ -31,3 +31,5 @@
   <% end %>
   </tbody>
 </table>
+
+<%= paginate @words %>

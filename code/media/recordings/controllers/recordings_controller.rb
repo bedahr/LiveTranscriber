@@ -2,7 +2,7 @@ class RecordingsController < ApplicationController
   before_action :set_recording, except: [ :index, :my, :new, :create ]
 
   def index
-    @recordings = Recording.all
+    @recordings = Recording.paginate page: params[:page]
   end
 
   def my

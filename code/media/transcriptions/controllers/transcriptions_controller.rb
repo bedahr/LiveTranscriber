@@ -1,8 +1,15 @@
 class TranscriptionsController < ApplicationController
+  has_sticky_params :recording_id
+
   before_action :set_transcription, only: [:show, :edit, :update, :destroy]
 
   def index
-    @transcriptions = Transcription.all
+    @transcriptions = finder.paginate page: params[:page]
+  end
+
+  def export
+    @transcriptions = finder.all
+    render 'index'
   end
 
   def show
@@ -51,6 +58,12 @@ class TranscriptionsController < ApplicationController
   end
 
   private
+
+    def finder
+      @chain = Transcription.chain
+      @chain.includes(:segment).where(segments: { recording_id: params[:recording_id] }) if params[:recording_id]
+      @chain.finder
+    end
 
     def set_transcription
       @transcription = Transcription.find(params[:id])

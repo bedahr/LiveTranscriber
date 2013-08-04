@@ -2,11 +2,9 @@ class ReviewerController < ApplicationController
   before_filter :set_recording
 
   def index
-    per_page = 5 # TODO: Allowing user to set this might break mining ..
-
     raise "Recording is not processed" unless @recording.processed?
 
-    @segments       = @recording.segments.includes(:words).paginate :per_page => per_page, :page => params[:page]
+    @segments       = @recording.segments.includes(:words).paginate page: params[:page], per_page: 5
     @transcriptions = @current_user.transcriptions.includes(:segment).where(:segment_id => @segments.collect(&:id)).best
 
     raise "missing transcripts" unless ( @segments - @transcriptions.collect(&:segment).uniq ).empty?

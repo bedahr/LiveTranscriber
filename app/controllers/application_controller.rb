@@ -29,6 +29,7 @@ private
       format.sse  { raise exception }
       format.vtt  { raise exception }
       format.html { raise exception }
+      format.txt  { raise exception }
       format.json { render :json => exception.to_json, :status => 500 }
     end
   end

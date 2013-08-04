@@ -21,6 +21,10 @@
     <%= f.number_field :end_time %>
   <% end %>
 
+  <%= f.control_group(:body) do %>
+    <%= f.text_field :body %>
+  <% end %>
+
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
   </div>

@@ -1,28 +1,27 @@
 class SegmentsController < ApplicationController
   before_action :set_segment, only: [:show, :edit, :update, :destroy]
 
-  # GET /segments
-  # GET /segments.json
+  has_sticky_params :recording_id
+
   def index
-    @segments = Segment.all
+    @segments = finder.paginate page: params[:page]
   end
 
-  # GET /segments/1
-  # GET /segments/1.json
+  def export
+    @segments = finder.all
+    render 'index'
+  end
+
   def show
   end
 
-  # GET /segments/new
   def new
     @segment = Segment.new
   end
 
-  # GET /segments/1/edit
   def edit
   end
 
-  # POST /segments
-  # POST /segments.json
   def create
     @segment = Segment.new(segment_params)
 
@@ -37,8 +36,6 @@ class SegmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /segments/1
-  # PATCH/PUT /segments/1.json
   def update
     respond_to do |format|
       if @segment.update(segment_params)
@@ -51,8 +48,6 @@ class SegmentsController < ApplicationController
     end
   end
 
-  # DELETE /segments/1
-  # DELETE /segments/1.json
   def destroy
     @segment.destroy
     respond_to do |format|
@@ -62,12 +57,16 @@ class SegmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    def finder
+      @chain    = Segment.chain
+      @chain.where(recording_id: params[:recording_id]) if params[:recording_id]
+      @chain.finder
+    end
+
     def set_segment
       @segment = Segment.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def segment_params
       params.require(:segment).permit(:recording_id, :start_time, :end_time)
     end
