@@ -20,8 +20,8 @@
 
       <div class="btn-group pull-right">
 
-        <% if @current_speaker %>
-          <%= button_to @current_speaker.name, '#', :icon => 'volume-up', 'data-toggle' => 'dropdown' %>
+        <% if @current_user %>
+          <%= button_to @current_user.name, '#', icon: :user, 'data-toggle' => 'dropdown' %>
         <% end %>
 
         <%= dropdown_button("", :icon => :reorder, :caret => false) do %>

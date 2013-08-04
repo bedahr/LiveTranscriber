@@ -9,15 +9,8 @@ class ApplicationController < ActionController::Base
   }
 
   before_filter :authenticate_user
-  before_filter :set_current_speaker
 
 private
-
-  def set_current_speaker
-    @current_speaker = Speaker.find_by_id( session[:current_speaker_id] ) || Speaker.first
-
-    session[:current_speaker_id] = @current_speaker.id
-  end
 
   # TODO: Implement authentication ...
   def authenticate_user
