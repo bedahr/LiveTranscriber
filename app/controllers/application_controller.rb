@@ -37,4 +37,17 @@ private
     super
     Core::Extension.append_view!(klass, caller)
   end
+
+  def self.sticky_params
+    @sticky_params ||= [ :iframe, :smart_search_initializer, :smart_search_query ]
+  end
+
+  def self.has_sticky_params(*args)
+    @sticky_params   = sticky_params.concat(args).uniq
+  end
+
+  def default_url_options(options={})
+    self.class.sticky_params.each_with_object( options ) { |key, memo| memo[key] = params[key] }
+  end
+
 end
