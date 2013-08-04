@@ -8,8 +8,12 @@ class TranscriptionsController < ApplicationController
   end
 
   def export
-    @transcriptions = finder.all
-    render 'index'
+    @transcriptions = finder.to_a
+
+    respond_to do |format|
+      format.txt
+      format.transcription
+    end
   end
 
   def show
