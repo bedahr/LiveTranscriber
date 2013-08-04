@@ -1,4 +1,4 @@
-<%= form_for(@recording, :html => { :class => 'form-horizontal' }) do |f| %>
+<%= form_for(@recording, html: { class: 'form-horizontal' }) do |f| %>
   <% if @recording.errors.any? %>
     <div id="error_explanation" class="round">
       <ul>
@@ -14,6 +14,6 @@
   <% end %>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= f.submit nil, class: 'btn btn-primary' %>
   </div>
 <% end %>

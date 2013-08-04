@@ -1,3 +1,3 @@
 resources :segments do
-  get :export, :on => :collection
+  get :export, on: :collection
 end

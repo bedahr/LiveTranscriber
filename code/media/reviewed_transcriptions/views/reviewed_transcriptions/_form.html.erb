@@ -1,4 +1,4 @@
-<%= form_for(@reviewed_transcription, :html => { :class => 'form-horizontal' }) do |f| %>
+<%= form_for(@reviewed_transcription, html: { class: 'form-horizontal' }) do |f| %>
   <% if @reviewed_transcription.errors.any? %>
     <div id="error_explanation" class="round">
       <ul>
@@ -10,6 +10,6 @@
   <% end %>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= f.submit nil, class: 'btn btn-primary' %>
   </div>
 <% end %>

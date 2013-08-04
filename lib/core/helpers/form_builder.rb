@@ -19,8 +19,8 @@ module Core
 
       # Wraps stuff inside a bootstrap control-group
       def control_group(method=nil, &block)
-        label = method ? label(method, method.to_s.titleize, :class => 'control-label') : content_tag(:span, "")
-        content_tag(:div, label + @template.content_tag(:div, nil, { :class => 'controls' }, true, &block), :class => 'control-group' )
+        label = method ? label(method, method.to_s.titleize, class: 'control-label') : content_tag(:span, "")
+        content_tag(:div, label + @template.content_tag(:div, nil, { class: 'controls' }, true, &block), class: 'control-group' )
       end
 
     end

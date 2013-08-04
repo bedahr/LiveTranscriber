@@ -36,19 +36,19 @@ class LiveTranscriberController < ApplicationController
    speech_recognizer.run! do |on|
 
      on.started do
-       sse.write({}, :event => 'started')
+       sse.write({}, event: 'started')
      end
 
      on.transcript do |data|
-       sse.write(data, :event => 'transcript')
+       sse.write(data, event: 'transcript')
      end
 
      on.partial_hypothese do |data|
-       sse.write(data, :event => 'partial_hypothese')
+       sse.write(data, event: 'partial_hypothese')
      end
 
      on.log do |line|
-       sse.write({ :line => line }, :event => 'log' )
+       sse.write({ :line => line }, event: 'log' )
      end
 
      on.prompt_to_continue do
@@ -74,12 +74,12 @@ class LiveTranscriberController < ApplicationController
    end
 
   rescue
-    sse.write( { :data => $!.inspect }, :event => 'terminated' )
+    sse.write( { :data => $!.inspect }, event: 'terminated' )
 
   ensure
     speech_recognizer.kill! rescue nil
 
-    sse.write( { :terminated => true }, :event => 'terminated' )
+    sse.write( { :terminated => true }, event: 'terminated' )
 
     sse.close
   end

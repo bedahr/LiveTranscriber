@@ -1,6 +1,6 @@
 <div class="page-header">
   <div class="btn-group pull-right">
-    <%= button_to("Overview", recordings_path, :icon => :list) %>
+    <%= button_to("Overview", recordings_path, icon: :list) %>
 
     <%= dropdown_button("Actions", icon: :cog) do %>
       <% %w(segments words transcriptions reviewed_transcriptions).each do |key| %>
@@ -8,7 +8,7 @@
       <% end %>
 
       <%= divider %>
-      <%= dropdown_link_to("Edit", edit_recording_path(@recording), :icon => :edit) %>
+      <%= dropdown_link_to("Edit", edit_recording_path(@recording), icon: :edit) %>
     <% end %>
 	</div>
 
@@ -42,20 +42,17 @@
     </div>
 
   </div>
-   <%#= button_to "Live Transcriber (experimental)",
-        { :controller => :live_transcriber, :id => @recording } %>
-
    <div class="segment_importer hide">
      <%= form_tag( import_segments_recording_path(@recording) ) do %>
-       <%= text_area_tag :lines, '', :class => '', :placeholder => "3.23\t5.6\tAdd tab-separated labels here .." %>
-       <%= submit_tag "Import Segments", :class => 'btn' %>
+       <%= text_area_tag :lines, '', class: '', :placeholder => "3.23\t5.6\tAdd tab-separated labels here .." %>
+       <%= submit_tag "Import Segments", class: 'btn' %>
       <% end %>
    </div>
 
    <div class="word_importer hide">
      <%= form_tag( import_words_recording_path(@recording) ) do %>
-       <%= text_area_tag :lines, '', :class => '', :placeholder => "3.23\t5.6\tword\t0.98\t0.7 alternative\t0.6 other_alternative" %>
-       <%= submit_tag "Import Words", :class => 'btn' %>
+       <%= text_area_tag :lines, '', class: '', :placeholder => "3.23\t5.6\tword\t0.98\t0.7 alternative\t0.6 other_alternative" %>
+       <%= submit_tag "Import Words", class: 'btn' %>
       <% end %>
    </div>
 <% end %>

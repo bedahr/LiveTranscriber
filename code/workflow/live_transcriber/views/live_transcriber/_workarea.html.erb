@@ -5,10 +5,10 @@
   <p id="partial_hypothese" class="transcript partial_hypothese"></p>
 
   <div class="buttons" style="visibility: hidden">
-    <%= button_to "Submit", { :action => :submit, :id => @recording },
-                              :data => { :remote => true }, :class => 'btn-primary' %>
+    <%= button_to "Submit", { action: :submit, id: @recording },
+                              :data => { :remote => true }, class: 'btn-primary' %>
 
-    <%= button_to "Skip",   { :action => :skip, :id => @recording },
+    <%= button_to "Skip",   { action: :skip, id: @recording },
                               :data => { :remote => true } %>
   </div>
 

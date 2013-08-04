@@ -46,7 +46,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'autotest-rails'
   gem 'autotest-growl'
-  gem 'simplecov', :require => false
+  gem 'simplecov', require: false
 end
 
 gem 'bcrypt-ruby', '~> 3.0.0'

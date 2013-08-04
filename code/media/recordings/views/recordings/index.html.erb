@@ -1,6 +1,6 @@
 <div class="page-header">
   <div class="btn-group pull-right">
-    <%= button_to("Add new Recording", new_recording_path, :class => 'btn-primary', :icon => [ :white, :plus ] ) %>
+    <%= button_to("Add new Recording", new_recording_path, class: 'btn-primary', icon: [ :white, :plus ] ) %>
 	</div>
 
   <h1>Recordings</h1>
@@ -21,8 +21,8 @@
       <td><%= recording.user.try(:name) %></td>
       <td><%= recording.name %></td>
       <td>
-        <%= link_to "Open", recording, :class => 'btn btn-small btn-primary' %>
-        <%= link_to "Edit", edit_recording_path(recording), :class => 'btn btn-small' %>
+        <%= link_to "Open", recording, class: 'btn btn-small btn-primary' %>
+        <%= link_to "Edit", edit_recording_path(recording), class: 'btn btn-small' %>
       </td>
     </tr>
   <% end %>

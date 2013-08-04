@@ -6,7 +6,7 @@ module ApplicationHelper
 
     href = url_for(url_options) if url_options
 
-    content_tag(:a, body, html_options.merge({ :href => href, :class => "btn #{html_options[:class]}"}))
+    content_tag(:a, body, html_options.merge({ href: href, class: "btn #{html_options[:class]}"}))
   end
 
   def check_or_unchecked(value, options={})
@@ -26,16 +26,16 @@ module ApplicationHelper
     return unless object
 
     filename = object.is_a?(Language) ? object.short_code : object
-    content_tag(:span, image_tag("flags/#{filename}.png"), :class => 'flag')
+    content_tag(:span, image_tag("flags/#{filename}.png"), class: 'flag')
   end
 
   def box(title, &block)
-    content_tag(:div, content_tag(:h4, title, :class => 'box-header round-top') + content_tag(:div, content_tag(:div, nil, { :class => 'box-content' }, true, &block), :class => 'box-container-toggle'), :class => 'box')
+    content_tag(:div, content_tag(:h4, title, class: 'box-header round-top') + content_tag(:div, content_tag(:div, nil, { class: 'box-content' }, true, &block), class: 'box-container-toggle'), class: 'box')
   end
 
   def dropdown_button(name, html_options={}, &block)
-    output  = button_to(name, nil, { :caret => true, :class => 'dropdown-toggle', 'data-toggle' => 'dropdown' }.merge(html_options) )
-    output += content_tag(:ul, capture(&block), :class => 'dropdown-menu') if block_given?
+    output  = button_to(name, nil, { caret: true, class: 'dropdown-toggle', data: { toggle: 'dropdown'} }.merge(html_options) )
+    output += content_tag(:ul, capture(&block), class: 'dropdown-menu') if block_given?
     output
   end
 
@@ -45,7 +45,7 @@ module ApplicationHelper
   end
 
   def divider
-    content_tag(:li, '', :class => :divider)
+    content_tag(:li, '', class: :divider)
   end
 
   def dump_table(obj, options={})
@@ -70,26 +70,26 @@ module ApplicationHelper
       value = number_with_delimiter(value) if value.is_a?(Integer)
 
       if title
-        rows << content_tag(:tr, content_tag(:td, title, :class => 'title top') + content_tag(:td, value))
+        rows << content_tag(:tr, content_tag(:td, title, class: 'title top') + content_tag(:td, value))
       else
         rows << content_tag(:tr, content_tag(:td, value))
       end
     end
 
-    array.any? ? content_tag(:table, rows.join.html_safe, :class => 'table hover') : ''
+    array.any? ? content_tag(:table, rows.join.html_safe, class: 'table hover') : ''
   end
 
   def alert(msg, klass, options={})
-    msg = content_tag(:a, 'x', :href => '#', :class => 'close', 'data-dismiss' => 'alert').html_safe + msg if options[:close]
-    content_tag(:div, msg, :class => "alert alert-#{klass} #{options[:class]}")
+    msg = content_tag(:a, 'x', href: '#', class: 'close', data: { dismiss: 'alert' } ).html_safe + msg if options[:close]
+    content_tag(:div, msg, class: "alert alert-#{klass} #{options[:class]}")
   end
 
-  # Paginate helper using will_paginate manual navigation, plus InfinityScroll (Show More), plus Show All, plus page entries info
+  # Paginate helper
   def paginate(collection, options={})
-    pagination   = will_paginate(collection, :container => false, :previous_label => "&laquo; Previous", :next_label => "Next &raquo;")
-    page_entries = content_tag(:li, content_tag(:a, raw(page_entries_info(collection, options)), :href => '#'), :class => 'disabled')
+    pagination   = will_paginate(collection, container: false, previous_label: "&laquo; Previous", next_label: "Next &raquo;")
+    page_entries = content_tag(:li, content_tag(:a, raw(page_entries_info(collection, options)), href: '#'), class: 'disabled')
 
-    content_tag(:ul, [ pagination, page_entries ].join.html_safe, :class => 'pagination')
+    content_tag(:ul, [ pagination, page_entries ].join.html_safe, class: 'pagination')
   end
 
   # Nicely formatted page_entries_info

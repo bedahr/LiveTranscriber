@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
-
-  rescue_from 'Exception' , :with => :handle_exception
+  protect_from_forgery     with: :exception
+  rescue_from 'Exception', with: :handle_exception
 
   layout proc { |controller|
     return 'simple' if controller.request.xhr?
@@ -24,7 +23,7 @@ private
       format.vtt  { raise exception }
       format.html { raise exception }
       format.txt  { raise exception }
-      format.json { render :json => exception.to_json, :status => 500 }
+      format.json { render json: exception.to_json, status: 500 }
     end
   end
 

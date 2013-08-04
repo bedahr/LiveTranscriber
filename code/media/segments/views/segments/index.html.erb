@@ -33,7 +33,7 @@
       <td><%= segment.body %></td>
       <td><%= number_with_delimiter segment.words.count %></td>
       <td><%= number_with_delimiter segment.transcriptions.count %></td>
-      <td><%= link_to "Edit", edit_segment_path(segment), :class => 'btn btn-small' %></td>
+      <td><%= link_to "Edit", edit_segment_path(segment), class: 'btn btn-small' %></td>
     </tr>
   <% end %>
   </tbody>
