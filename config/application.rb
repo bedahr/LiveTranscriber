@@ -12,6 +12,7 @@ module LiveTranscriber
     require 'extendable'
     require 'pp'
     require 'colored'
+    require 'tempfile'
 
     # Loading core System
     Booter.say "Loading Extension System"

@@ -11,6 +11,7 @@
 
   extensions << 'workflow/transcriber'
   extensions << 'workflow/reviewer'
+  extensions << 'workflow/tools'
 
   #extensions << 'experimental/talkbox'
   #extensions << 'media/speakers'
