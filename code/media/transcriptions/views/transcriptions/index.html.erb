@@ -3,8 +3,8 @@
     <%= button_to("Add Transcription", new_transcription_path, icon: :plus ) %>
 
     <%= dropdown_button("Export", icon: :cog) do %>
-      <%= dropdown_link_to("TXT",           export_transcriptions_path(format: :txt) ) %>
-      <%= dropdown_link_to("Transcription", export_transcriptions_path(format: :transcription) ) %>
+      <%= dropdown_link_to("TXT",           export_transcriptions_path(is_active: true, format: :txt) ) %>
+      <%= dropdown_link_to("Transcription", export_transcriptions_path(is_active: true, format: :transcription) ) %>
     <% end %>
 	</div>
 
@@ -25,9 +25,17 @@
   <% @transcriptions.each do |transcription| %>
     <tr>
       <td><%= transcription.user.try(:name) %></td>
-      <td><%= transcription.segment.try(:name) || 'N/A' %></td>
+      <td><%= dom_id(transcription.segment) %></td>
       <td><%= transcription.text_body %></td>
-      <td><%= link_to "Edit", edit_transcription_path(transcription), :class => 'btn btn-small' %></td>
+      <td>
+        <% if transcription.is_active %>
+          <%= button_to "", '#', icon: :check, class: 'btn-success', title: 'Active' %>
+        <% else %>
+          <%= button_to "", '#', icon: 'ban-circle', title: 'Not Active' %>
+        <% end %>
+
+        <%= link_to "Edit", edit_transcription_path(transcription), :class => 'btn btn-small' %>
+      </td>
     </tr>
   <% end %>
   </tbody>

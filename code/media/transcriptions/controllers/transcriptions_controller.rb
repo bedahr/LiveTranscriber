@@ -24,6 +24,7 @@ class TranscriptionsController < ApplicationController
 
   def create
     @transcription = @current_user.transcriptions.new(transcription_params)
+    @transcription.is_active = true
 
     respond_to do |format|
       if @transcription.save
@@ -62,6 +63,10 @@ class TranscriptionsController < ApplicationController
     def finder
       @chain = Transcription.chain
       @chain.includes(:segment).where(segments: { recording_id: params[:recording_id] }) if params[:recording_id]
+      @chain.where(segment_id: params[:segment_id]) if params[:segment_id]
+      @chain.active if params[:is_active]
+      @chain.ordered
+
       @chain.finder
     end
 
@@ -70,6 +75,6 @@ class TranscriptionsController < ApplicationController
     end
 
     def transcription_params
-      params.require(:transcription).permit(:segment_id, :html_body, :text_body)
+      params.require(:transcription).permit(:segment_id, :html_body, :text_body, :is_active)
     end
 end

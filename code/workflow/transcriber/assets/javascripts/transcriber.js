@@ -71,7 +71,7 @@ $(document).ready(function() {
     segment.removeClass('failed');
     $(".alert").hide();
 
-    $.post( segment.attr('action'),
+    $.post( $(".editor").attr('action'),
             { transcription: { segment_id: segment.data('id'), html_body: segment.html() } },
             function(data) {
               console.log("transcription saved");

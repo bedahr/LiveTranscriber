@@ -21,6 +21,10 @@
     <%= f.text_area :text_body %>
   <% end %>
 
+  <%= f.control_group(:flags) do %>
+    <%= f.check_box :is_active %> Active
+  <% end %>
+
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
   </div>

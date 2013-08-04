@@ -13,20 +13,21 @@ class Transcription < ActiveRecord::Base
   before_validation :initialize_text_body
   before_validation :initialize_duration
 
-  scope :today, -> { where("DAY(created_at) = DAY(NOW())") }
+  after_save :deactivate_other_transcriptions
 
-  # TODO: Implement this with a boolean flag, e.g. #is_best or #is_active
-  def self.best
-    all.group_by(&:segment).collect do |segment, transcriptions|
-      transcriptions.sort_by(&:created_at).last
-    end
-  end
+  scope :active,  -> { where(is_active: true) }
+  scope :ordered, -> { order(:segment_id) }
+  scope :today,   -> { where("DAY(created_at) = DAY(NOW())") }
 
   def raw_words
     text_body.to_s.split(/ /)
   end
 
 private
+
+  def deactivate_other_transcriptions
+    self.class.where(segment_id: segment_id).where("id != ?", id).update_all(is_active: false) if is_active
+  end
 
   def initialize_text_body
     self.text_body = Nokogiri::HTML(html_body).text.strip.gsub(" ", " ") # Normalizing nbsp

@@ -5,7 +5,7 @@ class ReviewerController < ApplicationController
     raise "Recording is not processed" unless @recording.processed?
 
     @segments       = @recording.segments.includes(:words).paginate page: params[:page], per_page: 5
-    @transcriptions = @current_user.transcriptions.includes(:segment).where(:segment_id => @segments.collect(&:id)).best
+    @transcriptions = @current_user.transcriptions.includes(:segment).where(:segment_id => @segments.collect(&:id)).active
 
     raise "missing transcripts" unless ( @segments - @transcriptions.collect(&:segment).uniq ).empty?
 
