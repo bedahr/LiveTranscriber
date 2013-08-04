@@ -12,9 +12,10 @@ class ApplicationController < ActionController::Base
 
 private
 
-  # TODO: Implement authentication ...
   def authenticate_user
-    @current_user ||= User.first
+    authenticate_or_request_with_http_basic do |username, password|
+      (@current_user = User.find_by_name(username)).try(:authenticate, password) ? true : false
+    end
   end
 
   def handle_exception(exception=nil)
