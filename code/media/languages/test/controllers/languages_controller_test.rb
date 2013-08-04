@@ -7,56 +7,41 @@ class LanguagesControllerTest < ActionController::TestCase
     @language = FactoryGirl.create(:language)
   end
 
-  def test_index
+  test "should get index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:languages)
   end
 
-  def test_new
+  test "should get new" do
     get :new
     assert_response :success
   end
 
-  def test_create
+  test "should create" do
     assert_difference('Language.count') do
       post :create, language:  factory_attributes_with_associations_for(:language)
     end
 
     assert_redirected_to language_path(assigns(:language))
   end
-  
-  def test_create_failed
-    assert_difference('Language.count',0) do
-      post :create, language:  factory_attributes_with_associations_for(:language).merge()
-    end
 
-    assert_response :success
-    assert_template :new
-  end
-
-  def test_show
+  test "should show" do
     get :show, id: @language
     assert_response :success
   end
 
-  def test_edit
+  test "should get edit" do
     get :edit, id: @language
     assert_response :success
   end
 
-  def test_update
+  test "should update" do
     put :update, id: @language, language: FactoryGirl.attributes_for(:language)
     assert_redirected_to language_path(assigns(:language))
   end
-  
-   def test_update_failed
-    put :update, id: @language, language: FactoryGirl.attributes_for(:language).merge() # colision
-    assert_response :success
-    assert_template :edit
-  end
 
-  def test_destroy
+  test "should destroy" do
     assert_difference('Language.count', -1) do
       delete :destroy, id: @language
     end

@@ -18,31 +18,31 @@ class ReviewedTranscriptionsController < ApplicationController
   def edit
   end
 
-  def create
-    @reviewed_transcription = ReviewedTranscription.new(reviewed_transcription_params)
+  # def create
+  #   @reviewed_transcription = ReviewedTranscription.new(reviewed_transcription_params)
+  #
+  #   respond_to do |format|
+  #     if @reviewed_transcription.save
+  #       format.html { redirect_to @reviewed_transcription, notice: 'Reviewed transcription was successfully created.' }
+  #       format.json { render action: 'show', status: :created, location: @reviewed_transcription }
+  #     else
+  #       format.html { render action: 'new' }
+  #       format.json { render json: @reviewed_transcription.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
-    respond_to do |format|
-      if @reviewed_transcription.save
-        format.html { redirect_to @reviewed_transcription, notice: 'Reviewed transcription was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @reviewed_transcription }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @reviewed_transcription.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @reviewed_transcription.update(reviewed_transcription_params)
-        format.html { redirect_to @reviewed_transcription, notice: 'Reviewed transcription was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @reviewed_transcription.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @reviewed_transcription.update(reviewed_transcription_params)
+  #       format.html { redirect_to @reviewed_transcription, notice: 'Reviewed transcription was successfully updated.' }
+  #       format.json { head :no_content }
+  #     else
+  #       format.html { render action: 'edit' }
+  #       format.json { render json: @reviewed_transcription.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   def destroy
     @reviewed_transcription.destroy

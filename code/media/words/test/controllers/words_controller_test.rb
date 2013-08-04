@@ -7,56 +7,41 @@ class WordsControllerTest < ActionController::TestCase
     @word = FactoryGirl.create(:word)
   end
 
-  def test_index
+  test "should get index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:words)
   end
 
-  def test_new
+  test "should get new" do
     get :new
     assert_response :success
   end
 
-  def test_create
+  test "should create" do
     assert_difference('Word.count') do
       post :create, word:  factory_attributes_with_associations_for(:word)
     end
 
     assert_redirected_to word_path(assigns(:word))
   end
-  
-  def test_create_failed
-    assert_difference('Word.count',0) do
-      post :create, word:  factory_attributes_with_associations_for(:word).merge()
-    end
 
-    assert_response :success
-    assert_template :new
-  end
-
-  def test_show
+  test "should show" do
     get :show, id: @word
     assert_response :success
   end
 
-  def test_edit
+  test "should get edit" do
     get :edit, id: @word
     assert_response :success
   end
 
-  def test_update
+  test "should update" do
     put :update, id: @word, word: FactoryGirl.attributes_for(:word)
     assert_redirected_to word_path(assigns(:word))
   end
-  
-   def test_update_failed
-    put :update, id: @word, word: FactoryGirl.attributes_for(:word).merge() # colision
-    assert_response :success
-    assert_template :edit
-  end
 
-  def test_destroy
+  test "should destroy" do
     assert_difference('Word.count', -1) do
       delete :destroy, id: @word
     end

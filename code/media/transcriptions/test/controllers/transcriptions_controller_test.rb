@@ -7,56 +7,41 @@ class TranscriptionsControllerTest < ActionController::TestCase
     @transcription = FactoryGirl.create(:transcription)
   end
 
-  def test_index
+  test "should get index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:transcriptions)
   end
 
-  def test_new
+  test "should get new" do
     get :new
     assert_response :success
   end
 
-  def test_create
+  test "should create" do
     assert_difference('Transcription.count') do
       post :create, transcription:  factory_attributes_with_associations_for(:transcription)
     end
 
     assert_redirected_to transcription_path(assigns(:transcription))
   end
-  
-  def test_create_failed
-    assert_difference('Transcription.count',0) do
-      post :create, transcription:  factory_attributes_with_associations_for(:transcription).merge()
-    end
 
-    assert_response :success
-    assert_template :new
-  end
-
-  def test_show
+  test "should show" do
     get :show, id: @transcription
     assert_response :success
   end
 
-  def test_edit
+  test "should get edit" do
     get :edit, id: @transcription
     assert_response :success
   end
 
-  def test_update
+  test "should update" do
     put :update, id: @transcription, transcription: FactoryGirl.attributes_for(:transcription)
     assert_redirected_to transcription_path(assigns(:transcription))
   end
-  
-   def test_update_failed
-    put :update, id: @transcription, transcription: FactoryGirl.attributes_for(:transcription).merge() # colision
-    assert_response :success
-    assert_template :edit
-  end
 
-  def test_destroy
+  test "should destroy" do
     assert_difference('Transcription.count', -1) do
       delete :destroy, id: @transcription
     end

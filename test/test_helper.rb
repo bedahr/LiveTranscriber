@@ -1,3 +1,8 @@
+#= Tests
+#
+# To run tests:
+#   rake test:run
+
 require 'factory_girl'
 
 FactoryGirl.definition_file_paths = Dir.glob("code/*/*/test/factories")
@@ -8,7 +13,9 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'minitest/rails'
 
-# All tests are under code/
+require 'database_cleaner'
+
+DatabaseCleaner.strategy = :truncation
 
 module AuthenticatedTestHelper
   def login_as(user)
@@ -17,8 +24,16 @@ module AuthenticatedTestHelper
   end
 end
 
+module FactoryGirlHelperExtension
+  def factory_attributes_with_associations_for(name, extra={})
+    FactoryGirl.build(name).attributes.reject { |k,v| v.nil? }.merge(extra)
+  end
+end
+
+
 class ActiveSupport::TestCase
   include AuthenticatedTestHelper
+  include FactoryGirlHelperExtension
 
   ActiveRecord::Migration.check_pending!
 

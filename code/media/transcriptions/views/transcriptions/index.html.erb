@@ -25,7 +25,7 @@
   <% @transcriptions.each do |transcription| %>
     <tr>
       <td><%= transcription.user.try(:name) %></td>
-      <td><%= dom_id(transcription.segment) %></td>
+      <td><%= transcription.segment ? dom_id(transcription.segment) : 'N/A' %></td>
       <td><%= transcription.text_body %></td>
       <td>
         <% if transcription.is_active %>

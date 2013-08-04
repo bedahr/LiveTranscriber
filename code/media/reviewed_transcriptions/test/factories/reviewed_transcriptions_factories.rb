@@ -6,7 +6,9 @@ FactoryGirl.define do
     transcription_id 1
     text_body "MyText"
     html_answer "MyText"
-    mine_words "MyText"
+
+    mine_words { [ "mine" ] }
+
     spotted_mistakes "MyText"
     has_mines_spotted false
   end

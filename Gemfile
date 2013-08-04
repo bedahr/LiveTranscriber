@@ -38,10 +38,14 @@ group :doc do
 end
 
 group :development, :test do
+  gem 'turn'
   gem 'minitest'
   gem 'minitest-rails'
   gem 'factory_girl'
   gem 'factory_girl_rails'
+  gem 'database_cleaner'
+  gem 'autotest-rails'
+  gem 'autotest-growl'
 end
 
 gem 'bcrypt-ruby', '~> 3.0.0'
