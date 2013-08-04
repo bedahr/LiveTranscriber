@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :speaker do
-    language_id 1
+    association :language
+
     name "MyString"
     hidden_markov_model "MyString"
     language_model "MyString"

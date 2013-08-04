@@ -9,7 +9,6 @@
 //= require rangy
 //= require hallo
 //= require global
-//= require live_transcriber
 //= require hallo_transcriber
 //= require transcriber
 //= require reviewer

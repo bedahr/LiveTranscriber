@@ -7,56 +7,41 @@ class SpeakersControllerTest < ActionController::TestCase
     @speaker = FactoryGirl.create(:speaker)
   end
 
-  def test_index
+  test "should get index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:speakers)
   end
 
-  def test_new
+  test "should get new" do
     get :new
     assert_response :success
   end
 
-  def test_create
+  test "should create" do
     assert_difference('Speaker.count') do
       post :create, speaker:  factory_attributes_with_associations_for(:speaker)
     end
 
     assert_redirected_to speaker_path(assigns(:speaker))
   end
-  
-  def test_create_failed
-    assert_difference('Speaker.count',0) do
-      post :create, speaker:  factory_attributes_with_associations_for(:speaker).merge()
-    end
 
-    assert_response :success
-    assert_template :new
-  end
-
-  def test_show
+  test "should show" do
     get :show, id: @speaker
     assert_response :success
   end
 
-  def test_edit
+  test "should get edit" do
     get :edit, id: @speaker
     assert_response :success
   end
 
-  def test_update
+  test "should update" do
     put :update, id: @speaker, speaker: FactoryGirl.attributes_for(:speaker)
     assert_redirected_to speaker_path(assigns(:speaker))
   end
-  
-   def test_update_failed
-    put :update, id: @speaker, speaker: FactoryGirl.attributes_for(:speaker).merge() # colision
-    assert_response :success
-    assert_template :edit
-  end
 
-  def test_destroy
+  test "should destroy" do
     assert_difference('Speaker.count', -1) do
       delete :destroy, id: @speaker
     end
