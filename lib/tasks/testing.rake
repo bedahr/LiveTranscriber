@@ -34,7 +34,7 @@ namespace :test do
     t.pattern = 'code/**/test/integration/**/*_test.rb'
   end
 
-  task :run => ['test:units', 'test:functionals', 'test:integration']
+  task run: ['test:units', 'test:functionals', 'test:integration']
 
 end
 

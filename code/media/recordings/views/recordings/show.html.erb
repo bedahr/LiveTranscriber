@@ -44,14 +44,14 @@
   </div>
    <div class="segment_importer hide">
      <%= form_tag( import_segments_recording_path(@recording) ) do %>
-       <%= text_area_tag :lines, '', class: '', :placeholder => "3.23\t5.6\tAdd tab-separated labels here .." %>
+       <%= text_area_tag :lines, '', class: '', placeholder: "3.23\t5.6\tAdd tab-separated labels here .." %>
        <%= submit_tag "Import Segments", class: 'btn' %>
       <% end %>
    </div>
 
    <div class="word_importer hide">
      <%= form_tag( import_words_recording_path(@recording) ) do %>
-       <%= text_area_tag :lines, '', class: '', :placeholder => "3.23\t5.6\tword\t0.98\t0.7 alternative\t0.6 other_alternative" %>
+       <%= text_area_tag :lines, '', class: '', placeholder: "3.23\t5.6\tword\t0.98\t0.7 alternative\t0.6 other_alternative" %>
        <%= submit_tag "Import Words", class: 'btn' %>
       <% end %>
    </div>
@@ -59,7 +59,7 @@
 
 <%= box("Status") do %>
   <div class="progress">
-    <div class="bar bar-success" title="<%= number_to_percentage(@recording.transcribed_percentage * 100, :precision => 0) %> Transcribed" style="width: <%= number_to_percentage(@recording.transcribed_percentage * 100) %>;"></div>
+    <div class="bar bar-success" title="<%= number_to_percentage(@recording.transcribed_percentage * 100, precision: 0) %> Transcribed" style="width: <%= number_to_percentage(@recording.transcribed_percentage * 100) %>;"></div>
     <div class="bar bar-danger" title="Untranscribed" style="width: <%= number_to_percentage((1 - @recording.transcribed_percentage) * 100) %>;"></div>
   </div>
 
@@ -73,7 +73,7 @@
         unassigned_words: @recording.words.unassigned.count }) %>
 
   <% if @recording.original_audio_file.file? %>
-    <%= audio_tag @recording.original_audio_file, :controls => true, :preload => :none %>
+    <%= audio_tag @recording.original_audio_file, controls: true, preload: :none %>
   <% else %>
     <%= alert("No audio file", :warning) %>
   <% end %>

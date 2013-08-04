@@ -4,12 +4,12 @@ class ActiveRecordChain
   ##
   ## Example:
   #  @chain = ActiveRecordChain(List)
-  #  @chain.where(:foo => 'bar')
+  #  @chain.where(foo: 'bar')
   #  @chain.is_csv
   #  @chain.is_empty
   #
   #  @chain.finder  will be the ActiveRecord finder
-  #  @chain.command will return 'List.where(:foo => 'bar').is_csv.is_empty
+  #  @chain.command will return 'List.where(foo: 'bar').is_csv.is_empty
 
   attr_accessor :klass, :command_chain, :finder
 

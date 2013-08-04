@@ -23,24 +23,24 @@
 #     end
 #   end
 #
-# To make the class extend the module (instead of include) provide option :extend => true
+# To make the class extend the module (instead of include) provide option extend: true
 # in any of the above scenarios.
 #
-#   extends :FooBar, :SomeModule, :extend => true
-#   extends :FooBar, :extend => true do
+#   extends :FooBar, :SomeModule, extend: true
+#   extends :FooBar, extend: true do
 #     def foo
 #
 # Instead of include/extend you can also eval code/block against the class.
 #
-#   extends :FooBar, "belongs_to :user", :eval => true
-#   extends :FooBar, :eval => true do
+#   extends :FooBar, "belongs_to :user", eval: true
+#   extends :FooBar, eval: true do
 #     belongs_to :user
 #   end
 #
-# :eval => true is a shortcut to :with => :instance_eval. You can change to :class_eval
+# eval: true is a shortcut to with: :instance_eval. You can change to :class_eval
 # (or any other method to be called on the class with the value and/or block)
 #
-#   extends :FooBar, :with => :class_eval do
+#   extends :FooBar, with: :class_eval do
 #     def foo
 #     end
 #   end
@@ -164,22 +164,22 @@ end
 module Test04; def test04; :test04; end; end
 module Test05; def test05; :test05; end; end
 
-extends :FooBar, Test04,  :extend => true
-extends :FooBar, :Test05, :extend => true
-extends :FooBar, :extend => true do
+extends :FooBar, Test04,  extend: true
+extends :FooBar, :Test05, extend:  true
+extends :FooBar, extend: true do
   def test06; :test06; end
 end
 
 
-extends :FooBar, :with => :class_eval do
+extends :FooBar, with: :class_eval do
   def test07; :test07; end
 end
 
-extends :FooBar, :with => :instance_eval do
+extends :FooBar, with: :instance_eval do
   def test08; :test08; end
 end
 
-extends :FooBar, "belongs_to_foo :test09", :eval => true do
+extends :FooBar, "belongs_to_foo :test09", eval: true do
   def test10; :test10; end
 end
 

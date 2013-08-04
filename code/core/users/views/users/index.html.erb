@@ -1,6 +1,6 @@
 <div class="page-header">
   <div class="btn-group pull-right">
-    <%= button_to("Add new User", new_user_path, :class => 'btn-primary', :icon => [ :white, :plus ] ) %>
+    <%= button_to("Add new User", new_user_path, class: 'btn-primary', icon: [ :white, :plus ] ) %>
 	</div>
 
   <h1>Users</h1>
@@ -19,7 +19,7 @@
     <tr>
       <td><%= user.name %></td>
       <td>
-        <%= link_to "Profile", user, :class => 'btn btn-small' %>
+        <%= link_to "Profile", user, class: 'btn btn-small' %>
       </td>
     </tr>
   <% end %>

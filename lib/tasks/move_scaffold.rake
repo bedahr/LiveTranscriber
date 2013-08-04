@@ -61,7 +61,7 @@ task :move_scaffold, :scaffold_name, :destination do |task, args|
 
   #FileUtils.touch( File.join(destination_path, "config/init.rb") )
 
-  ScaffoldMover.move_files(app_files, destination_path,  :source_prefix => "app",  :destination_suffix => "",     :remove_dir => remove_dir_if_module)
-  ScaffoldMover.move_files(test_files, destination_path, :source_prefix => "test", :destination_suffix => "test", :remove_dir => remove_dir_if_module)
+  ScaffoldMover.move_files(app_files, destination_path,  source_prefix: "app",  destination_suffix: "",     remove_dir: remove_dir_if_module)
+  ScaffoldMover.move_files(test_files, destination_path, source_prefix: "test", destination_suffix: "test", remove_dir: remove_dir_if_module)
 
 end

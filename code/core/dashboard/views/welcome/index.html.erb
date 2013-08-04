@@ -14,9 +14,9 @@
 
     <small id="url_toggle">or <%= link_to "Enter URL", '#' %></small>
 
-    <%= form_for(@recording, :html => { :class => 'url_upload hide form-horizontal' }) do |f| %>
-      <%= f.text_field :url, :placeholder => 'http://', :class => 'url' %>
-      <%= f.submit 'Go', :class => 'btn' %>
+    <%= form_for(@recording, html: { class: 'url_upload hide form-horizontal' }) do |f| %>
+      <%= f.text_field :url, placeholder: 'http://', class: 'url' %>
+      <%= f.submit 'Go', class: 'btn' %>
     <% end %>
 
     <div id="progress" class="progress progress-success progress-striped hide">
@@ -45,7 +45,7 @@
     </p>
 
     <p>This way you train the computer to recognize words better.<br />
-      <%= link_to "Learn more",  { :action => :about } %>
+      <%= link_to "Learn more",  { action: :about } %>
     </p>
   </div>
 
@@ -59,7 +59,7 @@
     <p>We aim to improve open and free speech recognition.</p>
 
     <p>Every transcription you make is shared with the community.<br />
-      <%= link_to "Learn more",  { :action => :about } %>
+      <%= link_to "Learn more",  { action: :about } %>
     </p>
 
     <p>

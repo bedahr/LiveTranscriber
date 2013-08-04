@@ -48,7 +48,7 @@ class LiveTranscriberController < ApplicationController
      end
 
      on.log do |line|
-       sse.write({ :line => line }, event: 'log' )
+       sse.write({ line: line }, event: 'log' )
      end
 
      on.prompt_to_continue do
@@ -74,12 +74,12 @@ class LiveTranscriberController < ApplicationController
    end
 
   rescue
-    sse.write( { :data => $!.inspect }, event: 'terminated' )
+    sse.write( { data: $!.inspect }, event: 'terminated' )
 
   ensure
     speech_recognizer.kill! rescue nil
 
-    sse.write( { :terminated => true }, event: 'terminated' )
+    sse.write( { terminated: true }, event: 'terminated' )
 
     sse.close
   end
@@ -90,7 +90,7 @@ private
     debug "Redis: Sending 'continue' notification"
     Redis.new.tap { |k| k.publish(redis_channel, "continue") }.quit
 
-    render :text => "OK"
+    render text: "OK"
   end
 
   def debug(msg)

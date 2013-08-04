@@ -69,10 +69,10 @@ module SpeechRecognizer
             callbacks.invoke(:timed_word, $~)
 
           elsif line.match(/^\= continue/)
-            data = { :text       => @word_buffer.reject(&:tag?).collect(&:to_s).join(' '),
-                     :start_time => @word_buffer.collect(&:start_timecode).collect(&:to_f).min,
-                     :end_time   => @word_buffer.collect(&:end_timecode).collect(&:to_f).max,
-                     :words      => @word_buffer.collect(&:all_attributes) }
+            data = { text:       @word_buffer.reject(&:tag?).collect(&:to_s).join(' '),
+                     start_time: @word_buffer.collect(&:start_timecode).collect(&:to_f).min,
+                     end_time:   @word_buffer.collect(&:end_timecode).collect(&:to_f).max,
+                     words:      @word_buffer.collect(&:all_attributes) }
 
             callbacks.invoke(:transcript, data)
 

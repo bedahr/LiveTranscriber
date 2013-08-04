@@ -37,7 +37,7 @@ module LiveTranscriber
       g.javascripts     false
       g.helper          false
       g.test_framework  :mini_test, fixture: false
-      g.factory_girl dir: 'test/factories', :suffix => 'factories'
+      g.factory_girl dir: 'test/factories', suffix: 'factories'
     end
 
     require 'core/core_ext'

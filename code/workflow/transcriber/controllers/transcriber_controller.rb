@@ -5,7 +5,7 @@ class TranscriberController < ApplicationController
     raise "Recording is not processed" unless @recording.processed?
 
     @segments       = @recording.segments.paginate per_page: 5, page: params[:page]
-    @transcriptions = @current_user.transcriptions.includes(:segment).where(:segment_id => @segments.collect(&:id))
+    @transcriptions = @current_user.transcriptions.includes(:segment).where(segment_id: @segments.collect(&:id))
   end
 
 private

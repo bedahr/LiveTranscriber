@@ -8,7 +8,7 @@ class Segment < ActiveRecord::Base
 
   include Timecodes
 
-  acts_as_list :scope => :recording
+  acts_as_list scope: :recording
 
   scope :transcribed,   -> { includes(:transcriptions).where("transcriptions.id IS NOT NULL").references(:transcriptions) }
   scope :untranscribed, -> { includes(:transcriptions).where("transcriptions.id IS NULL").references(:transcriptions) }
@@ -28,7 +28,7 @@ class Segment < ActiveRecord::Base
     raise "segment already has words" if words.exists?
 
     raw_words.each do |raw_word|
-      words.create!(:body => raw_word, :recording => recording)
+      words.create!(body: raw_word, recording: recording)
     end
   end
 

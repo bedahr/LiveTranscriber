@@ -6,10 +6,10 @@
 
   <div class="buttons" style="visibility: hidden">
     <%= button_to "Submit", { action: :submit, id: @recording },
-                              :data => { :remote => true }, class: 'btn-primary' %>
+                              data: { remote: true }, class: 'btn-primary' %>
 
     <%= button_to "Skip",   { action: :skip, id: @recording },
-                              :data => { :remote => true } %>
+                              data: { remote: true } %>
   </div>
 
 </div>

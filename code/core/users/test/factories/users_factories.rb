@@ -6,6 +6,6 @@ FactoryGirl.define do
     password              { name + "password" }
     password_confirmation { name + "password" }
 
-    initialize_with { User.where(:name => name).first || User.new(attributes) }
+    initialize_with { User.where(name: name).first || User.new(attributes) }
   end
 end

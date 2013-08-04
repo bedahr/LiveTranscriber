@@ -5,13 +5,13 @@ class ReviewerController < ApplicationController
     raise "Recording is not processed" unless @recording.processed?
 
     @segments       = @recording.segments.includes(:words).paginate page: params[:page], per_page: 5
-    @transcriptions = @current_user.transcriptions.includes(:segment).where(:segment_id => @segments.collect(&:id)).active
+    @transcriptions = @current_user.transcriptions.includes(:segment).where(segment_id: @segments.collect(&:id)).active
 
     raise "missing transcripts" unless ( @segments - @transcriptions.collect(&:segment).uniq ).empty?
 
     @mine_words = @recording.words.where("body NOT IN(?)", @transcriptions.collect(&:raw_words).flatten.uniq ).random.limit(@transcriptions.size)
 
-    @reviewed_transcriptions = @current_user.reviewed_transcriptions.find_or_create_with_mines!(@transcriptions, @mine_words, :max => 1)
+    @reviewed_transcriptions = @current_user.reviewed_transcriptions.find_or_create_with_mines!(@transcriptions, @mine_words, max: 1)
   end
 
   def save
