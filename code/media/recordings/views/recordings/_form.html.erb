@@ -13,6 +13,10 @@
     <%= f.file_field :original_audio_file %>
   <% end %>
 
+  <%= f.control_group(:url) do %>
+    <%= f.text_field :url %>
+  <% end %>
+
   <div class="form-actions">
     <%= f.submit nil, class: 'btn btn-primary' %>
   </div>

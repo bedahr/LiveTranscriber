@@ -15,8 +15,6 @@ class Recording < ActiveRecord::Base
 
   before_validation :initialize_original_audio_file_from_url
 
-  attr_accessor :url
-
   alias_attribute :name, :original_audio_file_file_name
 
   def processed?
