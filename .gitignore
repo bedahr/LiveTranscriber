@@ -1,3 +1,4 @@
+/config/deploy.rb
 *.rbc
 *.sassc
 .sass-cache

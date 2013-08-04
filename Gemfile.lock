@@ -1,10 +1,3 @@
-GIT
-  remote: git://github.com/jetthoughts/yaml_db.git
-  revision: fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba
-  ref: fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba
-  specs:
-    yaml_db (0.2.3)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -49,6 +42,12 @@ GEM
     bootstrap-will_paginate (0.0.9)
       will_paginate
     builder (3.1.4)
+    capistrano (2.15.4)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
     chosen-rails (0.13.2)
       coffee-rails (>= 3.2)
       compass-rails (>= 1.0)
@@ -85,6 +84,7 @@ GEM
     font-awesome-rails (3.2.1.2)
       railties (>= 3.2, < 5.0)
     fssm (0.2.10)
+    highline (1.6.19)
     hike (1.2.3)
     i18n (0.6.4)
     jbuilder (1.5.0)
@@ -111,6 +111,13 @@ GEM
       rails (>= 3.0)
     multi_json (1.7.7)
     mysql2 (0.3.11)
+    net-scp (1.1.1)
+      net-ssh (>= 2.6.5)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.6.7)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     nokogiri (1.6.0-java)
@@ -199,6 +206,7 @@ DEPENDENCIES
   autotest-rails
   bcrypt-ruby (~> 3.0.0)
   bootstrap-will_paginate
+  capistrano
   chosen-rails
   coffee-rails (~> 4.0.0)
   colored
@@ -226,4 +234,3 @@ DEPENDENCIES
   turn
   uglifier (>= 1.3.0)
   will_paginate
-  yaml_db!
