@@ -32,19 +32,19 @@ class Recording < ActiveRecord::Base
   end
 
   def create_downsampled_wav_file!
-    Recording::Downsampler.new(self).process!
+    Tool::Downsampler.new(self).process!
   end
 
   def create_optimized_audio_file!
-    Recording::Optimizer.new(self).process!
+    Tool::Optimizer.new(self).process!
   end
 
   def import_words!(filename)
-    Recording::WordImporter.new(self).import!(filename)
+    Tool::WordImporter.new(self).import!(filename)
   end
 
   def import_segments!(filename)
-    Recording::SegmentImporter.new(self).import!(filename)
+    Tool::SegmentImporter.new(self).import!(filename)
   end
 
 private
