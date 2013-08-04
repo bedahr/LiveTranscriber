@@ -15,7 +15,7 @@ class Tool
     end
 
     def check_sox!
-      raise "Could not confirm SoX installation" unless `sox`.match(/sox/)
+      raise "Could not confirm SoX installation" unless `sox`.to_s.match(/sox/)
     end
 
   end
