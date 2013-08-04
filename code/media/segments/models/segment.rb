@@ -10,8 +10,8 @@ class Segment < ActiveRecord::Base
 
   acts_as_list :scope => :recording
 
-  scope :transcribed,   -> { includes(:transcriptions).where("transcriptions.id IS NOT NULL") }
-  scope :untranscribed, -> { includes(:transcriptions).where("transcriptions.id IS NULL") }
+  scope :transcribed,   -> { includes(:transcriptions).where("transcriptions.id IS NOT NULL").references(:transcriptions) }
+  scope :untranscribed, -> { includes(:transcriptions).where("transcriptions.id IS NULL").references(:transcriptions) }
 
   before_validation :normalize_body
 

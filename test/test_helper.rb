@@ -3,6 +3,9 @@
 # To run tests:
 #   rake test:run
 
+require 'simplecov'
+SimpleCov.start
+
 require 'factory_girl'
 
 FactoryGirl.definition_file_paths = Dir.glob("code/*/*/test/factories")
