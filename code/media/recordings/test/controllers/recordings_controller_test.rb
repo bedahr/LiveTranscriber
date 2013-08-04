@@ -13,6 +13,17 @@ class RecordingsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:recordings)
   end
 
+  test "should get my recordings" do
+    get :my
+    assert_response :success
+    assert_not_nil assigns(:recordings)
+  end
+
+  test "should show segments as vtt" do
+    get :segments, format: 'vtt', id: @recording
+    assert_response :success
+  end
+
   test "should get new" do
     get :new
     assert_response :success

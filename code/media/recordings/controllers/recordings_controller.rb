@@ -6,7 +6,7 @@ class RecordingsController < ApplicationController
   end
 
   def my
-    @recordings = @current_user.recordings.all
+    @recordings = @current_user.recordings.paginate page: params[:page]
     render :index
   end
 
