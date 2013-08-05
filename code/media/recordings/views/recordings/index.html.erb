@@ -11,6 +11,7 @@
     <tr>
       <th>User</th>
       <th>Name</th>
+      <th class="status">Status</th>
       <th class="edit">&nbsp;</th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
     <tr>
       <td><%= recording.user.try(:name) %></td>
       <td><%= recording.name %></td>
+      <td><%= render 'progress', recording: recording %></td>
       <td>
         <%= link_to "Open", recording, class: 'btn btn-small btn-primary' %>
         <%= link_to "Edit", edit_recording_path(recording), class: 'btn btn-small' %>

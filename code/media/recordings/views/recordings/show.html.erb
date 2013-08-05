@@ -58,10 +58,7 @@
 <% end %>
 
 <%= box("Status") do %>
-  <div class="progress">
-    <div class="bar bar-success" title="<%= number_to_percentage(@recording.transcribed_percentage * 100, precision: 0) %> Transcribed" style="width: <%= number_to_percentage(@recording.transcribed_percentage * 100) %>;"></div>
-    <div class="bar bar-danger" title="Untranscribed" style="width: <%= number_to_percentage((1 - @recording.transcribed_percentage) * 100) %>;"></div>
-  </div>
+  <%= render 'progress', recording: @recording %>
 
   <%= dump_table( {
         processed: @recording.processed?,
