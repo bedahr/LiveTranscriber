@@ -83,7 +83,6 @@ $(document).ready(function() {
   });
 
   // Cue Change
-  // TODO: Put focus on element
   $("#transcriber audio track").on('cuechange', function() {
     $( this.track.activeCues ).each( function(i, cue) {
       console.log("cue changed: " + cue.id + " - " + cue.pauseOnExit);
@@ -167,7 +166,7 @@ $(document).ready(function() {
 
   // Editor activated
   $('#transcriber .editor').bind('halloactivated', function(event, data) {
-    $(event.target).removeClass('saved');
+    $(event.target).closest('.segment').removeClass('saved');
   });
 
   // Editor deactivated
