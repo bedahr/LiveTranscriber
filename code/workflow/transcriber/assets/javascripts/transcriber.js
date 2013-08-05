@@ -4,7 +4,7 @@ $(document).ready(function() {
   // TODO: Indicate whether audio is still playing (useful if there is a silence) ...
   $("#transcriber .continue").click( function() {
     if ( $(".segment").not('.saved').length > 0 ) {
-      alert("There are unsaved segments");
+      $(".alert").text("There are unsaved segments").show();
       return(false);
     }
   })
@@ -48,15 +48,20 @@ $(document).ready(function() {
   $("#transcriber .segment").on('play', function() {
     var audio = $("audio")[0];
     var track = audio.textTracks[0];
-    var cue   = track.cues.getCueById($(this).attr('id'));
+    var id    = $(this).attr('id');
+    var cue   = track.cues.getCueById(id);
 
-    console.log("playing cue");
-    console.log(cue);
+    console.log("playing cue: " + id);
 
-    $.each(track.cues, function(i,e) { e.pauseOnExit = false } );
+    var cue_exit_handler = function() {
+      console.log("clip ended: " + id);
+
+      this.onexit = undefined;
+      audio.pause();
+    }
 
     if (cue)
-      cue.pauseOnExit = true;
+      cue.onexit = cue_exit_handler;
 
     audio.pause();
     audio.currentTime = $(this).data('start-time');
@@ -85,7 +90,7 @@ $(document).ready(function() {
   // Cue Change
   $("#transcriber audio track").on('cuechange', function() {
     $( this.track.activeCues ).each( function(i, cue) {
-      console.log("cue changed: " + cue.id + " - " + cue.pauseOnExit);
+      console.log("cue changed: " + cue.id);
       $("#" + cue.id).addClass('active');
     });
   });
@@ -93,8 +98,6 @@ $(document).ready(function() {
   // Keycodes
   $('#transcriber').on('keydown', function(e) {
     var code = (e.keyCode ? e.keyCode : e.which);
-
-    console.log("key pressed: " + code);
 
     if ( code == 13 ) { // Enter
       console.log("Enter pressed");
