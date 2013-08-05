@@ -118,6 +118,7 @@ $(document).ready(function() {
   });
 
   // Audio has loaded
+  // TODO: Seek to desired position and check "canplay" for that (see W3 notes)
   $("#transcriber audio").on('canplay', function() {
     console.log("meta data loaded. showing first segment ...");
 
