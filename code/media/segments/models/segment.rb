@@ -25,6 +25,8 @@ class Segment < ActiveRecord::Base
   end
 
   def create_words!
+    return unless raw_words.any?
+
     raise "segment already has words" if words.exists?
 
     raw_words.each do |raw_word|
@@ -33,7 +35,7 @@ class Segment < ActiveRecord::Base
   end
 
   def raw_words
-    body.to_s.rstrip.split(/ /).reject(&:blank?)
+    @raw_words ||= body.to_s.rstrip.split(/ /).reject(&:blank?)
   end
 
 private

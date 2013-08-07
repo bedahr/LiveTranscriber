@@ -45,6 +45,7 @@
    <div class="segment_importer hide">
      <%= form_tag( import_segments_recording_path(@recording) ) do %>
        <%= text_area_tag :lines, '', class: '', placeholder: "3.23\t5.6\tAdd tab-separated labels here .." %>
+       <%= alert("Existing #{pluralize(@recording.words.count, 'segment')} will be removed", :warning) if @recording.segments.exists? %>
        <%= submit_tag "Import Segments", class: 'btn' %>
       <% end %>
    </div>
@@ -52,6 +53,7 @@
    <div class="word_importer hide">
      <%= form_tag( import_words_recording_path(@recording) ) do %>
        <%= text_area_tag :lines, '', class: '', placeholder: "3.23\t5.6\tword\t0.98\t0.7 alternative\t0.6 other_alternative" %>
+       <%= alert("Existing #{pluralize(@recording.words.count, 'word')} will be removed", :warning) if @recording.words.exists? %>
        <%= submit_tag "Import Words", class: 'btn' %>
       <% end %>
    </div>

@@ -18,12 +18,14 @@ class RecordingsController < ApplicationController
   end
 
   def import_segments
+    @recording.segments.each(&:destroy)
     Tool::SegmentImporter.new(@recording).import_lines!( params[:lines].to_s.split(/\n/) )
     @recording.segments.each(&:create_words!)
     redirect_to @recording
   end
 
   def import_words
+    @recording.words.each(&:destroy)
     Tool::WordImporter.new(@recording).import_lines!( params[:lines].to_s.split(/\n/) )
     @recording.segments.each(&:assign_words!)
     redirect_to @recording
