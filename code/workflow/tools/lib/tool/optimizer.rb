@@ -1,4 +1,4 @@
-class Tool
+module Tool
   class Optimizer < Tool::AbstractProcessor
 
     def process!

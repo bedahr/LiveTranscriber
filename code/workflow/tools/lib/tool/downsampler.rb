@@ -1,4 +1,4 @@
-class Tool
+module Tool
   class Downsampler < Tool::AbstractProcessor
 
     def initialize(*args)

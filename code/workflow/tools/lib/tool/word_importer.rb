@@ -1,4 +1,4 @@
-class Tool
+module Tool
   class WordImporter < Tool::AbstractProcessor
 
     def import!(filename)

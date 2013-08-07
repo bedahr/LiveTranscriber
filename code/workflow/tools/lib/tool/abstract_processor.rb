@@ -1,4 +1,4 @@
-class Tool
+module Tool
   class AbstractProcessor
 
     attr_accessor :recording, :options

@@ -1,4 +1,4 @@
-class Tool
+module Tool
   class SegmentImporter < Tool::AbstractProcessor
 
     def import!(filename)
