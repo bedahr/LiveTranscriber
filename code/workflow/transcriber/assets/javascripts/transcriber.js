@@ -10,17 +10,17 @@ $(document).ready(function() {
   })
 
   // Next Segment
-  $("#transcriber .next_segment").click( function(e) {
+  $("#transcriber .btn.next_segment").click( function(e) {
     console.log("next ..");
 
     var next_segment = $(".segment:hidden:first");
 
     if (next_segment.length == 0) {
-      $(".continue").show();
-      $(".next_segment").hide();
+      $(".btn.continue").show();
+      $(".btn.next_segment").hide();
       $(".preview").text("");
     } else {
-      next_segment.show().trigger('focus').trigger('play');
+      next_segment.show().trigger('play');
       $(".preview").text( next_segment.data('next-segment-preview') );
     }
 
@@ -30,7 +30,7 @@ $(document).ready(function() {
 
   // Replay clip
   // TODO: Implement better selection of what to play, e.g. last selected segment
-  $("#transcriber .replay").click( function(e) {
+  $("#transcriber .btn.replay").click( function(e) {
     console.log("replay clip");
 
     $(".segment:visible:last").trigger('play');
@@ -71,17 +71,24 @@ $(document).ready(function() {
   // 'save' event for segment
   $("#transcriber .segment").on('save', function() {
     var segment = $(this);
+    var current_html = segment.html();
 
     console.log("Saving transcription: " + segment.attr('id') );
+
+    if ( current_html == segment.data('saved-html') ) {
+      console.log("HTML did not change. Not saving ...");
+      return(false);
+    }
 
     segment.removeClass('failed');
     $(".alert").hide();
 
     $.post( $(".editor").attr('action'),
-            { transcription: { segment_id: segment.data('id'), html_body: segment.html() } },
+            { transcription: { segment_id: segment.data('id'), html_body: current_html } },
             function(data) {
               console.log("transcription saved");
               segment.addClass('saved');
+              segment.data('saved-html', current_html);
             } )
 
     .fail(function(data) { segment.addClass("failed"); $(".alert").text(data.responseText).show(); }) ;
@@ -102,14 +109,14 @@ $(document).ready(function() {
     if ( code == 13 ) { // Enter
       console.log("Enter pressed");
 
-      $(".next_segment").trigger('click');
+      $(".btn.next_segment").trigger('click');
       e.preventDefault();
       e.stopPropagation();
 
     } else if ( code == 9 ) { // Tab
       console.log("tab pressed");
 
-      $(".replay").trigger('click');
+      $(".btn.replay").trigger('click');
 
       e.preventDefault();
       e.stopPropagation();
@@ -128,9 +135,11 @@ $(document).ready(function() {
     });
 
     $(".streaming").hide();
-    $(".next_segment").show();
-    $(".replay").show();
-    $(".next_segment").trigger('click');
+
+    $(".btn.next_segment").show();
+    $(".btn.replay").show();
+
+    // $(".next_segment").trigger('click');
   });
 
   // Transcriber
