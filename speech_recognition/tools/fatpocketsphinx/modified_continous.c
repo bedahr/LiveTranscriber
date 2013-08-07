@@ -120,8 +120,33 @@ print_word_times(int32 start)
 		ps_seg_frames (iter, &sf, &ef);
 		pprob = ps_seg_prob (iter, NULL, NULL, NULL);
 		conf = logmath_exp(ps_get_logmath(ps), pprob);
-		printf ("= timed_word | %s | %f %f %f\n", ps_seg_word (iter), (sf + start) / 100.0, (ef + start) / 100.0, conf);
+    printf("%f\t%f\t%s\t%f", (sf + start) / 100.0, (ef + start) / 100.0, ps_seg_word(iter), conf);
+
 		iter = ps_seg_next (iter);
+
+    // n-best words
+    int i;
+    ps_nbest_t *nbw = ps_nbest(ps, sf, ef, NULL, NULL);
+
+    for(i = 0; i < 5; i++) {
+      int32 outscore;
+      char const* hyp;
+      float conf;
+
+      nbw = ps_nbest_next(nbw);
+
+      if (nbw == NULL)
+        break;
+
+      hyp = ps_nbest_hyp(nbw, &outscore);
+      conf = logmath_exp(ps_get_logmath(ps), outscore);
+
+      printf ("\t%f %s", conf, hyp);
+
+      // TODO: Implement: ps_nbest_free
+    }
+
+    printf("\n");
 	}
 }
 
@@ -171,8 +196,8 @@ recognize_from_file() {
         ps_process_raw(ps, adbuf, k, FALSE, FALSE);
 
         hyp = ps_get_hyp(ps, NULL, &uttid);
-        printf("= partial_hypothese | %s: %s\n", uttid, hyp);
-        fflush(stdout);
+        fprintf(stderr, "= partial_hypothese | %s: %s\n", uttid, hyp);
+        fflush(stderr);
 
         ts = cont->read_ts;
         start = ((ts - k) * 100.0) / file_ad.sps;
@@ -188,7 +213,7 @@ recognize_from_file() {
                  */
 
                 if ((cont->read_ts - ts) > 2000) {
-                  printf("= utterance_end | %i\n", (cont->read_ts - ts) );
+                  fprintf(stderr, "= utterance_end | %i\n", (cont->read_ts - ts) );
                   break;
                 }
             } else {
@@ -199,20 +224,18 @@ recognize_from_file() {
             ps_process_raw(ps, adbuf, k, FALSE, FALSE);
 
             hyp = ps_get_hyp(ps, NULL, &uttid);
-            printf("= partial_hypothese | %s: %s\n", uttid, hyp);
-            fflush(stdout);
+            fprintf(stderr, "= partial_hypothese | %s: %s\n", uttid, hyp);
+            fflush(stderr);
         }
 
         ps_end_utt(ps);
 
         if (cmd_ln_boolean_r(config, "-time")) {
 	        print_word_times(start);
-
-          printf("= continue\n");
-          fflush(stdout);
-
-          fgetc( stdin );
-
+          // printf("= continue\n");
+          // fflush(stdout);
+          //
+          // fgetc( stdin );
         } else {
           hyp = ps_get_hyp(ps, NULL, &uttid);
           printf("= final_hypothese | %s: %s\n\n\n", uttid, hyp);
